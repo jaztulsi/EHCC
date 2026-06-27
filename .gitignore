@@ -30,6 +30,3 @@ next-env.d.ts
 mcp/.venv/
 __pycache__/
 *.pyc
-
-# separate nested project — has its own git repo
-/DublinHacx/
