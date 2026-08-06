@@ -1,22 +1,19 @@
 import type { Metadata } from "next";
-import { Calendar, MapPin, Clock, Mic } from "lucide-react";
+import { Calendar, MapPin, Clock } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { ComingSoon } from "@/components/ui/ComingSoon";
 import { EventsBrowser } from "@/components/events/EventsBrowser";
 import { CircuitBackground } from "@/components/effects/CircuitBackground";
-import { EVENTS, SPEAKERS } from "@/lib/data";
+import { EVENTS } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Events",
   description: "Hackathons, workshops, guest speakers, and competitions hosted by the EHS Hacking & Coding Club.",
 };
-
-function initials(name: string) {
-  return name.split(" ").map((n) => n[0]).slice(0, 2).join("").toUpperCase();
-}
 
 export default function EventsPage() {
   const featured = EVENTS.find((e) => e.featured);
@@ -90,30 +87,12 @@ export default function EventsPage() {
             title="Learn from the pros"
             subtitle="Engineers, founders, and researchers who've been where you want to go."
           />
-          <div className="mt-12 grid gap-5 md:grid-cols-3">
-            {SPEAKERS.map((s, i) => (
-              <Reveal key={s.id} delay={i * 0.08}>
-                <div className="group flex h-full flex-col rounded-xl border border-white/5 bg-navy-800/50 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-violet-400/30 hover:shadow-glow">
-                  <div className="flex items-center gap-4">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-violet-500/40 to-navy-700 font-mono font-bold text-white ring-2 ring-violet-400/30">
-                      {initials(s.name)}
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-white">{s.name}</h3>
-                      <p className="text-xs text-muted">{s.role} · {s.company}</p>
-                    </div>
-                  </div>
-                  <div className="mt-4 flex items-start gap-2 rounded-lg bg-navy-900/60 p-3">
-                    <Mic size={15} className="mt-0.5 shrink-0 text-violet-300" />
-                    <p className="text-sm text-silver">{s.topic}</p>
-                  </div>
-                  <p className="mt-3 font-mono text-xs text-muted">
-                    {new Date(s.date + "T00:00:00").toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+          <Reveal className="mt-12">
+            <ComingSoon
+              title="Speakers announcing soon"
+              note="We're lining up engineers, founders, and researchers for the guest-speaker series. Check back for the lineup."
+            />
+          </Reveal>
         </div>
       </section>
     </>

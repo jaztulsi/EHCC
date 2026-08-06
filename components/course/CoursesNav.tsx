@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { GraduationCap, LayoutDashboard, BookOpen, Home } from "lucide-react";
+import { GraduationCap, LayoutDashboard, BookOpen, Home, Gamepad2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useProfile } from "./useProfile";
 
 const TABS = [
   { href: "/courses", label: "Home", icon: Home, exact: true },
   { href: "/courses/curriculum", label: "Curriculum", icon: BookOpen },
+  { href: "/courses/practice", label: "Practice", icon: Gamepad2 },
   { href: "/courses/dashboard", label: "Dashboard", icon: LayoutDashboard },
 ];
 
