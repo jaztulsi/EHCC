@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { headers } from "next/headers";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
@@ -47,16 +48,20 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // On the ehcc-courses.* domain, render a standalone courses app (no main-site chrome).
+  const host = headers().get("host") ?? "";
+  const coursesOnly = host.startsWith("ehcc-courses");
+
   return (
     <html lang="en" className={`${inter.variable} ${mono.variable}`}>
       <body className="min-h-screen flex flex-col">
-        <IntroLoader />
+        {!coursesOnly && <IntroLoader />}
         <ScrollProgress />
-        <Navbar />
+        {!coursesOnly && <Navbar />}
         <PageTransition>
           <main className="flex-1">{children}</main>
         </PageTransition>
-        <Footer />
+        {!coursesOnly && <Footer />}
       </body>
     </html>
   );

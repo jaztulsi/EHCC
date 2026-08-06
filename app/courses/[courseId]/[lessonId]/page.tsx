@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, Clock, PlayCircle, BookOpen } from "lucide-react
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { Quiz } from "@/components/course/Quiz";
+import { RequireProfile } from "@/components/course/RequireProfile";
 import { ALL_LESSON_PARAMS, getLesson } from "@/lib/courses";
 
 export function generateStaticParams() {
@@ -72,6 +73,7 @@ export default function LessonPage({
           <p className="text-muted">{lesson.summary}</p>
         </div>
 
+        <RequireProfile>
         {/* Reading */}
         <div className="mt-8">
           <div className="mb-3 flex items-center gap-2 font-mono text-sm text-emerald">
@@ -117,6 +119,7 @@ export default function LessonPage({
         <div className="mt-10">
           <Quiz courseId={course.id} lessonId={lesson.id} questions={lesson.quiz} />
         </div>
+        </RequireProfile>
 
         {/* Prev / next */}
         <div className="mt-10 flex items-center justify-between gap-4 border-t border-white/5 pt-8">

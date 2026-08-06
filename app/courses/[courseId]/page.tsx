@@ -5,6 +5,7 @@ import { ArrowLeft, PlayCircle } from "lucide-react";
 import { Badge, toneFor } from "@/components/ui/Badge";
 import { Icon } from "@/components/ui/Icon";
 import { CourseLessons } from "@/components/course/CourseLessons";
+import { RequireProfile } from "@/components/course/RequireProfile";
 import { COURSES, getCourse } from "@/lib/courses";
 
 export function generateStaticParams() {
@@ -58,7 +59,9 @@ export default function CoursePage({ params }: { params: { courseId: string } })
         </div>
 
         <div className="mt-10">
-          <CourseLessons courseId={course.id} lessons={course.lessons} />
+          <RequireProfile>
+            <CourseLessons courseId={course.id} lessons={course.lessons} />
+          </RequireProfile>
         </div>
       </div>
     </section>
