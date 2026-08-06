@@ -12,7 +12,7 @@ import { BRANCHES, LEADERSHIP, ACHIEVEMENTS, CLUB } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "About",
-  description: `The story of ${CLUB.name} — a student-run community at ${CLUB.school} built around three branches: Hackathon, Data Science, and USACO/Programming.`,
+  description: `The story of ${CLUB.name} — a student-run community at ${CLUB.school} built around three branches: Hackathon, Data Science, and AI Principles / Programming.`,
 };
 
 const storyStats = [
@@ -31,7 +31,7 @@ export default function AboutPage() {
             We build, compete, <span className="text-gradient">and elevate</span>.
           </>
         }
-        subtitle={`${CLUB.name} is a collaborative, inclusive community at ${CLUB.school} where the curious become creators — across our Hackathon, Data Science, and USACO/Programming branches.`}
+        subtitle={`${CLUB.name} is a collaborative, inclusive community at ${CLUB.school} where the curious become creators — across our Hackathon, Data Science, and AI Principles / Programming branches.`}
       />
 
       {/* Story */}
@@ -49,7 +49,7 @@ export default function AboutPage() {
               <p>
                 We organized the club into{" "}
                 <span className="text-emerald-bright">three specialized branches</span> — Hackathon,
-                Data Science, and USACO/Programming — so every member can focus on what excites them,
+                Data Science, and AI Principles / Programming — so every member can focus on what excites them,
                 or explore all three.
               </p>
               <p>

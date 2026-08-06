@@ -4,18 +4,17 @@ import { PageHero } from "@/components/ui/PageHero";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
-import { JoinForm } from "@/components/join/JoinForm";
 import { FaqAccordion } from "@/components/join/FaqAccordion";
 import { CircuitBackground } from "@/components/effects/CircuitBackground";
 import { FAQS, CLUB } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Join",
-  description: "Join the Emerald Hacking & Coding Club. Pick a branch — Hackathon, Data Science, or USACO/Programming — and start building. All skill levels welcome.",
+  description: "Join the Emerald Hacking & Coding Club. Pick a branch — Hackathon, Data Science, or AI Principles / Programming — and start building. All skill levels welcome.",
 };
 
 const VALUE_PROPS = [
-  { icon: Trophy, title: "Compete", text: "Take part in hackathons, USACO competitions, and monthly data science challenges — friendly competition that pushes everyone forward." },
+  { icon: Trophy, title: "Compete", text: "Take part in hackathons, AI build challenges, and monthly data science challenges — friendly competition that pushes everyone forward." },
   { icon: GraduationCap, title: "Learn", text: "Three specialized branches plus guest speakers and hands-on sessions. Go from curious to building, fast." },
   { icon: Users, title: "Belong", text: "A collaborative, inclusive community that meets every Wednesday and Thursday during Access Period in Room F-105." },
 ];
@@ -31,7 +30,7 @@ const REQUIREMENTS = [
 const STEPS = [
   { step: 1, title: "Fill Out the Form", text: "Complete our membership form with your interests and experience." },
   { step: 2, title: "Attend a Meeting", text: `Join us during Access Period on Wednesday or Thursday in ${CLUB.meetingRoom}.` },
-  { step: 3, title: "Choose Your Branch", text: "Pick Hackathon, Data Science, or USACO/Programming — or explore all three." },
+  { step: 3, title: "Choose Your Branch", text: "Pick Hackathon, Data Science, or AI Principles / Programming — or explore all three." },
   { step: 4, title: "Start Building", text: "Jump into projects, challenges, and club activities with your branch." },
 ];
 
@@ -142,17 +141,22 @@ export default function JoinPage() {
         </div>
       </section>
 
-      {/* Quick interest form */}
+      {/* Membership form CTA */}
       <section className="relative section pt-0">
         <CircuitBackground animate={false} density="sparse" />
         <div className="container-x relative max-w-2xl">
-          <SectionHeader
-            eyebrow="quick interest form"
-            title="Tell us about you"
-            subtitle="A 30-second heads-up so we can welcome you at the next meeting. The official membership form is linked above."
-          />
-          <Reveal className="mt-10">
-            <JoinForm />
+          <Reveal>
+            <div className="rounded-2xl border border-emerald/20 bg-navy-800/60 p-8 text-center md:p-10">
+              <p className="font-mono text-sm text-emerald">{"// ready when you are"}</p>
+              <h2 className="mt-3 text-3xl font-bold text-white">Fill out the membership form</h2>
+              <p className="mx-auto mt-3 max-w-md text-muted">
+                One short Google Form — your name, grade, and the branch you want to explore. We&apos;ll
+                welcome you at the next meeting in {CLUB.meetingRoom}.
+              </p>
+              <Button href={CLUB.joinFormUrl} external size="lg" className="mt-6">
+                Open the Membership Form <ArrowRight size={18} />
+              </Button>
+            </div>
           </Reveal>
         </div>
       </section>

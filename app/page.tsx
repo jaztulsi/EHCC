@@ -10,7 +10,7 @@ import { Icon } from "@/components/ui/Icon";
 import { FlipCard } from "@/components/cards/FlipCard";
 import { EventCard } from "@/components/cards/EventCard";
 import { CircuitBackground } from "@/components/effects/CircuitBackground";
-import { STATS, WHAT_WE_DO, EVENTS, CLUB } from "@/lib/data";
+import { STATS, WHAT_WE_DO, EVENTS, AWARDS, CLUB } from "@/lib/data";
 
 export default function HomePage() {
   const upcomingEvents = EVENTS.filter((e) => e.upcoming).slice(0, 3);
@@ -26,6 +26,34 @@ export default function HomePage() {
             {STATS.map((stat, i) => (
               <Reveal key={stat.label} delay={i * 0.08}>
                 <StatCounter stat={stat} />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Awards & Recognition */}
+      <section className="relative section">
+        <CircuitBackground animate={false} density="sparse" />
+        <div className="container-x relative">
+          <SectionHeader
+            eyebrow="// awards.recognition[]"
+            title="Recognition"
+            subtitle="What our members have earned by building and competing together."
+          />
+          <div className="mt-12 grid gap-5 md:grid-cols-2">
+            {AWARDS.map((a, i) => (
+              <Reveal key={a.title} delay={i * 0.1}>
+                <div className="flex h-full items-start gap-5 rounded-2xl border border-emerald/20 bg-navy-800/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-emerald/40 hover:shadow-glow md:p-8">
+                  <span className="inline-flex shrink-0 rounded-xl bg-emerald/10 p-4 text-emerald-bright shadow-glow">
+                    <Icon name={a.icon} className="h-8 w-8" />
+                  </span>
+                  <div>
+                    <p className="font-mono text-sm font-bold text-emerald-bright">{a.place}</p>
+                    <h3 className="mt-1 text-xl font-bold text-white">{a.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted">{a.detail}</p>
+                  </div>
+                </div>
               </Reveal>
             ))}
           </div>

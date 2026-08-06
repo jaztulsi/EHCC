@@ -11,7 +11,7 @@ import { PROJECTS } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Projects",
-  description: "Project ideas and builds from the Emerald Hacking & Coding Club's three branches: Hackathon, Data Science, and USACO/Programming.",
+  description: "Projects built by the Emerald Hacking & Coding Club across our three branches: Hackathon, Data Science, and AI Principles / Programming.",
 };
 
 export default function ProjectsPage() {
@@ -23,10 +23,10 @@ export default function ProjectsPage() {
         eyebrow="projects"
         title={
           <>
-            Ideas from <span className="text-gradient">our branches</span>.
+            Built by <span className="text-gradient">our branches</span>.
           </>
         }
-        subtitle="Project concepts spanning Hackathon, Data Science, and USACO/Programming — the kind of work EHCC members build together."
+        subtitle="Real work from EHCC members across Hackathon, Data Science, and AI Principles / Programming — with more shipping every semester."
       />
 
       {/* Featured / pinned */}

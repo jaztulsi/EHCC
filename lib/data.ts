@@ -24,11 +24,11 @@ export const CLUB = {
   city: "Dublin, CA",
   tagline: "// Think. // Build. // Elevate.",
   founded: "2025",
-  instagram: "@ehshackingclub",
-  instagramUrl: "https://instagram.com/ehshackingclub",
-  email: "ehshackingclub@gmail.com",
+  instagram: "@ehcc_26",
+  instagramUrl: "https://www.instagram.com/ehcc_26/",
+  email: "ehs.hackingcoding.club@gmail.com",
   description:
-    "A collaborative, inclusive community at Emerald High School for students interested in coding, technology, and problem-solving — across our Hackathon, Data Science, and USACO/Programming branches.",
+    "A collaborative, inclusive community at Emerald High School for students interested in coding, technology, and problem-solving — across our Hackathon, Data Science, and AI Principles / Programming branches.",
   // Meeting logistics
   meetingDays: "Wednesday & Thursday",
   meetingTime: "Access Period",
@@ -43,12 +43,13 @@ export const NAV_LINKS = [
   { href: "/about", label: "About" },
   { href: "/events", label: "Events" },
   { href: "/learn", label: "Learn" },
+  { href: "/courses", label: "Courses" },
   { href: "/team", label: "Team" },
 ] as const;
 
 export const STATS: Stat[] = [
   { label: "Specialized Branches", value: 3, icon: "Code2" },
-  { label: "Student Founders", value: 5, icon: "Users" },
+  { label: "Student Leaders", value: 6, icon: "Users" },
   { label: "Meetings / Week", value: 2, icon: "GraduationCap" },
   { label: "Free to Join", value: 100, suffix: "%", icon: "Trophy" },
 ];
@@ -67,10 +68,10 @@ export const WHAT_WE_DO = [
     detail: "Explore machine learning algorithms and data analysis through monthly challenges, guest speakers, and real-world applications.",
   },
   {
-    icon: "Trophy",
-    title: "USACO / Programming Branch",
-    blurb: "Compete and conquer.",
-    detail: "Prepare for coding competitions like USACO, mastering algorithms and efficient problem-solving in a collaborative academic environment.",
+    icon: "Network",
+    title: "AI Principles / Programming Branch",
+    blurb: "Use AI, understand the code.",
+    detail: "Learn to use AI effectively and responsibly — practical applications, prompt engineering, and the Python and programming foundations behind the tools.",
   },
   {
     icon: "Users",
@@ -88,36 +89,40 @@ export const WHAT_WE_DO = [
     icon: "Medal",
     title: "Competitions & Challenges",
     blurb: "Put skills to the test.",
-    detail: "Hackathons, USACO competitions, and monthly data science challenges — friendly competition that pushes everyone forward.",
+    detail: "Hackathons, AI build challenges, and monthly data science challenges — friendly competition that pushes everyone forward.",
   },
 ];
 
 export const BRANCHES: Branch[] = [
   { id: "hackathon", name: "Hackathon Branch", description: "Create impactful community solutions through technology, building real projects that address problems in our school and the Tri-Valley community.", icon: "Code2" },
   { id: "datascience", name: "Data Science Branch", description: "Explore machine learning algorithms and data analysis through monthly challenges, guest speakers, and real-world applications.", icon: "BarChart3" },
-  { id: "usaco", name: "USACO / Programming Branch", description: "Prepare for coding competitions like USACO, mastering algorithms and efficient problem-solving techniques in a collaborative academic environment.", icon: "Trophy" },
+  { id: "ai-programming", name: "AI Principles / Programming Branch", description: "Understand and use AI effectively, responsibly, and creatively — practical applications, advanced prompt engineering, and evaluating what today's AI systems can and can't do, all on a foundation of real Python and programming so members understand the code behind the tools. Through hands-on projects, members use AI to build websites, personal apps, and solutions to real problems, experimenting with emerging tech and building the technical and critical-thinking skills to unlock what's next.", icon: "Network" },
 ];
 
 export const LEADERSHIP: TeamMember[] = [
-  { id: "jasraj", name: "Jasraj Tulsi", role: "Co-Founder", grade: "Leadership", bio: "Passionate about creating inclusive tech communities and fostering innovation.", interests: ["Leadership", "Hackathons", "Full-Stack"], isLeadership: true },
-  { id: "shivani", name: "Shivani Venkata", role: "Co-Founder", grade: "Data Science", bio: "Dedicated to exploring real-world applications of data analysis and machine learning.", interests: ["Data Science", "ML", "Python"], isLeadership: true },
-  { id: "alexander", name: "Alexander Xu", role: "Co-Founder", grade: "USACO / Programming", bio: "Focused on competitive programming and algorithm optimization.", interests: ["USACO", "Algorithms", "C++"], isLeadership: true },
-  { id: "dhruv", name: "Dhruv Kothari", role: "Co-Founder", grade: "Hackathon", bio: "Committed to building impactful community solutions through technology.", interests: ["Hackathons", "Web Dev", "React"], isLeadership: true },
-  { id: "shaurya", name: "Shaurya Nigam", role: "Co-Founder", grade: "Operations", bio: "Ensuring smooth club operations and member engagement.", interests: ["Operations", "Events", "Outreach"], isLeadership: true },
+  { id: "shaurya", name: "Shaurya Nigam", role: "President", grade: "Events Manager", bio: "Oversees every role, keeps the club on task, and makes the final calls. Co-runs monthly events with Jasraj.", interests: ["Leadership", "Events", "Operations"], isLeadership: true },
+  { id: "jasraj", name: "Jasraj Tulsi", role: "Vice President", grade: "Events Manager", bio: "Supports the president, co-leads meetings, and manages external relationships. Co-runs monthly events with Shaurya.", interests: ["Leadership", "Events", "Outreach"], isLeadership: true },
+  { id: "joseph", name: "Joseph", role: "Secretary", grade: "Hackathon Lead (TBD)", bio: "Meeting minutes, attendance, shared docs, and the club inbox. May move over to lead the Hackathon track.", interests: ["Operations", "Records", "Hackathons"], isLeadership: true },
+  { id: "sanjana", name: "Sanjana", role: "Treasurer", grade: "Finance", bio: "Budget, school funding, sponsor outreach, and food & event costs.", interests: ["Finance", "Sponsorships", "Events"], isLeadership: true },
+  { id: "shivani", name: "Shivani Venkata", role: "Data Science Lead", grade: "Technology Manager", bio: "Runs the Data Science track — workshops, flagship projects, and Alameda County Fair submissions. Co-manages website & socials.", interests: ["Data Science", "ML", "Python"], isLeadership: true },
+  { id: "alex", name: "Alexander Xu", role: "AI Principles / Programming Lead", grade: "Technology Manager", bio: "Runs the AI Principles / Programming track — practical AI, prompt engineering, and the Python foundations behind the tools. Co-manages website & socials.", interests: ["AI", "Prompt Engineering", "Python"], isLeadership: true },
 ];
 
-// The club is organized by an elected officer board plus per-branch leadership.
+// The club is run by an officer board plus per-track leads.
 export const OFFICER_BOARD = [
-  { position: "Presidents", count: 3, description: "Oversee all branches, lead meetings, coordinate with ASB, and ensure club goals are met." },
-  { position: "Vice President", count: 1, description: "Assists the Presidents and coordinates between the three branches." },
-  { position: "Secretary", count: 1, description: "Keeps records of meetings, membership, and communications." },
-  { position: "Treasurer", count: 1, description: "Manages funds, prepares budgets, and coordinates fundraising efforts." },
+  { position: "President", count: 1, description: "Oversees every role, keeps the club on task, and holds the final decision." },
+  { position: "Vice President", count: 1, description: "Supports the president, co-leads meetings, and manages external relationships." },
+  { position: "Secretary", count: 1, description: "Meeting minutes, attendance, shared docs, and the club inbox." },
+  { position: "Treasurer", count: 1, description: "Budget, school funding, sponsor outreach, and food & event costs." },
+  { position: "Events Manager", count: 1, description: "Plans and executes all monthly events and drives attendance." },
+  { position: "Technology Manager", count: 1, description: "Website, Instagram, flyers, and new-member outreach." },
 ];
 
 export const BRANCH_LEADERSHIP = [
-  { branch: "Hackathon Branch", positions: ["President", "Vice President"], description: "Lead hackathon initiatives and community impact projects." },
-  { branch: "USACO / Programming Branch", positions: ["President", "Vice President"], description: "Guide competitive programming and algorithm training." },
-  { branch: "Data Science Branch", positions: ["President", "Vice President"], description: "Oversee data science education and machine learning projects." },
+  { branch: "Data Science", positions: ["Lead: Shivani"], description: "Workshops, flagship projects, and Alameda County Fair submissions." },
+  { branch: "AI Principles / Programming", positions: ["Lead: Alex"], description: "Practical AI use, prompt engineering, and Python foundations — plus hands-on projects that build real websites, apps, and solutions." },
+  { branch: "Hackathon", positions: ["Lead: TBD (Joseph?)"], description: "Rotating membership each hackathon to grow participation; members picked on CS foundation. Goal: 3–4 hackathons a year." },
+  { branch: "Tech Master", positions: ["Shivani", "Alex"], description: "Club website, social media, HTML/CSS/JS/React workshops, and flagship app & website projects." },
 ];
 
 export const ELECTIONS = {
@@ -126,9 +131,25 @@ export const ELECTIONS = {
   requirements: "Good academic standing",
 };
 
+// Real wins to feature. Edit here to add recognition as the club earns it.
+export const AWARDS = [
+  {
+    icon: "Medal",
+    place: "2nd Place",
+    title: "World's Largest High School Hackathon",
+    detail: "EHCC's team placed 2nd among thousands of student competitors — one of our proudest results.",
+  },
+  {
+    icon: "Rocket",
+    place: "Flagship",
+    title: "Projects Built & Shipped",
+    detail: "Members designed and presented flagship projects together, including Alameda County Fair submissions.",
+  },
+];
+
 export const ACHIEVEMENTS: Milestone[] = [
-  { date: "2025", title: "EHCC Founded", description: "Five Emerald High students launch the club with a mission: build real things, together." },
-  { date: "2025", title: "Three Branches Launched", description: "Hackathon, Data Science, and USACO/Programming branches open their doors to all skill levels." },
+  { date: "2025", title: "EHCC Founded", description: "A team of Emerald High students launch the club with a mission: build real things, together." },
+  { date: "2025", title: "Three Branches Launched", description: "Hackathon, Data Science, and AI Principles / Programming branches open their doors to all skill levels." },
   { date: "2025", title: "Weekly Meetings Begin", description: "The club starts meeting every Wednesday and Thursday during Access Period in Room F-105." },
   { date: "Ongoing", title: "Guest Speaker Series", description: "Industry professionals join us monthly to talk careers in tech and data science." },
   { date: "Each May", title: "Officer Elections", description: "Members in good standing run for board and branch-leadership positions." },
@@ -136,7 +157,7 @@ export const ACHIEVEMENTS: Milestone[] = [
 
 export const EVENTS: ClubEvent[] = [
   { id: "e1", title: "Weekly General Meeting", type: "Social", date: "2026-09-02", time: "Wednesday & Thursday · Access Period", location: "Room F-105", description: "Our weekly meeting where all three branches come together to share updates, learn new skills, and work on collaborative projects.", upcoming: true, featured: true },
-  { id: "e2", title: "USACO Practice Session", type: "Workshop", date: "2026-09-03", time: "Weekly · Access Period", location: "Room F-105", description: "Focused practice for competitive programming — working through USACO problems and algorithm optimization together.", upcoming: true },
+  { id: "e2", title: "AI Principles Workshop", type: "Workshop", date: "2026-09-03", time: "Weekly · Access Period", location: "Room F-105", description: "Hands-on sessions on using AI effectively — prompt engineering, building with AI, and the Python foundations behind the tools.", upcoming: true },
   { id: "e3", title: "Data Science Challenge", type: "Competition", date: "2026-09-18", time: "Monthly", location: "Room F-105", description: "Monthly challenges where students define a problem, collect data, and apply machine learning to build predictive models.", upcoming: true },
   { id: "e4", title: "Guest Speaker Series", type: "Guest Speaker", date: "2026-09-25", time: "Monthly", location: "Room F-105", description: "Industry professionals share insights about careers in tech, data science applications, and real-world programming.", upcoming: true },
   { id: "e5", title: "Hackathon Prep Workshop", type: "Workshop", date: "2026-10-09", time: "Quarterly · After School", location: "Room F-105", description: "Intensive workshops to prep for upcoming hackathons — rapid prototyping, teamwork, and project presentation skills.", upcoming: true },
@@ -145,17 +166,12 @@ export const EVENTS: ClubEvent[] = [
 export const SPEAKERS: GuestSpeaker[] = [
   { id: "s1", name: "To Be Announced", role: "Industry Professional", company: "Monthly Series", topic: "Careers in Software Engineering", date: "2026-09-25" },
   { id: "s2", name: "To Be Announced", role: "Industry Professional", company: "Monthly Series", topic: "Real-World Data Science & Machine Learning", date: "2026-10-23" },
-  { id: "s3", name: "To Be Announced", role: "Industry Professional", company: "Monthly Series", topic: "Competitive Programming & Problem Solving", date: "2026-11-20" },
+  { id: "s3", name: "To Be Announced", role: "Industry Professional", company: "Monthly Series", topic: "AI, Prompt Engineering & Building with AI", date: "2026-11-20" },
 ];
 
+// Real, shipped work. Add projects here as branches complete them.
 export const PROJECTS: Project[] = [
-  { id: "p1", name: "StudySync", description: "A Data Science branch concept: an AI-powered study planner that builds personalized revision schedules from your syllabus and spaced-repetition data.", category: "AI/ML", members: ["Data Science Branch"], tech: ["Next.js", "OpenAI API", "Postgres", "TypeScript"], featured: true },
-  { id: "p2", name: "HallPass", description: "A Hackathon branch idea: a digital hall-pass system for EHS with QR check-in, live dashboards, and abuse detection.", category: "Web Dev", members: ["Hackathon Branch"], tech: ["React", "Firebase", "Tailwind"], featured: true },
-  { id: "p3", name: "PhishNet", description: "A browser extension concept that flags phishing emails and suspicious links using a lightweight on-device classifier.", category: "Cybersecurity", members: ["Hackathon Branch"], tech: ["JavaScript", "TensorFlow.js", "Chrome API"], featured: true },
-  { id: "p4", name: "CafeteriaIQ", description: "A Data Science project idea: a dashboard predicting lunch-line wait times from historical foot-traffic data.", category: "Data Science", members: ["Data Science Branch"], tech: ["Python", "pandas", "Plotly", "scikit-learn"] },
-  { id: "p5", name: "DragonBot", description: "A club Discord bot concept: event reminders, code-snippet sharing, and a built-in trivia game.", category: "Other", members: ["Hackathon Branch"], tech: ["Python", "discord.py", "SQLite"] },
-  { id: "p6", name: "VisionLabel", description: "An AI/ML idea: a real-time object detection web app for science-fair projects, running entirely in the browser.", category: "AI/ML", members: ["Data Science Branch"], tech: ["TensorFlow.js", "React", "WebRTC"] },
-  { id: "p7", name: "Algorithm Visualizer", description: "A USACO/Programming branch project: an interactive tool that animates sorting and graph algorithms to make practice click.", category: "Web Dev", members: ["USACO / Programming Branch"], tech: ["React", "TypeScript", "Canvas"] },
+  { id: "ehcc-website", name: "EHCC Website", description: "This site — the club's official home, built and maintained by the Tech Master team. Branch info, events, the courses platform, and four playable browser games.", category: "Web Dev", members: ["Tech Master — Shivani & Alex"], tech: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"], featured: true },
 ];
 
 export const WORKSHOPS: Workshop[] = [
@@ -345,7 +361,7 @@ export const FAQS = [
   { q: "Do I need coding experience to join?", a: "Not at all. All skill levels are welcome — we pair newcomers with experienced members, and curiosity is the only real requirement." },
   { q: "When and where does the club meet?", a: "We meet during Access Period every Wednesday and Thursday in Room F-105 at Emerald High School." },
   { q: "How much does it cost?", a: "Nothing. EHCC is free to join for all Emerald High students." },
-  { q: "What are the three branches?", a: "Hackathon, Data Science, and USACO/Programming. You can focus on one branch or explore all three." },
+  { q: "What are the three branches?", a: "Hackathon, Data Science, and AI Principles / Programming. You can focus on one branch or explore all three." },
   { q: "Who can join?", a: "Any Emerald High School student in good academic and behavioral standing who's willing to contribute positively to the club." },
   { q: "How do I join?", a: "Fill out our membership form, come to a meeting in Room F-105, pick your branch, and start building." },
 ];
