@@ -14,6 +14,7 @@ import {
   RotateCcw,
 } from "lucide-react";
 import { Badge, toneFor } from "@/components/ui/Badge";
+import { Icon } from "@/components/ui/Icon";
 import { COURSES, TOPICS, COURSE_COUNT, LESSON_COUNT } from "@/lib/courses";
 import { cn } from "@/lib/utils";
 import { useProfile } from "./useProfile";
@@ -130,7 +131,7 @@ function Dashboard({
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <p className="font-mono text-sm text-emerald">{"// student.dashboard"}</p>
-          <h2 className="mt-1 text-3xl font-bold text-white">Welcome back, {name} 👋</h2>
+          <h2 className="mt-1 text-3xl font-bold text-white">Welcome back, {name}</h2>
         </div>
         <div className="flex items-center gap-2">
           <button
@@ -174,7 +175,9 @@ function Dashboard({
                   href={`/courses/${course.id}/${next.id}`}
                   className="group flex items-center gap-4 rounded-xl border border-white/5 bg-navy-800/50 p-4 transition-all hover:-translate-y-0.5 hover:border-emerald/30 hover:shadow-glow"
                 >
-                  <span className="text-3xl">{course.icon}</span>
+                  <span className="inline-flex shrink-0 rounded-lg bg-emerald/10 p-3 text-emerald-bright">
+                    <Icon name={course.icon} className="h-6 w-6" />
+                  </span>
                   <div className="min-w-0 flex-1">
                     <p className="truncate font-semibold text-white">{course.title}</p>
                     <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-navy-950">
@@ -277,7 +280,9 @@ function Catalog({
               className="group flex h-full flex-col rounded-xl border border-white/5 bg-navy-800/50 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-emerald/30 hover:shadow-glow"
             >
               <div className="flex items-start justify-between">
-                <span className="text-4xl">{c.icon}</span>
+                <span className="inline-flex rounded-xl bg-emerald/10 p-3 text-emerald-bright">
+                  <Icon name={c.icon} className="h-7 w-7" />
+                </span>
                 <Badge tone={toneFor(c.difficulty)} mono>
                   {c.difficulty}
                 </Badge>

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, PlayCircle } from "lucide-react";
 import { Badge, toneFor } from "@/components/ui/Badge";
+import { Icon } from "@/components/ui/Icon";
 import { CourseLessons } from "@/components/course/CourseLessons";
 import { COURSES, getCourse } from "@/lib/courses";
 
@@ -33,7 +34,9 @@ export default function CoursePage({ params }: { params: { courseId: string } })
         </Link>
 
         <div className="mt-5 flex items-start gap-5">
-          <span className="text-6xl">{course.icon}</span>
+          <span className="inline-flex shrink-0 rounded-2xl bg-emerald/10 p-4 text-emerald-bright shadow-glow">
+            <Icon name={course.icon} className="h-10 w-10" />
+          </span>
           <div>
             <div className="flex flex-wrap items-center gap-2">
               <Badge tone={toneFor(course.difficulty)} mono>{course.difficulty}</Badge>

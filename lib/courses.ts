@@ -24,7 +24,7 @@ export interface Lesson {
 export interface Course {
   id: string;
   title: string;
-  icon: string; // emoji
+  icon: string; // lucide icon name (see components/ui/Icon.tsx)
   topic: string;
   difficulty: Difficulty;
   tagline: string;
@@ -40,7 +40,7 @@ export const COURSES: Course[] = [
   {
     id: "python-foundations",
     title: "Python Foundations",
-    icon: "🐍",
+    icon: "FileCode2",
     topic: "Python",
     difficulty: "Beginner",
     tagline: "The on-ramp to everything else.",
@@ -91,7 +91,7 @@ export const COURSES: Course[] = [
   {
     id: "web-html-css",
     title: "Web: HTML & CSS",
-    icon: "🎨",
+    icon: "Globe",
     topic: "Web Dev",
     difficulty: "Beginner",
     tagline: "Build and style your first page.",
@@ -142,7 +142,7 @@ export const COURSES: Course[] = [
   {
     id: "javascript-essentials",
     title: "JavaScript Essentials",
-    icon: "⚡",
+    icon: "Code2",
     topic: "Web Dev",
     difficulty: "Beginner",
     tagline: "Make pages do things.",
@@ -173,7 +173,7 @@ export const COURSES: Course[] = [
   {
     id: "git-github",
     title: "Git & GitHub",
-    icon: "🔀",
+    icon: "GitBranch",
     topic: "Tools",
     difficulty: "Beginner",
     tagline: "How teams ship together.",
@@ -204,7 +204,7 @@ export const COURSES: Course[] = [
   {
     id: "command-line",
     title: "The Command Line",
-    icon: "⌨️",
+    icon: "Terminal",
     topic: "Tools",
     difficulty: "Beginner",
     tagline: "Talk to your computer directly.",
@@ -235,7 +235,7 @@ export const COURSES: Course[] = [
   {
     id: "prompt-engineering",
     title: "Prompt Engineering",
-    icon: "✨",
+    icon: "Sparkles",
     topic: "AI",
     difficulty: "Beginner",
     tagline: "Ask well, get better results.",
@@ -266,7 +266,7 @@ export const COURSES: Course[] = [
   {
     id: "building-with-ai",
     title: "Building with AI",
-    icon: "🤖",
+    icon: "Bot",
     topic: "AI",
     difficulty: "Intermediate",
     tagline: "Ship real things faster.",
@@ -297,7 +297,7 @@ export const COURSES: Course[] = [
   {
     id: "react-intro",
     title: "React from Scratch",
-    icon: "⚛️",
+    icon: "Atom",
     topic: "Web Dev",
     difficulty: "Intermediate",
     tagline: "Build interfaces from components.",
@@ -328,7 +328,7 @@ export const COURSES: Course[] = [
   {
     id: "data-science-python",
     title: "Data Science with Python",
-    icon: "📊",
+    icon: "BarChart3",
     topic: "Data Science",
     difficulty: "Intermediate",
     tagline: "Turn raw data into insight.",
@@ -359,7 +359,7 @@ export const COURSES: Course[] = [
   {
     id: "machine-learning",
     title: "Intro to Machine Learning",
-    icon: "🧠",
+    icon: "BrainCircuit",
     topic: "AI",
     difficulty: "Intermediate",
     tagline: "Programs that learn from data.",
@@ -390,7 +390,7 @@ export const COURSES: Course[] = [
   {
     id: "neural-networks",
     title: "Neural Networks",
-    icon: "🕸️",
+    icon: "Network",
     topic: "AI",
     difficulty: "Advanced",
     tagline: "The math that learns.",
@@ -421,7 +421,7 @@ export const COURSES: Course[] = [
   {
     id: "sql-databases",
     title: "Databases & SQL",
-    icon: "🗄️",
+    icon: "Database",
     topic: "Data Science",
     difficulty: "Intermediate",
     tagline: "Store and query structured data.",
@@ -452,7 +452,7 @@ export const COURSES: Course[] = [
   {
     id: "apis-and-http",
     title: "APIs & HTTP",
-    icon: "🔌",
+    icon: "Plug",
     topic: "Web Dev",
     difficulty: "Intermediate",
     tagline: "How programs talk to each other.",
@@ -483,7 +483,7 @@ export const COURSES: Course[] = [
   {
     id: "cybersecurity",
     title: "Cybersecurity Basics",
-    icon: "🛡️",
+    icon: "ShieldCheck",
     topic: "Cybersecurity",
     difficulty: "Intermediate",
     tagline: "Think like an attacker, defend like a pro.",
@@ -514,7 +514,7 @@ export const COURSES: Course[] = [
   {
     id: "algorithms",
     title: "Algorithms & Big-O",
-    icon: "📈",
+    icon: "Binary",
     topic: "Programming",
     difficulty: "Intermediate",
     tagline: "Write code that scales.",
@@ -545,7 +545,7 @@ export const COURSES: Course[] = [
   {
     id: "discord-bots",
     title: "Build a Discord Bot",
-    icon: "💬",
+    icon: "MessageSquare",
     topic: "Projects",
     difficulty: "Intermediate",
     tagline: "Automate your server.",
@@ -576,7 +576,7 @@ export const COURSES: Course[] = [
   {
     id: "game-dev",
     title: "Game Dev Basics",
-    icon: "🎮",
+    icon: "Gamepad2",
     topic: "Projects",
     difficulty: "Beginner",
     tagline: "Loops, input, and drawing.",
@@ -607,7 +607,7 @@ export const COURSES: Course[] = [
   {
     id: "deploy-and-hosting",
     title: "Shipping & Hosting",
-    icon: "🚀",
+    icon: "Rocket",
     topic: "Tools",
     difficulty: "Beginner",
     tagline: "Put it on the internet.",
@@ -638,7 +638,7 @@ export const COURSES: Course[] = [
   {
     id: "hackathon-playbook",
     title: "Hackathon Playbook",
-    icon: "🏆",
+    icon: "Trophy",
     topic: "Projects",
     difficulty: "Beginner",
     tagline: "Build and pitch in 24 hours.",
@@ -669,7 +669,7 @@ export const COURSES: Course[] = [
   {
     id: "interview-prep",
     title: "Coding Interview Prep",
-    icon: "🎯",
+    icon: "Target",
     topic: "Programming",
     difficulty: "Advanced",
     tagline: "Solve problems under pressure.",

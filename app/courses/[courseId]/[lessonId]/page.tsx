@@ -60,7 +60,7 @@ export default function LessonPage({
           </Link>
           <span>/</span>
           <Link href={`/courses/${course.id}`} className="transition-colors hover:text-emerald-bright">
-            {course.icon} {course.title}
+            {course.title}
           </Link>
         </div>
 
