@@ -6,7 +6,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 /**
  * Wraps children in a layer that drifts vertically as it passes through the
  * viewport, creating depth between foreground and background elements.
- * `speed` is the fraction of the element's travel to offset by — positive
+ * `speed` is the fraction of the element's travel to offset by, positive
  * moves slower (recedes), negative moves faster (leads). Disabled entirely
  * for reduced-motion visitors.
  */

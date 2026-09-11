@@ -15,7 +15,7 @@ export function ProjectCard({ project, large = false }: { project: Project; larg
   return (
     <article
       className={cn(
-        "group relative flex h-full flex-col rounded-xl border border-white/5 bg-navy-800/50 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-emerald/30 hover:shadow-glow-md",
+        "group relative flex h-full flex-col surface p-6 card-lift",
         large && "md:p-8"
       )}
     >
@@ -27,7 +27,7 @@ export function ProjectCard({ project, large = false }: { project: Project; larg
       <div className="mb-3 flex items-center gap-2">
         <Badge tone={categoryTone[project.category]}>{project.category}</Badge>
       </div>
-      <h3 className={cn("font-bold text-white transition-colors group-hover:text-emerald-bright", large ? "text-2xl" : "text-xl")}>
+      <h3 className={cn("font-bold text-silver transition-colors group-hover:text-emerald-bright", large ? "text-2xl" : "text-xl")}>
         {project.name}
       </h3>
       <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{project.description}</p>
@@ -46,13 +46,13 @@ export function ProjectCard({ project, large = false }: { project: Project; larg
       </div>
 
       {(project.github || project.demo) && (
-        <div className="mt-5 flex gap-2 border-t border-white/5 pt-4">
+        <div className="mt-5 flex gap-2 border-t border-line pt-4">
           {project.github && (
             <a
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-md border border-white/10 px-3 py-1.5 text-xs font-medium text-silver transition-colors hover:border-emerald/40 hover:text-emerald-bright"
+              className="inline-flex items-center gap-1.5 rounded-md border border-line px-3 py-1.5 text-xs font-medium text-silver transition-colors hover:border-emerald/40 hover:text-emerald-bright"
             >
               <Github size={14} /> Code
             </a>

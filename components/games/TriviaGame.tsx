@@ -52,9 +52,9 @@ export function TriviaGame() {
   return (
     <GameShell
       title="cs-trivia"
-      subtitle="test your computer-science knowledge — 8 questions"
+      subtitle="test your computer-science knowledge, 8 questions"
       onRestart={restart}
-      shareText={done ? `I scored ${score}/${total} (${pct}%) on EHCC CS Trivia! Your turn.` : undefined}
+      shareText={done ? `I scored ${score}/${total} (${pct}%) on EHIC CS Trivia! Your turn.` : undefined}
     >
       {!done ? (
         <div>
@@ -75,7 +75,7 @@ export function TriviaGame() {
             />
           </div>
 
-          <h3 className="text-lg font-semibold text-white">{q.question}</h3>
+          <h3 className="text-lg font-semibold text-silver">{q.question}</h3>
 
           <div className="mt-4 grid gap-2 sm:grid-cols-2">
             {q.options.map((opt, i) => {
@@ -88,10 +88,10 @@ export function TriviaGame() {
                   disabled={selected !== null}
                   className={cn(
                     "flex items-center justify-between gap-3 rounded-lg border px-4 py-3 text-left text-sm transition-all",
-                    selected === null && "border-white/10 hover:border-emerald/40 hover:bg-emerald/5",
+                    selected === null && "border-line hover:border-emerald/40 hover:bg-emerald/5",
                     selected !== null && isAnswer && "border-emerald bg-emerald/10 text-emerald-bright",
-                    selected !== null && isPicked && !isAnswer && "border-rose-500 bg-rose-500/10 text-rose-300",
-                    selected !== null && !isAnswer && !isPicked && "border-white/5 opacity-50"
+                    selected !== null && isPicked && !isAnswer && "border-rose-300 bg-rose-50 text-rose-700",
+                    selected !== null && !isAnswer && !isPicked && "border-line opacity-50"
                   )}
                 >
                   <span>{opt}</span>
@@ -105,7 +105,7 @@ export function TriviaGame() {
           {selected !== null && (
             <button
               onClick={next}
-              className="btn-shimmer mt-4 rounded-md bg-emerald px-5 py-2 text-sm font-semibold text-navy-950 hover:bg-emerald-bright"
+              className="mt-4 rounded-md bg-emerald px-5 py-2 text-sm font-semibold text-white hover:bg-emerald-bright"
             >
               {round + 1 >= total ? "Reveal score" : "Next question →"}
             </button>
@@ -122,7 +122,7 @@ export function TriviaGame() {
           >
             {pct}%
           </motion.p>
-          <p className="font-mono text-sm text-white">
+          <p className="font-mono text-sm text-silver">
             {score}/{total} correct
           </p>
           <p className="mt-2 font-mono text-sm text-emerald-bright">
@@ -130,7 +130,7 @@ export function TriviaGame() {
           </p>
           <button
             onClick={restart}
-            className="btn-shimmer mt-5 rounded-md bg-emerald px-6 py-2 text-sm font-semibold text-navy-950 hover:bg-emerald-bright"
+            className="mt-5 rounded-md bg-emerald px-6 py-2 text-sm font-semibold text-white hover:bg-emerald-bright"
           >
             Play again
           </button>

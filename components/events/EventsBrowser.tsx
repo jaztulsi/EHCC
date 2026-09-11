@@ -28,7 +28,7 @@ export function EventsBrowser({ events }: { events: ClubEvent[] }) {
             onClick={() => setFilter(f)}
             className={cn(
               "relative rounded-full px-4 py-1.5 text-sm font-medium transition-colors",
-              filter === f ? "text-navy-950" : "text-muted hover:text-silver"
+              filter === f ? "text-white" : "text-muted hover:text-silver"
             )}
           >
             {filter === f && (
@@ -62,7 +62,7 @@ export function EventsBrowser({ events }: { events: ClubEvent[] }) {
 
       {filtered.length === 0 && (
         <p className="mt-10 text-center font-mono text-sm text-muted">
-          {"// no events match this filter — check back soon"}
+          No events match this filter. Check back soon.
         </p>
       )}
     </div>

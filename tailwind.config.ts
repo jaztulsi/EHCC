@@ -1,8 +1,18 @@
 import type { Config } from "tailwindcss";
 
 /**
- * EHCC design system — derived from the dragon badge logo.
- * Deep navy canvas + emerald green accents + silver text.
+ * EHIC design system.
+ *
+ * Built on three ideas borrowed from Apple's HIG:
+ *   1. Layered surfaces, not a flat page. The canvas is a tinted sage, cards
+ *      are white and sit above it, and deep forest bands anchor the page.
+ *   2. One accent, sampled from the dragon mark, plus two supporting tones
+ *      used only to code event types.
+ *   3. Depth from soft, layered shadow and a light inner highlight rather
+ *      than from heavy borders.
+ *
+ * Legacy token names (navy/silver/muted) are kept as aliases so the whole
+ * app re-themes from this one file.
  */
 const config: Config = {
   content: [
@@ -13,70 +23,123 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Backgrounds
+        // ---- Surfaces -----------------------------------------------------
+        canvas: {
+          DEFAULT: "#eff4ef", // page, sage-tinted
+          warm: "#f5f3ed", // alternating band, warmer
+          cool: "#eaf1f0", // alternating band, cooler
+        },
+        // Legacy aliases: cards resolve to white so they lift off the canvas.
         navy: {
-          950: "#0a1628",
-          900: "#0d1b2a",
-          800: "#112240",
-          700: "#1a2f4a",
+          950: "#eff4ef",
+          900: "#ffffff",
+          800: "#ffffff",
+          700: "#e4ece6",
         },
-        // Emerald accent scale
+        // Deep band used for the footer and feature sections.
+        bark: {
+          DEFAULT: "#12291d",
+          soft: "#1a3a29",
+          line: "#2a4b38",
+          ink: "#e9f1eb",
+          muted: "#9ab5a5",
+        },
+
+        // ---- Ink ----------------------------------------------------------
+        silver: "#121a15", // primary ink
+        muted: "#586a5f", // secondary ink
+        line: "#dae3dc", // hairline
+
+        // ---- Accent, sampled off the dragon mark --------------------------
         emerald: {
-          DEFAULT: "#22c55e",
-          glow: "#22c55e",
-          bright: "#4ade80",
-          circuit: "#16a34a",
-          deep: "#1a7a3c",
+          DEFAULT: "#2b6a45",
+          bright: "#1a422d",
+          circuit: "#55a969",
+          deep: "#183d2a",
+          glow: "#55a969",
+          light: "#55a969",
+          pale: "#96d896",
         },
-        silver: "#e2e8f0",
-        muted: "#94a3b8",
+        // Supporting tones. Used to colour-code event types, nothing else.
+        clay: "#a35f36",
+        lagoon: "#276b6b",
+        iris: "#514a86",
       },
+
       fontFamily: {
-        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+        // On Apple hardware this renders real SF Pro; Inter elsewhere.
+        sans: [
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "SF Pro Text",
+          "var(--font-inter)",
+          "system-ui",
+          "sans-serif",
+        ],
+        display: [
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "SF Pro Display",
+          "var(--font-inter)",
+          "system-ui",
+          "sans-serif",
+        ],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
+
+      // Apple's display type is set tight; body stays optically relaxed.
+      letterSpacing: {
+        display: "-0.026em",
+        title: "-0.018em",
+      },
+
+      borderRadius: {
+        card: "16px",
+        panel: "22px",
+        hero: "30px",
+      },
+
       boxShadow: {
-        glow: "0 0 20px rgba(34, 197, 94, 0.2)",
-        "glow-md": "0 0 30px rgba(34, 197, 94, 0.35)",
-        "glow-lg": "0 0 45px rgba(34, 197, 94, 0.45)",
-        "glow-text": "0 0 12px rgba(74, 222, 128, 0.6)",
+        // Legacy names, now real elevation with a light inner highlight.
+        glow: "0 1px 2px rgba(18,41,29,0.05), 0 1px 1px rgba(18,41,29,0.04)",
+        "glow-md":
+          "0 8px 24px -10px rgba(18,41,29,0.20), 0 2px 6px -2px rgba(18,41,29,0.08)",
+        "glow-lg":
+          "0 26px 60px -22px rgba(18,41,29,0.30), 0 6px 16px -8px rgba(18,41,29,0.10)",
+        "glow-text": "none",
+        rim: "inset 0 1px 0 rgba(255,255,255,0.75)",
+        "rim-dark": "inset 0 1px 0 rgba(255,255,255,0.08)",
       },
-      backgroundImage: {
-        "circuit-grid":
-          "linear-gradient(rgba(34,197,94,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(34,197,94,0.06) 1px, transparent 1px)",
-        "radial-glow":
-          "radial-gradient(circle at 50% 0%, rgba(34,197,94,0.12), transparent 60%)",
+
+      transitionTimingFunction: {
+        // Apple's standard interface curve, and a softer overshoot.
+        apple: "cubic-bezier(0.32, 0.72, 0, 1)",
+        "apple-out": "cubic-bezier(0.16, 1, 0.3, 1)",
       },
+
       keyframes: {
         "fade-up": {
-          "0%": { opacity: "0", transform: "translateY(24px)" },
+          "0%": { opacity: "0", transform: "translateY(12px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
-        float: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-12px)" },
+        "marquee-x": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
         },
-        blink: {
-          "0%, 49%": { opacity: "1" },
-          "50%, 100%": { opacity: "0" },
+        drift: {
+          "0%, 100%": { transform: "translate3d(0,0,0) scale(1)" },
+          "50%": { transform: "translate3d(0,-18px,0) scale(1.04)" },
         },
-        shimmer: {
-          "100%": { transform: "translateX(100%)" },
-        },
-        "dash-draw": {
-          to: { strokeDashoffset: "0" },
-        },
-        "pulse-glow": {
-          "0%, 100%": { opacity: "0.4" },
-          "50%": { opacity: "1" },
+        sheen: {
+          "0%": { transform: "translateX(-120%)" },
+          "100%": { transform: "translateX(220%)" },
         },
       },
       animation: {
-        "fade-up": "fade-up 0.6s ease-out forwards",
-        float: "float 4s ease-in-out infinite",
-        blink: "blink 1s step-end infinite",
-        shimmer: "shimmer 1.2s ease-out",
-        "pulse-glow": "pulse-glow 3s ease-in-out infinite",
+        "fade-up": "fade-up 0.5s cubic-bezier(0.16,1,0.3,1) forwards",
+        marquee: "marquee-x 38s linear infinite",
+        drift: "drift 16s ease-in-out infinite",
+        sheen: "sheen 0.9s cubic-bezier(0.32,0.72,0,1)",
       },
     },
   },

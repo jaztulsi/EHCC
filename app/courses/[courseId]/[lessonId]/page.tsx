@@ -30,7 +30,7 @@ function Inline({ text }: { text: string }) {
         i % 2 === 1 ? (
           <code
             key={i}
-            className="rounded bg-navy-950 px-1.5 py-0.5 font-mono text-[0.85em] text-emerald-bright"
+            className="rounded bg-navy-700 px-1.5 py-0.5 font-mono text-[0.85em] text-emerald-bright"
           >
             {part}
           </code>
@@ -65,7 +65,7 @@ export default function LessonPage({
           </Link>
         </div>
 
-        <h1 className="mt-4 text-3xl font-bold text-white md:text-4xl">{lesson.title}</h1>
+        <h1 className="mt-4 text-3xl font-bold text-silver md:text-4xl">{lesson.title}</h1>
         <div className="mt-3 flex items-center gap-3">
           <Badge tone="navy" mono>
             <Clock size={12} className="mr-1 inline" /> {lesson.minutes} min
@@ -77,7 +77,7 @@ export default function LessonPage({
         {/* Reading */}
         <div className="mt-8">
           <div className="mb-3 flex items-center gap-2 font-mono text-sm text-emerald">
-            <BookOpen size={15} /> {"// read"}
+            <BookOpen size={15} /> Read
           </div>
           <div className="space-y-4 leading-relaxed text-silver">
             {lesson.reading.map((p, i) => (
@@ -91,7 +91,7 @@ export default function LessonPage({
         {/* Videos */}
         <div className="mt-10">
           <div className="mb-3 flex items-center gap-2 font-mono text-sm text-emerald">
-            <PlayCircle size={15} /> {"// watch — 3 sources"}
+            <PlayCircle size={15} /> Watch
           </div>
           <div className="grid gap-3">
             {lesson.videos.map((vid, i) => (
@@ -100,13 +100,13 @@ export default function LessonPage({
                 href={vid.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-4 rounded-xl border border-white/10 bg-navy-800/50 p-4 transition-all hover:border-emerald/40 hover:shadow-glow"
+                className="group flex items-center gap-4 surface p-4 card-lift"
               >
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-emerald/10 font-mono text-sm font-bold text-emerald-bright">
                   {i + 1}
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className="truncate font-semibold text-white">{vid.title}</p>
+                  <p className="truncate font-semibold text-silver">{vid.title}</p>
                   <p className="text-sm text-muted">{vid.channel}</p>
                 </div>
                 <PlayCircle size={22} className="shrink-0 text-muted transition-colors group-hover:text-emerald-bright" />
@@ -122,7 +122,7 @@ export default function LessonPage({
         </RequireProfile>
 
         {/* Prev / next */}
-        <div className="mt-10 flex items-center justify-between gap-4 border-t border-white/5 pt-8">
+        <div className="mt-10 flex items-center justify-between gap-4 border-t border-line pt-8">
           {prev ? (
             <Button href={`/courses/${course.id}/${prev.id}`} variant="ghost" size="sm">
               <ArrowLeft size={16} /> {prev.title}

@@ -26,7 +26,7 @@ export function GameShell({
     if (!shareText) return;
     try {
       if (navigator.share) {
-        await navigator.share({ title: "EHCC Games", text: shareText });
+        await navigator.share({ title: "EHIC Games", text: shareText });
       } else {
         await navigator.clipboard.writeText(shareText);
         setCopied(true);
@@ -40,7 +40,7 @@ export function GameShell({
   return (
     <div className={cn("overflow-hidden rounded-xl border border-emerald/20 bg-navy-900", className)}>
       {/* Terminal title bar */}
-      <div className="flex items-center justify-between border-b border-white/10 bg-navy-800/80 px-4 py-2.5">
+      <div className="flex items-center justify-between border-b border-line bg-navy-800 px-4 py-2.5">
         <div className="flex items-center gap-2">
           <span className="flex gap-1.5">
             <span className="h-3 w-3 rounded-full bg-rose-400/70" />
@@ -48,7 +48,7 @@ export function GameShell({
             <span className="h-3 w-3 rounded-full bg-emerald/70" />
           </span>
           <span className="ml-2 font-mono text-xs text-muted">
-            ehcc@games:~$ <span className="text-emerald-bright">{title}</span>
+            ehic@games:~$ <span className="text-emerald-bright">{title}</span>
           </span>
         </div>
         <div className="flex items-center gap-1.5">
@@ -72,7 +72,7 @@ export function GameShell({
         </div>
       </div>
       {subtitle && (
-        <p className="border-b border-white/5 px-4 py-2 font-mono text-xs text-muted">{"// "}{subtitle}</p>
+        <p className="border-b border-line px-4 py-2 font-mono text-xs text-muted">" "{subtitle}</p>
       )}
       <div className="p-5 sm:p-6">{children}</div>
     </div>

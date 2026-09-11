@@ -23,7 +23,7 @@ export function CoursesNav({ standalone = true }: { standalone?: boolean }) {
   return (
     <header
       className={cn(
-        "z-40 border-b border-white/10 bg-navy-950/80 backdrop-blur-md",
+        "z-40 border-b border-line bg-white",
         standalone ? "sticky top-0" : "relative"
       )}
     >
@@ -32,8 +32,8 @@ export function CoursesNav({ standalone = true }: { standalone?: boolean }) {
           <span className="inline-flex rounded-lg bg-emerald/15 p-1.5 text-emerald-bright">
             <GraduationCap size={18} />
           </span>
-          <span className="font-bold text-white">
-            EHCC <span className="text-emerald-bright">Academy</span>
+          <span className="font-bold text-silver">
+            EHIC <span className="text-emerald-bright">Academy</span>
           </span>
         </Link>
 
@@ -46,7 +46,7 @@ export function CoursesNav({ standalone = true }: { standalone?: boolean }) {
                 "inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm transition-colors",
                 isActive(t.href, t.exact)
                   ? "bg-emerald/10 text-emerald-bright"
-                  : "text-muted hover:text-white"
+                  : "text-muted hover:text-silver"
               )}
             >
               <t.icon size={15} /> {t.label}
@@ -60,7 +60,7 @@ export function CoursesNav({ standalone = true }: { standalone?: boolean }) {
               href="/courses/dashboard"
               className="inline-flex items-center gap-2 rounded-full border border-emerald/30 bg-emerald/10 px-3 py-1.5 text-sm font-medium text-emerald-bright transition-colors hover:border-emerald/50"
             >
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald text-xs font-bold text-navy-950">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald text-xs font-bold text-white">
                 {profile.name.trim().charAt(0).toUpperCase()}
               </span>
               <span className="hidden sm:inline">{profile.name.split(" ")[0]}</span>
@@ -68,7 +68,7 @@ export function CoursesNav({ standalone = true }: { standalone?: boolean }) {
           ) : (
             <Link
               href="/courses"
-              className="btn-shimmer inline-flex items-center gap-1.5 rounded-lg bg-emerald px-4 py-2 text-sm font-semibold text-navy-950 transition-colors hover:bg-emerald-bright"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-emerald px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-bright"
             >
               Sign up free
             </Link>
@@ -77,7 +77,7 @@ export function CoursesNav({ standalone = true }: { standalone?: boolean }) {
       </nav>
 
       {/* Mobile tabs */}
-      <div className="flex items-center gap-1 border-t border-white/5 px-4 py-2 sm:hidden">
+      <div className="flex items-center gap-1 border-t border-line px-4 py-2 sm:hidden">
         {TABS.map((t) => (
           <Link
             key={t.href}

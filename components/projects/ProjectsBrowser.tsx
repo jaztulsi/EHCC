@@ -21,7 +21,7 @@ export function ProjectsBrowser({ projects }: { projects: Project[] }) {
             onClick={() => setFilter(f)}
             className={cn(
               "relative rounded-full px-4 py-1.5 text-sm font-medium transition-colors",
-              filter === f ? "text-navy-950" : "text-muted hover:text-silver"
+              filter === f ? "text-white" : "text-muted hover:text-silver"
             )}
           >
             {filter === f && (

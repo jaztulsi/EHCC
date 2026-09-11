@@ -16,20 +16,20 @@ export function TeamMemberCard({ member, large = false }: { member: TeamMember; 
   return (
     <article
       className={cn(
-        "group flex h-full flex-col items-center rounded-xl border border-white/5 bg-navy-800/50 p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-emerald/30 hover:shadow-glow",
+        "group flex h-full flex-col items-center surface p-6 text-center card-lift",
         large && "sm:p-7"
       )}
     >
       {/* Avatar placeholder with glowing ring */}
       <div
         className={cn(
-          "relative mb-4 flex items-center justify-center rounded-full bg-gradient-to-br from-emerald-deep to-navy-700 font-mono font-bold text-white ring-2 ring-emerald/30 transition-all duration-300 group-hover:ring-emerald group-hover:shadow-glow",
+          "relative mb-4 flex items-center justify-center rounded-full bg-navy-700 font-mono font-bold text-silver ring-2 ring-emerald/30 transition-all duration-300 group-hover:ring-emerald group-hover:shadow-glow",
           large ? "h-20 w-20 text-xl" : "h-16 w-16 text-lg"
         )}
       >
         {initials(member.name)}
       </div>
-      <h3 className="text-base font-semibold text-white">{member.name}</h3>
+      <h3 className="text-base font-semibold text-silver">{member.name}</h3>
       <p className="text-sm font-medium text-emerald-bright">{member.role}</p>
       <p className="mt-0.5 text-xs text-muted">{member.grade}</p>
 

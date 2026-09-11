@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const base = "https://ehcc.club";
+const base = "https://ehic.club";
 const routes = ["", "/about", "/events", "/projects", "/learn", "/games", "/team", "/join"];
 
 export default function sitemap(): MetadataRoute.Sitemap {

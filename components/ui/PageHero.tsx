@@ -1,8 +1,7 @@
-import { CircuitBackground } from "@/components/effects/CircuitBackground";
 import { Reveal } from "./Reveal";
 import { cn } from "@/lib/utils";
 
-/** Standard inner-page hero with circuit backdrop and mono eyebrow. */
+/** Standard inner-page hero: pill label, display title, optional lede. */
 export function PageHero({
   eyebrow,
   title,
@@ -17,16 +16,17 @@ export function PageHero({
   className?: string;
 }) {
   return (
-    <section className={cn("relative overflow-hidden border-b border-white/5", className)}>
-      <CircuitBackground />
-      <div className="container-x relative px-4 py-20 sm:px-6 md:py-28 lg:px-8">
+    <section className={cn("hero-wash border-b border-line", className)}>
+      <div className="container-x px-4 py-20 sm:px-6 md:py-24 lg:px-8">
         <Reveal className="max-w-3xl">
-          <p className="mb-4 font-mono text-sm text-emerald">
-            <span className="text-emerald/60">//</span> {eyebrow}
-          </p>
-          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">{title}</h1>
-          {subtitle && <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">{subtitle}</p>}
-          {children && <div className="mt-8">{children}</div>}
+          <p className="eyebrow">{eyebrow}</p>
+          <h1 className="mt-5 text-[2.5rem] font-semibold leading-[1.06] tracking-display text-silver sm:text-6xl">
+            {title}
+          </h1>
+          {subtitle && (
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">{subtitle}</p>
+          )}
+          {children && <div className="mt-9">{children}</div>}
         </Reveal>
       </div>
     </section>

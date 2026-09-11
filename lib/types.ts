@@ -1,4 +1,4 @@
-// Shared TypeScript types for EHCC static content.
+// Shared TypeScript types for EHIC static content.
 
 export type EventType = "Hackathon" | "Workshop" | "Guest Speaker" | "Competition" | "Social";
 

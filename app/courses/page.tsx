@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { CoursesHome } from "@/components/course/CoursesHome";
 
 export const metadata: Metadata = {
-  title: "EHCC Academy",
+  title: "EHIC Academy",
   description:
-    "EHCC Academy — 20 student-built courses with reading, videos, and quizzes. Sign up free to track progress, resume lessons, and earn certificates.",
+    "EHIC Academy, 20 student-built courses with reading, videos, and quizzes. Sign up free to track progress, resume lessons, and earn certificates.",
 };
 
 export default function CoursesPage() {

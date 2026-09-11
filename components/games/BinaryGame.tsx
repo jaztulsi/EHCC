@@ -79,7 +79,7 @@ export function BinaryGame() {
       title="binary-quiz"
       subtitle="convert the decimal number into binary before the timer runs out"
       onRestart={phase !== "setup" ? restart : undefined}
-      shareText={phase === "done" ? `I scored ${score}/${TOTAL_ROUNDS} on EHCC Binary Quiz (${difficulty})! Try it.` : undefined}
+      shareText={phase === "done" ? `I scored ${score}/${TOTAL_ROUNDS} on EHIC Binary Quiz (${difficulty})! Try it.` : undefined}
     >
       {phase === "setup" && (
         <div className="text-center">
@@ -108,7 +108,7 @@ export function BinaryGame() {
           </div>
 
           <p className="font-mono text-sm text-muted">Convert to binary:</p>
-          <p className="my-3 font-mono text-6xl font-bold text-white">{target}</p>
+          <p className="my-3 font-mono text-6xl font-bold text-silver">{target}</p>
 
           <input
             value={input}
@@ -121,7 +121,7 @@ export function BinaryGame() {
               "mx-auto block w-48 rounded-lg border bg-navy-950 px-4 py-3 text-center font-mono text-2xl tracking-widest text-emerald-bright outline-none transition-colors",
               feedback === "correct" && "border-emerald",
               feedback === "wrong" && "border-rose-500",
-              !feedback && "border-white/15 focus:border-emerald/50"
+              !feedback && "border-line focus:border-emerald/50"
             )}
           />
 
@@ -135,7 +135,7 @@ export function BinaryGame() {
           {!feedback && (
             <button
               onClick={submit}
-              className="btn-shimmer mt-4 rounded-md bg-emerald px-6 py-2 text-sm font-semibold text-navy-950 hover:bg-emerald-bright"
+              className="mt-4 rounded-md bg-emerald px-6 py-2 text-sm font-semibold text-white hover:bg-emerald-bright"
             >
               Submit
             </button>
@@ -146,7 +146,7 @@ export function BinaryGame() {
       {phase === "done" && (
         <div className="text-center">
           <p className="font-mono text-sm text-muted">{difficulty} complete</p>
-          <p className="my-3 font-mono text-5xl font-bold text-white">
+          <p className="my-3 font-mono text-5xl font-bold text-silver">
             {score}<span className="text-muted">/{TOTAL_ROUNDS}</span>
           </p>
           <p className="font-mono text-sm text-emerald-bright">
@@ -154,7 +154,7 @@ export function BinaryGame() {
           </p>
           <button
             onClick={restart}
-            className="btn-shimmer mt-5 rounded-md bg-emerald px-6 py-2 text-sm font-semibold text-navy-950 hover:bg-emerald-bright"
+            className="mt-5 rounded-md bg-emerald px-6 py-2 text-sm font-semibold text-white hover:bg-emerald-bright"
           >
             Play again
           </button>

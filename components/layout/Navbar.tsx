@@ -28,17 +28,17 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 transition-all duration-300",
+        "sticky top-0 z-50 transition-[background-color,border-color,box-shadow] duration-500 ease-apple",
         scrolled
-          ? "glass border-b border-emerald/20 shadow-[0_4px_30px_-12px_rgba(34,197,94,0.5)]"
-          : "border-b border-transparent bg-navy-950/30 backdrop-blur-sm"
+          ? "material-chrome border-b border-line shadow-glow"
+          : "border-b border-transparent bg-transparent"
       )}
     >
-      <nav className="container-x flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
+      <nav className="container-x flex h-[4.25rem] items-center justify-between px-4 sm:px-6 lg:px-8">
         <Logo />
 
-        {/* Center links (desktop) */}
-        <ul className="hidden items-center gap-1 md:flex">
+        {/* Center links. The active pill slides between items. */}
+        <ul className="hidden items-center gap-0.5 md:flex">
           {NAV_LINKS.map((link) => {
             const active = pathname === link.href;
             return (
@@ -46,17 +46,18 @@ export function Navbar() {
                 <Link
                   href={link.href}
                   className={cn(
-                    "relative rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                    active ? "text-emerald-bright" : "text-muted hover:text-silver"
+                    "relative rounded-full px-3.5 py-2 text-sm font-medium transition-colors duration-300",
+                    active ? "text-emerald" : "text-muted hover:text-silver"
                   )}
                 >
-                  {link.label}
                   {active && (
                     <motion.span
-                      layoutId="nav-underline"
-                      className="absolute inset-x-2 -bottom-px h-px bg-emerald shadow-glow-text"
+                      layoutId="nav-pill"
+                      className="absolute inset-0 rounded-full bg-emerald/[0.09]"
+                      transition={{ type: "spring", stiffness: 380, damping: 32 }}
                     />
                   )}
+                  <span className="relative">{link.label}</span>
                 </Link>
               </li>
             );
@@ -70,7 +71,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className="rounded-md p-2 text-silver hover:bg-white/5 md:hidden"
+            className="rounded-md p-2 text-silver hover:bg-navy-800 md:hidden"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
           >
@@ -86,8 +87,8 @@ export function Navbar() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="overflow-hidden border-t border-white/5 glass md:hidden"
+            transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
+            className="material-chrome overflow-hidden border-t border-line md:hidden"
           >
             <ul className="container-x flex flex-col gap-1 px-4 py-4">
               {NAV_LINKS.map((link) => (
@@ -98,7 +99,7 @@ export function Navbar() {
                       "block rounded-md px-3 py-2.5 text-sm font-medium",
                       pathname === link.href
                         ? "bg-emerald/10 text-emerald-bright"
-                        : "text-muted hover:bg-white/5 hover:text-silver"
+                        : "text-muted hover:bg-navy-800 hover:text-silver"
                     )}
                   >
                     {link.label}

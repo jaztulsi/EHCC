@@ -46,14 +46,14 @@ export default function CoursePage({ params }: { params: { courseId: string } })
                 {course.lessons.length} lessons · ~{totalMin} min
               </span>
             </div>
-            <h1 className="mt-3 text-3xl font-bold text-white md:text-4xl">{course.title}</h1>
+            <h1 className="mt-3 text-3xl font-bold text-silver md:text-4xl">{course.title}</h1>
             <p className="mt-1 text-emerald-bright">{course.tagline}</p>
           </div>
         </div>
 
         <p className="mt-6 leading-relaxed text-silver">{course.description}</p>
 
-        <div className="mt-6 flex items-center gap-2 rounded-lg border border-white/5 bg-navy-800/40 px-4 py-3 text-sm text-muted">
+        <div className="mt-6 flex items-center gap-2 surface px-4 py-3 text-sm text-muted">
           <PlayCircle size={16} className="text-emerald-bright" />
           Every lesson: reading, three curated videos, and a quiz you must pass to complete it.
         </div>

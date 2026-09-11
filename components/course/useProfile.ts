@@ -8,9 +8,9 @@ export interface Profile {
   joined: string; // ISO date
 }
 
-/** Local student profile — name + email in the browser, no password, no backend. */
+/** Local student profile, name + email in the browser, no password, no backend. */
 export function useProfile() {
-  const [profile, setProfile, loaded] = useLocalStorage<Profile | null>("ehcc-profile", null);
+  const [profile, setProfile, loaded] = useLocalStorage<Profile | null>("ehic-profile", null);
   const signIn = (name: string, email: string) =>
     setProfile({ name: name.trim(), email: email.trim(), joined: new Date().toISOString() });
   const signOut = () => setProfile(null);

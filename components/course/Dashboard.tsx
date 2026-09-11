@@ -20,7 +20,7 @@ export function Dashboard() {
   const { courseProgress, totalDone, reset, loaded } = useProgress();
 
   if (!pLoaded || !loaded) {
-    return <div className="h-40 animate-pulse rounded-2xl border border-white/5 bg-navy-800/40" />;
+    return <div className="h-40 animate-pulse surface" />;
   }
   if (!profile) return null;
 
@@ -40,19 +40,19 @@ export function Dashboard() {
     <div>
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <p className="font-mono text-sm text-emerald">{"// student.dashboard"}</p>
-          <h1 className="mt-1 text-3xl font-bold text-white">Welcome back, {profile.name}</h1>
+          <p className="eyebrow">student.dashboard</p>
+          <h1 className="mt-1 text-3xl font-bold text-silver">Welcome back, {profile.name}</h1>
         </div>
         <div className="flex items-center gap-2">
           <button
             onClick={reset}
-            className="inline-flex items-center gap-1.5 rounded-md border border-white/10 px-3 py-1.5 text-sm text-silver transition-colors hover:border-emerald/40 hover:text-emerald-bright"
+            className="inline-flex items-center gap-1.5 rounded-md border border-line px-3 py-1.5 text-sm text-silver transition-colors hover:border-emerald/40 hover:text-emerald-bright"
           >
             <RotateCcw size={14} /> Reset progress
           </button>
           <button
             onClick={signOut}
-            className="inline-flex items-center gap-1.5 rounded-md border border-white/10 px-3 py-1.5 text-sm text-silver transition-colors hover:border-white/25"
+            className="inline-flex items-center gap-1.5 rounded-md border border-line px-3 py-1.5 text-sm text-silver transition-colors hover:border-line"
           >
             <LogOut size={14} /> Sign out
           </button>
@@ -61,9 +61,9 @@ export function Dashboard() {
 
       <div className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
         {stats.map((s) => (
-          <div key={s.label} className="rounded-xl border border-white/5 bg-navy-800/50 p-5 text-center">
+          <div key={s.label} className="surface p-5 text-center">
             <s.icon className="mx-auto h-6 w-6 text-emerald-bright" strokeWidth={1.8} />
-            <p className="mt-2 font-mono text-3xl font-bold text-white">{s.value}</p>
+            <p className="mt-2 font-mono text-3xl font-bold text-silver">{s.value}</p>
             <p className="text-xs text-muted">{s.label}</p>
           </div>
         ))}
@@ -71,7 +71,7 @@ export function Dashboard() {
 
       {inProgress.length > 0 ? (
         <div className="mt-10">
-          <h2 className="text-lg font-semibold text-white">Continue learning</h2>
+          <h2 className="text-lg font-semibold text-silver">Continue learning</h2>
           <div className="mt-4 grid gap-4 md:grid-cols-2">
             {inProgress.map(({ course, p }) => {
               const next = course.lessons.find((_l, i) => i >= p.done) ?? course.lessons[0];
@@ -79,14 +79,14 @@ export function Dashboard() {
                 <Link
                   key={course.id}
                   href={`/courses/${course.id}/${next.id}`}
-                  className="group flex items-center gap-4 rounded-xl border border-white/5 bg-navy-800/50 p-4 transition-all hover:-translate-y-0.5 hover:border-emerald/30 hover:shadow-glow"
+                  className="group flex items-center gap-4 surface p-4 card-lift"
                 >
                   <span className="inline-flex shrink-0 rounded-lg bg-emerald/10 p-3 text-emerald-bright">
                     <Icon name={course.icon} className="h-6 w-6" />
                   </span>
                   <div className="min-w-0 flex-1">
-                    <p className="truncate font-semibold text-white">{course.title}</p>
-                    <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-navy-950">
+                    <p className="truncate font-semibold text-silver">{course.title}</p>
+                    <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-navy-700">
                       <div className="h-full rounded-full bg-emerald" style={{ width: `${p.pct}%` }} />
                     </div>
                     <p className="mt-1 font-mono text-xs text-muted">
@@ -100,7 +100,7 @@ export function Dashboard() {
           </div>
         </div>
       ) : (
-        <div className="mt-10 rounded-2xl border border-white/5 bg-navy-800/40 p-6 text-center">
+        <div className="mt-10 surface p-6 text-center">
           <p className="text-muted">You haven&apos;t started a course yet.</p>
           <Link
             href="/courses/curriculum"
@@ -113,7 +113,7 @@ export function Dashboard() {
 
       {completed.length > 0 && (
         <div className="mt-10">
-          <h2 className="text-lg font-semibold text-white">Certificates</h2>
+          <h2 className="text-lg font-semibold text-silver">Certificates</h2>
           <div className="mt-4 flex flex-wrap gap-3">
             {completed.map(({ course }) => (
               <div

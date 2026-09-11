@@ -1,30 +1,28 @@
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { AnimatedHero } from "@/components/home/AnimatedHero";
-import { ManifestoScene } from "@/components/home/ManifestoScene";
+import { Hero } from "@/components/home/Hero";
+import { Approach } from "@/components/home/Approach";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { StatCounter } from "@/components/ui/StatCounter";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
-import { FlipCard } from "@/components/cards/FlipCard";
 import { EventCard } from "@/components/cards/EventCard";
-import { CircuitBackground } from "@/components/effects/CircuitBackground";
 import { STATS, WHAT_WE_DO, EVENTS, AWARDS, CLUB } from "@/lib/data";
 
 export default function HomePage() {
-  const upcomingEvents = EVENTS.filter((e) => e.upcoming).slice(0, 3);
+  const upcoming = EVENTS.filter((e) => e.upcoming);
+  const [lead, ...rest] = upcoming;
 
   return (
     <>
-      <AnimatedHero />
+      <Hero />
 
-      {/* Stats bar */}
-      <section className="section pt-12 md:pt-16">
+      {/* Stats. White tiles floating on the tinted canvas. */}
+      <section className="section border-b border-line py-14 md:py-16">
         <div className="container-x">
           <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
             {STATS.map((stat, i) => (
-              <Reveal key={stat.label} delay={i * 0.08}>
+              <Reveal key={stat.label} delay={i * 0.06} zoom>
                 <StatCounter stat={stat} />
               </Reveal>
             ))}
@@ -32,25 +30,60 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Awards & Recognition */}
-      <section className="relative section">
-        <CircuitBackground animate={false} density="sparse" />
-        <div className="container-x relative">
+      {/* Branches */}
+      <section className="band-warm section border-b border-line">
+        <div className="container-x">
           <SectionHeader
-            eyebrow="// awards.recognition[]"
-            title="Recognition"
-            subtitle="What our members have earned by building and competing together."
+            eyebrow="What we do"
+            title="Three branches, one club"
+            subtitle="Each branch runs its own projects and meetings, and members are welcome in all of them."
           />
-          <div className="mt-12 grid gap-5 md:grid-cols-2">
+          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {WHAT_WE_DO.map((item, i) => (
+              <Reveal key={item.title} delay={(i % 3) * 0.08} zoom>
+                <article className="surface card-lift group flex h-full flex-col p-7">
+                  <span className="inline-flex w-fit rounded-card bg-emerald/[0.08] p-3 text-emerald transition-transform duration-500 ease-apple group-hover:scale-110">
+                    <Icon name={item.icon} className="h-5 w-5" />
+                  </span>
+                  <h3 className="mt-5 text-xl font-semibold tracking-title text-silver">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-[15px] leading-relaxed text-muted">{item.blurb}</p>
+                  <p className="mt-5 border-t border-line pt-5 text-sm leading-relaxed text-muted">
+                    {item.detail}
+                  </p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Approach, on the deep band */}
+      <Approach />
+
+      {/* Recognition */}
+      <section className="band-cool section border-b border-line">
+        <div className="container-x">
+          <SectionHeader
+            eyebrow="Recognition"
+            title="What our members have earned"
+            subtitle="Results from the competitions and hackathons our teams have entered."
+          />
+          <div className="mt-14 grid gap-5 md:grid-cols-2">
             {AWARDS.map((a, i) => (
-              <Reveal key={a.title} delay={i * 0.1}>
-                <div className="flex h-full items-start gap-5 rounded-2xl border border-emerald/20 bg-navy-800/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-emerald/40 hover:shadow-glow md:p-8">
-                  <span className="inline-flex shrink-0 rounded-xl bg-emerald/10 p-4 text-emerald-bright shadow-glow">
-                    <Icon name={a.icon} className="h-8 w-8" />
+              <Reveal key={a.title} delay={i * 0.08} zoom>
+                <div className="surface card-lift group flex h-full items-start gap-5 p-7">
+                  <span className="inline-flex shrink-0 rounded-card bg-clay/[0.09] p-3.5 text-clay transition-transform duration-500 ease-apple group-hover:-rotate-6">
+                    <Icon name={a.icon} className="h-6 w-6" />
                   </span>
                   <div>
-                    <p className="font-mono text-sm font-bold text-emerald-bright">{a.place}</p>
-                    <h3 className="mt-1 text-xl font-bold text-white">{a.title}</h3>
+                    <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-clay">
+                      {a.place}
+                    </p>
+                    <h3 className="mt-1.5 text-lg font-semibold tracking-title text-silver">
+                      {a.title}
+                    </h3>
                     <p className="mt-2 text-sm leading-relaxed text-muted">{a.detail}</p>
                   </div>
                 </div>
@@ -60,103 +93,76 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Scroll narrative — Think · Build · Elevate */}
-      <ManifestoScene />
-
-      {/* What We Do — flip cards */}
-      <section className="relative section">
-        <CircuitBackground animate={false} density="sparse" />
-        <div className="container-x relative">
-          <SectionHeader
-            eyebrow="act 01 — think"
-            title="More than a club — a launchpad"
-            subtitle="Hover any card to see what each part of EHCC looks like in practice."
-          />
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {WHAT_WE_DO.map((item, i) => (
-              <Reveal key={item.title} delay={(i % 3) * 0.08}>
-                <FlipCard
-                  front={
-                    <>
-                      <span className="inline-flex w-fit rounded-lg bg-emerald/10 p-3 text-emerald-bright">
-                        <Icon name={item.icon} className="h-6 w-6" />
-                      </span>
-                      <h3 className="mt-4 text-xl font-semibold text-white">{item.title}</h3>
-                      <p className="mt-1 text-sm text-muted">{item.blurb}</p>
-                      <span className="mt-auto font-mono text-xs text-emerald/60">{"// hover to expand"}</span>
-                    </>
-                  }
-                  back={
-                    <>
-                      <h3 className="text-lg font-semibold text-emerald-bright">{item.title}</h3>
-                      <p className="mt-2 flex-1 text-sm leading-relaxed text-silver">{item.detail}</p>
-                    </>
-                  }
-                />
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Upcoming events */}
-      <section className="relative section">
-        <CircuitBackground animate={false} density="sparse" />
-        <div className="container-x relative">
-          <div className="flex flex-wrap items-end justify-between gap-4">
+      {/* Events. One featured card, then the rest in a grid. */}
+      <section className="section border-b border-line">
+        <div className="container-x">
+          <div className="flex flex-wrap items-end justify-between gap-6">
             <SectionHeader
               align="left"
-              eyebrow="act 03 — elevate"
-              title="Upcoming events"
-              subtitle="Hackathons, workshops, and guest talks. Show up, build something, meet your people."
+              eyebrow="Calendar"
+              title="What is coming up"
+              subtitle="Hackathons, workshops, and guest talks, open to every member."
+              className="max-w-xl"
             />
-            <Button href="/events" variant="ghost" size="sm" className="shrink-0">
-              Full calendar <ArrowRight size={16} />
-            </Button>
+            <Reveal delay={0.1}>
+              <Button href="/events" variant="outline" size="sm" className="shrink-0">
+                Full calendar <ArrowRight size={15} />
+              </Button>
+            </Reveal>
           </div>
-          <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {upcomingEvents.map((e, i) => (
-              <Reveal key={e.id} delay={i * 0.1}>
-                <EventCard event={e} featured={e.featured} />
-              </Reveal>
-            ))}
-          </div>
+
+          {lead && (
+            <Reveal className="mt-12" zoom>
+              <EventCard event={lead} featured />
+            </Reveal>
+          )}
+
+          {rest.length > 0 && (
+            <div className="mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {rest.slice(0, 3).map((e, i) => (
+                <Reveal key={e.id} delay={i * 0.08} zoom>
+                  <EventCard event={e} />
+                </Reveal>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
-      {/* Mission pull-quote */}
+      {/* Mission and closing call to action */}
       <section className="section">
         <div className="container-x">
-          <Reveal>
-            <figure className="relative overflow-hidden rounded-2xl border border-emerald/20 bg-navy-800/60 p-8 md:p-14">
-              <CircuitBackground animate={false} />
-              <div className="relative flex gap-5">
-                <span className="w-1 shrink-0 rounded-full bg-emerald shadow-glow" />
-                <blockquote className="text-2xl font-semibold leading-snug text-white md:text-3xl">
-                  Not just a club you attend — a club that{" "}
-                  <span className="text-gradient">builds things</span>, competes, and creates{" "}
-                  <span className="text-gradient">real opportunities</span>.
-                </blockquote>
-              </div>
-              <figcaption className="relative mt-6 pl-6 font-mono text-sm text-emerald">
-                — The {CLUB.shortName} mission
+          <Reveal from="none">
+            <figure className="mx-auto max-w-3xl text-center">
+              <blockquote className="text-2xl font-semibold leading-[1.28] tracking-display text-silver md:text-[2.1rem]">
+                Not just a club you attend, but a club that builds things, competes, and creates
+                real opportunities.
+              </blockquote>
+              <figcaption className="mt-6 text-sm font-medium text-muted">
+                The {CLUB.shortName} mission
               </figcaption>
             </figure>
           </Reveal>
 
-          {/* Final CTA */}
-          <Reveal delay={0.1}>
-            <div className="mt-10 flex flex-col items-center gap-4 rounded-2xl border border-white/5 bg-gradient-to-b from-navy-800/60 to-navy-900 p-10 text-center">
-              <h3 className="text-2xl font-bold text-white md:text-3xl">Ready to build something real?</h3>
-              <p className="max-w-md text-muted">
-                Join {CLUB.shortName} and start shipping. No experience required — just curiosity.
+          <Reveal delay={0.08} zoom>
+            <div className="band-dark mt-16 overflow-hidden rounded-panel px-8 py-14 text-center md:px-14 md:py-16">
+              <h3 className="text-3xl font-semibold tracking-display md:text-4xl">
+                Ready to build something real?
+              </h3>
+              <p className="mx-auto mt-4 max-w-lg text-[17px] leading-relaxed text-bark-muted">
+                Join {CLUB.shortName} and start shipping. No experience required, just curiosity.
               </p>
-              <div className="mt-2 flex flex-wrap justify-center gap-3">
-                <Button href="/join" size="lg">
-                  Join the Club <ArrowRight size={18} />
+              <div className="mt-9 flex flex-wrap justify-center gap-3">
+                <Button href="/join" size="lg" className="bg-emerald-circuit text-bark hover:bg-white">
+                  Join the club <ArrowRight size={17} />
                 </Button>
-                <Button href="/learn" size="lg" variant="outline">
-                  Start Learning
+                <Button
+                  href="/learn"
+                  size="lg"
+                  variant="outline"
+                  className="border-bark-line bg-white/5 text-bark-ink hover:border-bark-muted hover:bg-white/10"
+                >
+                  Start learning
                 </Button>
               </div>
             </div>

@@ -7,7 +7,7 @@ const key = (courseId: string, lessonId: string) => `${courseId}:${lessonId}`;
 
 /** Lesson-completion progress, persisted in localStorage (keyed by course:lesson). */
 export function useProgress() {
-  const [done, setDone, loaded] = useLocalStorage<string[]>("ehcc-course-progress", []);
+  const [done, setDone, loaded] = useLocalStorage<string[]>("ehic-course-progress", []);
 
   const isDone = (c: string, l: string) => done.includes(key(c, l));
   const complete = (c: string, l: string) =>

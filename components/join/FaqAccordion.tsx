@@ -9,7 +9,7 @@ export function FaqAccordion({ faqs }: { faqs: { q: string; a: string }[] }) {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <div className="divide-y divide-white/5 rounded-2xl border border-white/10 bg-navy-800/50">
+    <div className="divide-y divide-line surface">
       {faqs.map((faq, i) => {
         const isOpen = open === i;
         return (

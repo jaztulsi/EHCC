@@ -24,7 +24,7 @@ export function TypingGame() {
   const [typed, setTyped] = useState("");
   const [startTime, setStartTime] = useState<number | null>(null);
   const [finished, setFinished] = useState(false);
-  const [scores, setScores] = useLocalStorage<Score[]>("ehcc-typing-scores", []);
+  const [scores, setScores] = useLocalStorage<Score[]>("ehic-typing-scores", []);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -64,17 +64,17 @@ export function TypingGame() {
       title="code-breaker"
       subtitle="type the snippet as fast and accurately as you can"
       onRestart={restart}
-      shareText={finished ? `I hit ${wpm} WPM at ${accuracy}% accuracy on EHCC Code Breaker! Can you beat me?` : undefined}
+      shareText={finished ? `I hit ${wpm} WPM at ${accuracy}% accuracy on EHIC Code Breaker! Can you beat me?` : undefined}
     >
       {/* Snippet with per-character highlighting */}
       <div
-        className="cursor-text rounded-lg border border-white/10 bg-navy-950 p-4 font-mono text-base leading-relaxed"
+        className="cursor-text rounded-card border border-bark-line bg-bark p-4 font-mono text-base leading-relaxed"
         onClick={() => inputRef.current?.focus()}
       >
         {[...target].map((char, i) => {
-          let cls = "text-muted";
-          if (i < typed.length) cls = typed[i] === char ? "text-emerald-bright" : "bg-rose-500/30 text-rose-300";
-          else if (i === typed.length) cls = "bg-emerald/30 text-white";
+          let cls = "text-bark-muted";
+          if (i < typed.length) cls = typed[i] === char ? "text-emerald-circuit" : "bg-rose-200 text-rose-800";
+          else if (i === typed.length) cls = "bg-emerald-circuit/40 text-white";
           return (
             <span key={i} className={cls}>
               {char}
@@ -103,14 +103,14 @@ export function TypingGame() {
 
       {!finished && (
         <p className="mt-3 text-center font-mono text-xs text-muted">
-          {startTime ? "// keep going…" : "// start typing to begin the timer"}
+          {startTime ? "Keep going" : "Start typing to begin the timer"}
         </p>
       )}
 
       {finished && (
         <div className="mt-4 rounded-lg border border-emerald/30 bg-emerald/5 p-4 text-center">
           <p className="font-mono text-sm text-emerald-bright">
-            ✓ Done — {wpm} WPM at {accuracy}% accuracy
+            ✓ Done: {wpm} WPM at {accuracy}% accuracy
           </p>
         </div>
       )}
@@ -123,9 +123,9 @@ export function TypingGame() {
           </p>
           <ol className="space-y-1">
             {scores.map((s, i) => (
-              <li key={i} className="flex items-center justify-between rounded-md bg-navy-800/60 px-3 py-1.5 font-mono text-xs">
+              <li key={i} className="flex items-center justify-between rounded-md bg-navy-800 px-3 py-1.5 font-mono text-xs">
                 <span className="text-emerald">#{i + 1}</span>
-                <span className="text-white">{s.wpm} WPM</span>
+                <span className="text-silver">{s.wpm} WPM</span>
                 <span className="text-muted">{s.acc}%</span>
                 <span className="text-muted">{s.date}</span>
               </li>
@@ -139,8 +139,8 @@ export function TypingGame() {
 
 function Stat({ label, value }: { label: string; value: string | number }) {
   return (
-    <div className="rounded-lg border border-white/5 bg-navy-800/60 p-3 text-center">
-      <p className="font-mono text-2xl font-bold text-white">{value}</p>
+    <div className="surface p-3 text-center">
+      <p className="font-mono text-2xl font-bold text-silver">{value}</p>
       <p className="text-xs text-muted">{label}</p>
     </div>
   );

@@ -1,8 +1,8 @@
 {
-  "name": "ehcc-website",
+  "name": "ehic-website",
   "version": "1.0.0",
   "private": true,
-  "description": "EHS Hacking & Coding Club — Think. Build. Elevate.",
+  "description": "Emerald Hacking & Innovation Club. Think. Build. Elevate.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

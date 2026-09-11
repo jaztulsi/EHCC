@@ -1,5 +1,5 @@
-// EHCC course catalog. 20 courses; each lesson has reading, 3 videos, and a
-// required quiz. Add courses/lessons here — the /courses pages render from this.
+// EHIC course catalog. 20 courses; each lesson has reading, 3 videos, and a
+// required quiz. Add courses/lessons here, the /courses pages render from this.
 import type { Difficulty } from "./types";
 
 export interface Video {
@@ -44,7 +44,7 @@ export const COURSES: Course[] = [
     topic: "Python",
     difficulty: "Beginner",
     tagline: "The on-ramp to everything else.",
-    description: "Variables, logic, loops, and functions in Python — the language behind our Data Science and AI branches.",
+    description: "Variables, logic, loops, and functions in Python, the language behind our Data Science and AI branches.",
     lessons: [
       {
         id: "variables-types",
@@ -56,7 +56,7 @@ export const COURSES: Course[] = [
           "Python figures out the type for you, but you still have to keep them straight: `\"2\" + \"2\"` is `\"22\"` (joining text) while `2 + 2` is `4` (adding numbers). Mixing them is the classic beginner bug.",
         ],
         videos: [
-          v("Learn Python — Full Course for Beginners", "freeCodeCamp", "https://www.youtube.com/watch?v=rfscVS0vtbw"),
+          v("Learn Python: Full Course for Beginners", "freeCodeCamp", "https://www.youtube.com/watch?v=rfscVS0vtbw"),
           v("Python Variables & Data Types", "Programming with Mosh", "https://www.youtube.com/watch?v=kqtD5dpn9C8"),
           v("Python in 100 Seconds", "Fireship", "https://www.youtube.com/watch?v=x7X9w_GIm1s"),
         ],
@@ -72,13 +72,13 @@ export const COURSES: Course[] = [
         summary: "Make code decide and repeat.",
         minutes: 14,
         reading: [
-          "`if` / `elif` / `else` run different blocks depending on a condition built from comparisons (`==`, `<`, `>=`) and `and` / `or` / `not`. Indentation defines the block — Python is strict about it.",
+          "`if` / `elif` / `else` run different blocks depending on a condition built from comparisons (`==`, `<`, `>=`) and `and` / `or` / `not`. Indentation defines the block, Python is strict about it.",
           "A `for` loop walks through a collection one item at a time; a `while` loop repeats until its condition becomes `False`. Make sure a `while` can actually end, or it runs forever.",
         ],
         videos: [
           v("Conditionals & Booleans", "Corey Schafer", "https://www.youtube.com/watch?v=DZwmZ8Usvnk"),
           v("Loops in Python", "Corey Schafer", "https://www.youtube.com/watch?v=6iF8Xb7Z3wQ"),
-          v("Python Full Course — control flow", "freeCodeCamp", "https://www.youtube.com/watch?v=rfscVS0vtbw"),
+          v("Python Full Course: control flow", "freeCodeCamp", "https://www.youtube.com/watch?v=rfscVS0vtbw"),
         ],
         quiz: [
           q("Which keyword handles the 'none of the above' case?", ['`elif`', '`else`', '`otherwise`', '`default`'], 1),
@@ -95,11 +95,11 @@ export const COURSES: Course[] = [
     topic: "Web Dev",
     difficulty: "Beginner",
     tagline: "Build and style your first page.",
-    description: "The structure and style of every website — the skills our Tech Master team uses to build sites like this one.",
+    description: "The structure and style of every website, the skills our Tech Master team uses to build sites like this one.",
     lessons: [
       {
         id: "html-structure",
-        title: "HTML — Structure",
+        title: "HTML: Structure",
         summary: "The skeleton of every page.",
         minutes: 12,
         reading: [
@@ -107,9 +107,9 @@ export const COURSES: Course[] = [
           "The browser reads your HTML top to bottom and draws the page from it. Good structure (semantic tags) also makes your page accessible and easier to style.",
         ],
         videos: [
-          v("HTML & CSS — Full Course", "freeCodeCamp", "https://www.youtube.com/watch?v=mU6anWqZJcc"),
+          v("HTML & CSS: Full Course", "freeCodeCamp", "https://www.youtube.com/watch?v=mU6anWqZJcc"),
           v("HTML in 100 Seconds", "Fireship", "https://www.youtube.com/watch?v=ok-plXXHlWw"),
-          v("MDN — HTML basics", "Mozilla", "https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics"),
+          v("MDN: HTML basics", "Mozilla", "https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics"),
         ],
         quiz: [
           q("Which tag makes a link?", ['`<link>`', '`<a>`', '`<href>`', '`<url>`'], 1),
@@ -119,17 +119,17 @@ export const COURSES: Course[] = [
       },
       {
         id: "css-style",
-        title: "CSS — Style",
+        title: "CSS: Style",
         summary: "Control how it looks.",
         minutes: 13,
         reading: [
           "CSS sets colors, spacing, fonts, and layout. You write a selector (what to target) and a set of properties (how it should look): `h1 { color: #22c55e; }`.",
-          "Nobody memorizes all of CSS — keep MDN open. Modern layout uses Flexbox and Grid; learn those two and most layouts become straightforward.",
+          "Nobody memorizes all of CSS, keep MDN open. Modern layout uses Flexbox and Grid; learn those two and most layouts become straightforward.",
         ],
         videos: [
           v("CSS Crash Course", "freeCodeCamp", "https://www.youtube.com/watch?v=mU6anWqZJcc"),
           v("Flexbox in 100 Seconds", "Fireship", "https://www.youtube.com/watch?v=K74l26pE4YA"),
-          v("MDN — Learn CSS", "Mozilla", "https://developer.mozilla.org/en-US/docs/Learn/CSS"),
+          v("MDN: Learn CSS", "Mozilla", "https://developer.mozilla.org/en-US/docs/Learn/CSS"),
         ],
         quiz: [
           q("What does a CSS selector do?", ['Runs JavaScript', 'Chooses which elements to style', 'Creates a variable', 'Loads an image'], 1),
@@ -146,7 +146,7 @@ export const COURSES: Course[] = [
     topic: "Web Dev",
     difficulty: "Beginner",
     tagline: "Make pages do things.",
-    description: "The language that runs in every browser — respond to clicks, change content, and fetch data.",
+    description: "The language that runs in every browser, respond to clicks, change content, and fetch data.",
     lessons: [
       {
         id: "js-basics",
@@ -154,13 +154,13 @@ export const COURSES: Course[] = [
         summary: "Variables, functions, and the DOM.",
         minutes: 14,
         reading: [
-          "You already know the ideas from Python — variables, conditions, loops, functions. JavaScript's syntax differs (`let`/`const`, curly braces, `===`), but the thinking transfers directly.",
+          "You already know the ideas from Python, variables, conditions, loops, functions. JavaScript's syntax differs (`let`/`const`, curly braces, `===`), but the thinking transfers directly.",
           "In the browser, JavaScript reaches into the page through the DOM: `document.querySelector` finds an element, and `addEventListener` runs code when the user does something.",
         ],
         videos: [
-          v("JavaScript Programming — Full Course", "freeCodeCamp", "https://www.youtube.com/watch?v=jS4aFq5-91M"),
+          v("JavaScript Programming: Full Course", "freeCodeCamp", "https://www.youtube.com/watch?v=jS4aFq5-91M"),
           v("JavaScript in 100 Seconds", "Fireship", "https://www.youtube.com/watch?v=DHjqpvDnNGE"),
-          v("MDN — JavaScript first steps", "Mozilla", "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps"),
+          v("MDN: JavaScript first steps", "Mozilla", "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps"),
         ],
         quiz: [
           q("Which keyword declares a constant?", ['`var`', '`let`', '`const`', '`def`'], 2),
@@ -177,7 +177,7 @@ export const COURSES: Course[] = [
     topic: "Tools",
     difficulty: "Beginner",
     tagline: "How teams ship together.",
-    description: "Version control, branches, and pull requests — the workflow every EHCC project runs on.",
+    description: "Version control, branches, and pull requests, the workflow every EHIC project runs on.",
     lessons: [
       {
         id: "commits-branches",
@@ -185,7 +185,7 @@ export const COURSES: Course[] = [
         summary: "Save checkpoints and work in parallel.",
         minutes: 12,
         reading: [
-          "A commit is a saved snapshot of your files with a message describing the change — a save point you can rewind to. The habit: small change, clear commit, repeat.",
+          "A commit is a saved snapshot of your files with a message describing the change, a save point you can rewind to. The habit: small change, clear commit, repeat.",
           "A branch is a parallel copy of the project. You try something on a branch while `main` stays safe; if it works you merge it back, if not you delete the branch. This is what lets a whole team work at once.",
         ],
         videos: [
@@ -208,7 +208,7 @@ export const COURSES: Course[] = [
     topic: "Tools",
     difficulty: "Beginner",
     tagline: "Talk to your computer directly.",
-    description: "Navigate, move files, and run tools from the terminal — the developer's default workspace.",
+    description: "Navigate, move files, and run tools from the terminal, the developer's default workspace.",
     lessons: [
       {
         id: "terminal-basics",
@@ -217,11 +217,11 @@ export const COURSES: Course[] = [
         minutes: 10,
         reading: [
           "The terminal runs one command at a time. `pwd` shows where you are, `ls` lists files, `cd` changes directory, `mkdir` makes a folder. These four get you most of the way.",
-          "The command line feels intimidating for a day, then becomes faster than clicking. Every serious tool — git, Python, deploys — is driven from here.",
+          "The command line feels intimidating for a day, then becomes faster than clicking. Every serious tool, git, Python, deploys, is driven from here.",
         ],
         videos: [
           v("Command Line Crash Course", "freeCodeCamp", "https://www.youtube.com/watch?v=uwAqEzhyjtw"),
-          v("The Missing Semester — the shell", "MIT", "https://missing.csail.mit.edu/2020/course-shell/"),
+          v("The Missing Semester: the shell", "MIT", "https://missing.csail.mit.edu/2020/course-shell/"),
           v("Terminal in 100 Seconds", "Fireship", "https://www.youtube.com/watch?v=Uf7Sc82W90A"),
         ],
         quiz: [
@@ -239,7 +239,7 @@ export const COURSES: Course[] = [
     topic: "AI",
     difficulty: "Beginner",
     tagline: "Ask well, get better results.",
-    description: "Get reliable, useful output from AI models — a core skill of the AI Principles / Programming branch.",
+    description: "Get reliable, useful output from AI models, a core skill of the AI Principles / Programming branch.",
     lessons: [
       {
         id: "prompt-basics",
@@ -248,7 +248,7 @@ export const COURSES: Course[] = [
         minutes: 11,
         reading: [
           "A prompt is your instruction to the model. Vague prompts get vague answers. The fixes are simple: give context, state the goal clearly, show the format you want, and ask it to work step by step.",
-          "Treat prompting like debugging — if the output is off, change one thing and try again. Iteration beats hunting for a mythical 'perfect prompt'.",
+          "Treat prompting like debugging, if the output is off, change one thing and try again. Iteration beats hunting for a mythical 'perfect prompt'.",
         ],
         videos: [
           v("Intro to Large Language Models", "Andrej Karpathy", "https://www.youtube.com/watch?v=zjkBMFhNj_g"),
@@ -270,7 +270,7 @@ export const COURSES: Course[] = [
     topic: "AI",
     difficulty: "Intermediate",
     tagline: "Ship real things faster.",
-    description: "Use AI as a force multiplier to prototype, debug, and build — while still owning and understanding the result.",
+    description: "Use AI as a force multiplier to prototype, debug, and build, while still owning and understanding the result.",
     lessons: [
       {
         id: "ai-as-tool",
@@ -282,8 +282,8 @@ export const COURSES: Course[] = [
           "But you own the result: read what it gives you, test it, and make sure you understand the code. The AI branch is about using these tools on a real foundation, not blindly.",
         ],
         videos: [
-          v("CS50 — AI with Python", "Harvard", "https://cs50.harvard.edu/ai/"),
-          v("How AI Models Work — Neural Networks", "3Blue1Brown", "https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi"),
+          v("CS50: AI with Python", "Harvard", "https://cs50.harvard.edu/ai/"),
+          v("How AI Models Work: Neural Networks", "3Blue1Brown", "https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi"),
           v("Build apps with AI", "Fireship", "https://www.youtube.com/@Fireship"),
         ],
         quiz: [
@@ -301,7 +301,7 @@ export const COURSES: Course[] = [
     topic: "Web Dev",
     difficulty: "Intermediate",
     tagline: "Build interfaces from components.",
-    description: "Components, props, and state — the library behind this very website.",
+    description: "Components, props, and state, the library behind this very website.",
     lessons: [
       {
         id: "components-props",
@@ -309,13 +309,13 @@ export const COURSES: Course[] = [
         summary: "Reusable pieces that take inputs.",
         minutes: 13,
         reading: [
-          "A React component is a function that returns UI. You compose small components into bigger ones — a page is just components inside components.",
-          "Props are the inputs you pass to a component, like arguments to a function. The same component with different props renders different content — that's how one `Card` shows many events.",
+          "A React component is a function that returns UI. You compose small components into bigger ones, a page is just components inside components.",
+          "Props are the inputs you pass to a component, like arguments to a function. The same component with different props renders different content, that's how one `Card` shows many events.",
         ],
         videos: [
-          v("React Course — Beginner's Tutorial", "freeCodeCamp", "https://www.youtube.com/watch?v=bMknfKXIFA8"),
+          v("React Course: Beginner's Tutorial", "freeCodeCamp", "https://www.youtube.com/watch?v=bMknfKXIFA8"),
           v("React in 100 Seconds", "Fireship", "https://www.youtube.com/watch?v=Tn6-PIqc4UM"),
-          v("React Docs — Quick Start", "react.dev", "https://react.dev/learn"),
+          v("React Docs: Quick Start", "react.dev", "https://react.dev/learn"),
         ],
         quiz: [
           q("What does a React component return?", ['A database row', 'UI', 'A CSS file', 'A commit'], 1),
@@ -332,7 +332,7 @@ export const COURSES: Course[] = [
     topic: "Data Science",
     difficulty: "Intermediate",
     tagline: "Turn raw data into insight.",
-    description: "pandas, cleaning, and visualization — the Data Science branch's core toolkit.",
+    description: "pandas, cleaning, and visualization, the Data Science branch's core toolkit.",
     lessons: [
       {
         id: "pandas-intro",
@@ -341,12 +341,12 @@ export const COURSES: Course[] = [
         minutes: 14,
         reading: [
           "pandas is Python's data workhorse. A DataFrame is a table you can filter, group, and summarize in a line or two. Most data work is loading a file into a DataFrame and asking questions of it.",
-          "Real data is messy — missing values, wrong types, duplicates. Cleaning is most of the job, and doing it carefully is what separates a trustworthy analysis from a misleading one.",
+          "Real data is messy, missing values, wrong types, duplicates. Cleaning is most of the job, and doing it carefully is what separates a trustworthy analysis from a misleading one.",
         ],
         videos: [
-          v("Data Analysis with Python — Full Course", "freeCodeCamp", "https://www.youtube.com/watch?v=r-uOLxNrNk8"),
+          v("Data Analysis with Python: Full Course", "freeCodeCamp", "https://www.youtube.com/watch?v=r-uOLxNrNk8"),
           v("pandas in 100 Seconds", "Fireship", "https://www.youtube.com/watch?v=dcqPhpY7tWk"),
-          v("Kaggle Learn — pandas", "Kaggle", "https://www.kaggle.com/learn/pandas"),
+          v("Kaggle Learn: pandas", "Kaggle", "https://www.kaggle.com/learn/pandas"),
         ],
         quiz: [
           q("What is a pandas DataFrame?", ['A chart', 'A table of data', 'A neural network', 'A web page'], 1),
@@ -377,7 +377,7 @@ export const COURSES: Course[] = [
         videos: [
           v("Machine Learning for Everybody", "freeCodeCamp", "https://www.youtube.com/watch?v=i_LwzRVP7bg"),
           v("Machine Learning in 100 Seconds", "Fireship", "https://www.youtube.com/watch?v=PeMlggyqz0Y"),
-          v("Kaggle Learn — Intro to ML", "Kaggle", "https://www.kaggle.com/learn/intro-to-machine-learning"),
+          v("Kaggle Learn: Intro to ML", "Kaggle", "https://www.kaggle.com/learn/intro-to-machine-learning"),
         ],
         quiz: [
           q("What does an ML model learn from?", ['Random guesses', 'Example data', 'The programmer only', 'Nothing'], 1),
@@ -394,7 +394,7 @@ export const COURSES: Course[] = [
     topic: "AI",
     difficulty: "Advanced",
     tagline: "The math that learns.",
-    description: "How layers of simple units combine to recognize patterns — built from intuition up.",
+    description: "How layers of simple units combine to recognize patterns, built from intuition up.",
     lessons: [
       {
         id: "how-nets-learn",
@@ -403,12 +403,12 @@ export const COURSES: Course[] = [
         minutes: 15,
         reading: [
           "A neural network is layers of connected 'neurons'. Each connection has a weight, and training nudges those weights so the network's output gets closer to the right answer.",
-          "That nudging is done by backpropagation and gradient descent — measure how wrong you are, then adjust weights a little in the direction that reduces the error. Repeat millions of times and the network learns.",
+          "That nudging is done by backpropagation and gradient descent, measure how wrong you are, then adjust weights a little in the direction that reduces the error. Repeat millions of times and the network learns.",
         ],
         videos: [
           v("But what is a Neural Network?", "3Blue1Brown", "https://www.youtube.com/watch?v=aircAruvnKk"),
           v("Gradient descent, how networks learn", "3Blue1Brown", "https://www.youtube.com/watch?v=IHZwWFHWa-w"),
-          v("Neural Networks — full playlist", "3Blue1Brown", "https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi"),
+          v("Neural Networks: full playlist", "3Blue1Brown", "https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi"),
         ],
         quiz: [
           q("What does training adjust?", ['The screen', 'The weights', 'The dataset size', 'The language'], 1),
@@ -425,7 +425,7 @@ export const COURSES: Course[] = [
     topic: "Data Science",
     difficulty: "Intermediate",
     tagline: "Store and query structured data.",
-    description: "Tables, queries, and relationships — where real apps keep their data.",
+    description: "Tables, queries, and relationships, where real apps keep their data.",
     lessons: [
       {
         id: "sql-basics",
@@ -434,12 +434,12 @@ export const COURSES: Course[] = [
         minutes: 13,
         reading: [
           "A relational database stores data in tables of rows and columns. SQL is the language you use to ask questions: `SELECT name FROM members WHERE grade = 10`.",
-          "The real power is relationships — a `JOIN` combines rows from two tables that share a key, so you can answer questions that span your whole dataset.",
+          "The real power is relationships, a `JOIN` combines rows from two tables that share a key, so you can answer questions that span your whole dataset.",
         ],
         videos: [
-          v("SQL Tutorial — Full Course", "freeCodeCamp", "https://www.youtube.com/watch?v=HXV3zeQKqGY"),
+          v("SQL Tutorial: Full Course", "freeCodeCamp", "https://www.youtube.com/watch?v=HXV3zeQKqGY"),
           v("SQL in 100 Seconds", "Fireship", "https://www.youtube.com/watch?v=zsjvFFKOm3c"),
-          v("Kaggle Learn — Intro to SQL", "Kaggle", "https://www.kaggle.com/learn/intro-to-sql"),
+          v("Kaggle Learn: Intro to SQL", "Kaggle", "https://www.kaggle.com/learn/intro-to-sql"),
         ],
         quiz: [
           q("Which SQL keyword reads data?", ['`GET`', '`SELECT`', '`READ`', '`FIND`'], 1),
@@ -456,7 +456,7 @@ export const COURSES: Course[] = [
     topic: "Web Dev",
     difficulty: "Intermediate",
     tagline: "How programs talk to each other.",
-    description: "Requests, responses, and JSON — the glue between every modern app and service.",
+    description: "Requests, responses, and JSON, the glue between every modern app and service.",
     lessons: [
       {
         id: "http-json",
@@ -465,12 +465,12 @@ export const COURSES: Course[] = [
         minutes: 12,
         reading: [
           "An API lets one program request data or actions from another using set rules. Over HTTP you send a request (a method like GET or POST and a URL) and get back a response with a status code and data.",
-          "That data is usually JSON — a simple, human-readable format of keys and values that maps neatly onto objects in code. Fetch it, parse it, use it.",
+          "That data is usually JSON, a simple, human-readable format of keys and values that maps neatly onto objects in code. Fetch it, parse it, use it.",
         ],
         videos: [
           v("APIs for Beginners", "freeCodeCamp", "https://www.youtube.com/watch?v=WXsD0ZgxjRw"),
           v("HTTP in 100 Seconds", "Fireship", "https://www.youtube.com/watch?v=iYM2zFP3Zn0"),
-          v("MDN — Fetch & working with APIs", "Mozilla", "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch"),
+          v("MDN: Fetch & working with APIs", "Mozilla", "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch"),
         ],
         quiz: [
           q("Which HTTP method typically reads data?", ['POST', 'GET', 'DELETE', 'PUT'], 1),
@@ -487,7 +487,7 @@ export const COURSES: Course[] = [
     topic: "Cybersecurity",
     difficulty: "Intermediate",
     tagline: "Think like an attacker, defend like a pro.",
-    description: "Threat models, common web exploits, and safe habits — hands-on, CTF-style thinking.",
+    description: "Threat models, common web exploits, and safe habits, hands-on, CTF-style thinking.",
     lessons: [
       {
         id: "security-foundations",
@@ -496,11 +496,11 @@ export const COURSES: Course[] = [
         minutes: 12,
         reading: [
           "Security starts with a threat model: who might attack, what they want, and what you're protecting. You can't defend everything, so you defend what matters against realistic attackers.",
-          "Two everyday pillars: strong, unique passwords (a manager beats memory) and encryption, which scrambles data with a key so only the right person can read it — the backbone of safe communication online.",
+          "Two everyday pillars: strong, unique passwords (a manager beats memory) and encryption, which scrambles data with a key so only the right person can read it, the backbone of safe communication online.",
         ],
         videos: [
           v("Cyber Security Full Course", "freeCodeCamp", "https://www.youtube.com/watch?v=U_P23SqJaDc"),
-          v("PicoCTF — beginner CTF challenges", "picoCTF", "https://picoctf.org/"),
+          v("PicoCTF: beginner CTF challenges", "picoCTF", "https://picoctf.org/"),
           v("Encryption in 100 Seconds", "Fireship", "https://www.youtube.com/watch?v=NuyzuNBFWxQ"),
         ],
         quiz: [
@@ -518,7 +518,7 @@ export const COURSES: Course[] = [
     topic: "Programming",
     difficulty: "Intermediate",
     tagline: "Write code that scales.",
-    description: "Core algorithms and how to reason about efficiency — essential for interviews and competitions.",
+    description: "Core algorithms and how to reason about efficiency, essential for interviews and competitions.",
     lessons: [
       {
         id: "big-o",
@@ -526,13 +526,13 @@ export const COURSES: Course[] = [
         summary: "How code grows with input.",
         minutes: 13,
         reading: [
-          "An algorithm is a step-by-step procedure to solve a problem. Big-O notation describes how its time or memory grows as the input gets larger, ignoring constants — `O(n)` is linear, `O(n²)` is quadratic.",
+          "An algorithm is a step-by-step procedure to solve a problem. Big-O notation describes how its time or memory grows as the input gets larger, ignoring constants, `O(n)` is linear, `O(n²)` is quadratic.",
           "This matters because a slow approach that works on 10 items can freeze on 10,000. Choosing the right algorithm is often the difference between instant and unusable.",
         ],
         videos: [
-          v("Big-O Notation — Full Course", "freeCodeCamp", "https://www.youtube.com/watch?v=Mo4vesaut8g"),
+          v("Big-O Notation: Full Course", "freeCodeCamp", "https://www.youtube.com/watch?v=Mo4vesaut8g"),
           v("Big-O in 100 Seconds", "Fireship", "https://www.youtube.com/watch?v=BgLTDT03QtU"),
-          v("Algorithms — Harvard CS50", "Harvard", "https://cs50.harvard.edu/x/"),
+          v("Algorithms: Harvard CS50", "Harvard", "https://cs50.harvard.edu/x/"),
         ],
         quiz: [
           q("What does Big-O describe?", ['Code color', 'How runtime grows with input size', 'File size', 'Bug count'], 1),
@@ -557,13 +557,13 @@ export const COURSES: Course[] = [
         summary: "Commands, events, and tokens.",
         minutes: 14,
         reading: [
-          "A Discord bot is a program that logs into Discord and reacts to events — messages, joins, reactions. You register it in the Discord developer portal and drive it with a library like discord.py or discord.js.",
-          "Your bot token is a secret — never commit it to a public repo. Keep it in an environment variable, exactly the kind of thing our `.gitignore` protects.",
+          "A Discord bot is a program that logs into Discord and reacts to events, messages, joins, reactions. You register it in the Discord developer portal and drive it with a library like discord.py or discord.js.",
+          "Your bot token is a secret, never commit it to a public repo. Keep it in an environment variable, exactly the kind of thing our `.gitignore` protects.",
         ],
         videos: [
           v("Discord Bot with Python", "freeCodeCamp", "https://www.youtube.com/watch?v=SPTfmiYiuok"),
           v("Discord.js Bot Tutorial", "The Net Ninja", "https://www.youtube.com/watch?v=NwmHbYJcCyg"),
-          v("Discord Developer Portal — docs", "Discord", "https://discord.com/developers/docs/intro"),
+          v("Discord Developer Portal: docs", "Discord", "https://discord.com/developers/docs/intro"),
         ],
         quiz: [
           q("What drives a Discord bot?", ['Reacting to events', 'A spreadsheet', 'A CSS file', 'A printer'], 0),
@@ -580,7 +580,7 @@ export const COURSES: Course[] = [
     topic: "Projects",
     difficulty: "Beginner",
     tagline: "Loops, input, and drawing.",
-    description: "The core loop behind every game — update, draw, repeat — and how to handle player input.",
+    description: "The core loop behind every game, update, draw, repeat, and how to handle player input.",
     lessons: [
       {
         id: "game-loop",
@@ -589,7 +589,7 @@ export const COURSES: Course[] = [
         minutes: 11,
         reading: [
           "Every game runs a loop: read input, update the game state (positions, score), draw the frame, and repeat many times per second. Smooth movement is just small updates done fast.",
-          "Start tiny — move a square with the arrow keys. Games are motivating because you see and feel every change instantly, which makes debugging fun instead of abstract.",
+          "Start tiny, move a square with the arrow keys. Games are motivating because you see and feel every change instantly, which makes debugging fun instead of abstract.",
         ],
         videos: [
           v("Game Development with JavaScript", "freeCodeCamp", "https://www.youtube.com/watch?v=GFO_txvwK_c"),
@@ -611,7 +611,7 @@ export const COURSES: Course[] = [
     topic: "Tools",
     difficulty: "Beginner",
     tagline: "Put it on the internet.",
-    description: "Take a project from your laptop to a public URL people can actually use — like this site on Vercel.",
+    description: "Take a project from your laptop to a public URL people can actually use, like this site on Vercel.",
     lessons: [
       {
         id: "deploy-basics",
@@ -619,13 +619,13 @@ export const COURSES: Course[] = [
         summary: "From localhost to a live URL.",
         minutes: 10,
         reading: [
-          "A project isn't real until someone else can open it. Free hosts like Vercel, Netlify, and GitHub Pages take your code and give you a public URL — often by connecting your GitHub repo so every push auto-deploys.",
-          "Ship early, ship rough, then improve. A live link you can share beats a perfect project nobody sees — this website went live the same way.",
+          "A project isn't real until someone else can open it. Free hosts like Vercel, Netlify, and GitHub Pages take your code and give you a public URL, often by connecting your GitHub repo so every push auto-deploys.",
+          "Ship early, ship rough, then improve. A live link you can share beats a perfect project nobody sees, this website went live the same way.",
         ],
         videos: [
-          v("Deploy a website — full guide", "freeCodeCamp", "https://www.youtube.com/watch?v=Kx_1NYYJS7Q"),
+          v("Deploy a website: full guide", "freeCodeCamp", "https://www.youtube.com/watch?v=Kx_1NYYJS7Q"),
           v("Vercel in 100 Seconds", "Fireship", "https://www.youtube.com/watch?v=hEnDFmB5W25"),
-          v("Vercel — deploy docs", "Vercel", "https://vercel.com/docs/deployments/overview"),
+          v("Vercel: deploy docs", "Vercel", "https://vercel.com/docs/deployments/overview"),
         ],
         quiz: [
           q("When is a project 'real'?", ['When it compiles', 'When others can open it', 'When it has comments', 'Never'], 1),
@@ -642,7 +642,7 @@ export const COURSES: Course[] = [
     topic: "Projects",
     difficulty: "Beginner",
     tagline: "Build and pitch in 24 hours.",
-    description: "How to scope, build, and present a project under time pressure — the Hackathon branch's edge.",
+    description: "How to scope, build, and present a project under time pressure, the Hackathon branch's edge.",
     lessons: [
       {
         id: "hackathon-strategy",
@@ -651,12 +651,12 @@ export const COURSES: Course[] = [
         minutes: 11,
         reading: [
           "Hackathons are won by focus. Pick one clear problem, build the smallest version that shows the idea, and leave time to polish the demo. Judges remember a working story, not a feature list.",
-          "Split the team by strength — someone builds, someone designs, someone prepares the pitch. Practice the demo out loud; a smooth 2-minute pitch beats a buggy live coding attempt.",
+          "Split the team by strength, someone builds, someone designs, someone prepares the pitch. Practice the demo out loud; a smooth 2-minute pitch beats a buggy live coding attempt.",
         ],
         videos: [
           v("How to win a Hackathon", "Fireship", "https://www.youtube.com/watch?v=Unzc731iCUY"),
           v("Hackathon tips for beginners", "freeCodeCamp", "https://www.youtube.com/@freecodecamp"),
-          v("MLH — Hackathon resources", "Major League Hacking", "https://mlh.io/"),
+          v("MLH: Hackathon resources", "Major League Hacking", "https://mlh.io/"),
         ],
         quiz: [
           q("Hackathons are won mostly by...", ['The most features', 'Focus and a clear demo', 'The biggest team', 'Luck'], 1),
@@ -681,13 +681,13 @@ export const COURSES: Course[] = [
         summary: "Think out loud, use the right structure.",
         minutes: 13,
         reading: [
-          "Most interview problems are variations on a few patterns — two pointers, hash maps for lookups, sliding windows, recursion. Recognizing the pattern is half the battle; practice builds that recognition.",
+          "Most interview problems are variations on a few patterns, two pointers, hash maps for lookups, sliding windows, recursion. Recognizing the pattern is half the battle; practice builds that recognition.",
           "Communication counts as much as the answer. Restate the problem, think out loud, state your approach and its Big-O before coding, then test with an example. A clear, correct O(n) beats a silent, clever O(n²).",
         ],
         videos: [
           v("Coding Interview Patterns", "freeCodeCamp", "https://www.youtube.com/watch?v=xo7XrRVxH8Y"),
-          v("Data Structures — Full Course", "freeCodeCamp", "https://www.youtube.com/watch?v=RBSGKlAvoiM"),
-          v("LeetCode patterns — NeetCode", "NeetCode", "https://neetcode.io/"),
+          v("Data Structures: Full Course", "freeCodeCamp", "https://www.youtube.com/watch?v=RBSGKlAvoiM"),
+          v("LeetCode patterns: NeetCode", "NeetCode", "https://neetcode.io/"),
         ],
         quiz: [
           q("Most interview problems reduce to...", ['Memorizing answers', 'A few reusable patterns', 'Luck', 'Typing speed'], 1),
@@ -721,7 +721,7 @@ export function getLesson(courseId: string, lessonId: string) {
   };
 }
 
-/** All (courseId, lessonId) pairs — for static generation. */
+/** All (courseId, lessonId) pairs, for static generation. */
 export const ALL_LESSON_PARAMS = COURSES.flatMap((c) =>
   c.lessons.map((l) => ({ courseId: c.id, lessonId: l.id }))
 );

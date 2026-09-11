@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-/** Persisted state hook — SSR-safe, reads localStorage after mount. */
+/** Persisted state hook, SSR-safe, reads localStorage after mount. */
 export function useLocalStorage<T>(key: string, initial: T) {
   const [value, setValue] = useState<T>(initial);
   const [loaded, setLoaded] = useState(false);

@@ -7,12 +7,11 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { ComingSoon } from "@/components/ui/ComingSoon";
 import { EventsBrowser } from "@/components/events/EventsBrowser";
-import { CircuitBackground } from "@/components/effects/CircuitBackground";
 import { EVENTS } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Events",
-  description: "Hackathons, workshops, guest speakers, and competitions hosted by the EHS Hacking & Coding Club.",
+  description: "Hackathons, workshops, guest speakers, and competitions hosted by the Hacking & Innovation Club.",
 };
 
 export default function EventsPage() {
@@ -28,7 +27,7 @@ export default function EventsPage() {
             Show up. <span className="text-gradient">Build something.</span>
           </>
         }
-        subtitle="From all-day hackathons to focused workshops and industry guest talks — there's always something happening at EHCC."
+        subtitle="From all-day hackathons to focused workshops and industry guest talks, there's always something happening at EHIC."
       />
 
       {/* Featured event banner */}
@@ -37,11 +36,10 @@ export default function EventsPage() {
           <div className="container-x">
             <Reveal>
               <div className="relative overflow-hidden rounded-2xl border border-emerald/30 bg-navy-800 p-8 shadow-glow md:p-10">
-                <CircuitBackground animate={false} />
                 <div className="relative flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
                   <div className="max-w-xl">
                     <Badge tone="emerald" className="mb-3">Featured · {featured.type}</Badge>
-                    <h2 className="text-2xl font-bold text-white md:text-3xl">{featured.title}</h2>
+                    <h2 className="text-2xl font-bold text-silver md:text-3xl">{featured.title}</h2>
                     <p className="mt-2 text-muted">{featured.description}</p>
                     <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm text-silver">
                       <span className="inline-flex items-center gap-1.5">
@@ -80,7 +78,6 @@ export default function EventsPage() {
 
       {/* Guest speaker spotlight */}
       <section className="relative section">
-        <CircuitBackground animate={false} density="sparse" />
         <div className="container-x relative">
           <SectionHeader
             eyebrow="guest speakers"

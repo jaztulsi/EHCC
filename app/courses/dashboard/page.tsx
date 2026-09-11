@@ -4,7 +4,7 @@ import { Dashboard } from "@/components/course/Dashboard";
 
 export const metadata: Metadata = {
   title: "Dashboard",
-  description: "Your EHCC Academy dashboard — progress, courses in progress, and certificates.",
+  description: "Your EHIC Academy dashboard, progress, courses in progress, and certificates.",
 };
 
 export default function DashboardPage() {

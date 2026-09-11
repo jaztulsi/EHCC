@@ -2,13 +2,14 @@ import { cn } from "@/lib/utils";
 
 type Tone = "emerald" | "navy" | "amber" | "blue" | "violet" | "rose";
 
+/** Light-canvas tones: pale tint, mid border, dark readable label. */
 const tones: Record<Tone, string> = {
-  emerald: "bg-emerald/10 text-emerald-bright border-emerald/30",
-  navy: "bg-navy-700/60 text-silver border-white/10",
-  amber: "bg-amber-400/10 text-amber-300 border-amber-400/30",
-  blue: "bg-sky-400/10 text-sky-300 border-sky-400/30",
-  violet: "bg-violet-400/10 text-violet-300 border-violet-400/30",
-  rose: "bg-rose-400/10 text-rose-300 border-rose-400/30",
+  emerald: "bg-emerald/[0.08] text-emerald border-emerald/25",
+  navy: "bg-navy-700 text-muted border-line",
+  amber: "bg-clay/[0.09] text-clay border-clay/25",
+  blue: "bg-lagoon/[0.09] text-lagoon border-lagoon/25",
+  violet: "bg-iris/[0.09] text-iris border-iris/25",
+  rose: "bg-clay/[0.09] text-clay border-clay/25",
 };
 
 export function Badge({

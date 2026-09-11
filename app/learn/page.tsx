@@ -7,12 +7,11 @@ import { ConceptFlipCard } from "@/components/cards/ConceptFlipCard";
 import { CodePlayground } from "@/components/learn/CodePlayground";
 import { LearningRoadmap } from "@/components/learn/LearningRoadmap";
 import { ResourceLibrary } from "@/components/learn/ResourceLibrary";
-import { CircuitBackground } from "@/components/effects/CircuitBackground";
 import { WORKSHOPS, CONCEPTS, ROADMAPS, RESOURCES } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Learn",
-  description: "Workshops, an in-browser code playground, learning roadmaps, a resource library, and concept explainers — everything you need to start coding with EHCC.",
+  description: "Workshops, an in-browser code playground, learning roadmaps, a resource library, and concept explainers, everything you need to start coding with EHIC.",
 };
 
 export default function LearnPage() {
@@ -25,7 +24,7 @@ export default function LearnPage() {
             Start where you are. <span className="text-gradient">Go further.</span>
           </>
         }
-        subtitle="Workshops, interactive code, roadmaps, and curated resources — built to take you from zero to shipping."
+        subtitle="Workshops, interactive code, roadmaps, and curated resources, built to take you from zero to shipping."
       />
 
       {/* Workshops */}
@@ -48,7 +47,6 @@ export default function LearnPage() {
 
       {/* Code playground */}
       <section className="relative section">
-        <CircuitBackground animate={false} density="sparse" />
         <div className="container-x relative">
           <SectionHeader
             eyebrow="code playground"
@@ -77,7 +75,6 @@ export default function LearnPage() {
 
       {/* Resource library */}
       <section className="relative section">
-        <CircuitBackground animate={false} density="sparse" />
         <div className="container-x relative">
           <SectionHeader
             eyebrow="resource library"

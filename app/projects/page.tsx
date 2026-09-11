@@ -6,12 +6,11 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { ProjectCard } from "@/components/cards/ProjectCard";
 import { ProjectsBrowser } from "@/components/projects/ProjectsBrowser";
-import { CircuitBackground } from "@/components/effects/CircuitBackground";
 import { PROJECTS } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Projects",
-  description: "Projects built by the Emerald Hacking & Coding Club across our three branches: Hackathon, Data Science, and AI Principles / Programming.",
+  description: "Projects built by the Hacking & Innovation Club across our three branches: Hackathon, Data Science, and AI Principles / Programming.",
 };
 
 export default function ProjectsPage() {
@@ -26,7 +25,7 @@ export default function ProjectsPage() {
             Built by <span className="text-gradient">our branches</span>.
           </>
         }
-        subtitle="Real work from EHCC members across Hackathon, Data Science, and AI Principles / Programming — with more shipping every semester."
+        subtitle="Real work from EHIC members across Hackathon, Data Science, and AI Principles / Programming, with more shipping every semester."
       />
 
       {/* Featured / pinned */}
@@ -45,7 +44,6 @@ export default function ProjectsPage() {
 
       {/* All projects with filter */}
       <section className="relative section pt-0">
-        <CircuitBackground animate={false} density="sparse" />
         <div className="container-x relative">
           <SectionHeader align="left" eyebrow="explore" title="All projects" subtitle="Filter by category to find work that matches your interests." />
           <div className="mt-8">
@@ -58,11 +56,11 @@ export default function ProjectsPage() {
       <section className="section pt-0">
         <div className="container-x">
           <Reveal>
-            <div className="flex flex-col items-center gap-4 rounded-2xl border border-emerald/20 bg-navy-800/60 p-10 text-center">
-              <p className="font-mono text-sm text-emerald">{"// your project here"}</p>
-              <h3 className="text-2xl font-bold text-white md:text-3xl">Start your own project</h3>
+            <div className="flex flex-col items-center gap-4 rounded-2xl border border-emerald/20 bg-navy-800 p-10 text-center">
+              <p className="eyebrow">your project here</p>
+              <h3 className="text-2xl font-bold text-silver md:text-3xl">Start your own project</h3>
               <p className="max-w-md text-muted">
-                Got an idea? We&apos;ll help you build it — find teammates, mentorship, and a stage to demo.
+                Got an idea? We&apos;ll help you build it, find teammates, mentorship, and a stage to demo.
               </p>
               <Button href="/join" size="lg" className="mt-2">
                 Pitch your idea <ArrowRight size={18} />

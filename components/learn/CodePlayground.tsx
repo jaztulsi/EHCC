@@ -12,9 +12,9 @@ interface Snippet {
 const SNIPPETS: Snippet[] = [
   {
     label: "Hello, World",
-    code: `// Welcome to the EHCC playground!
+    code: `// Welcome to the EHIC playground!
 // Edit this code and hit Run.
-const club = "EHCC";
+const club = "EHIC";
 console.log("Hello from " + club + " 👋");
 console.log("// Think. // Build. // Elevate.");`,
   },
@@ -109,9 +109,9 @@ export function CodePlayground() {
   }
 
   return (
-    <div className="overflow-hidden rounded-xl border border-white/10 bg-navy-900">
+    <div className="overflow-hidden rounded-xl border border-line bg-navy-900">
       {/* Snippet tabs */}
-      <div className="flex flex-wrap gap-1 border-b border-white/5 bg-navy-800/60 p-2">
+      <div className="flex flex-wrap gap-1 border-b border-line bg-navy-800 p-2">
         {SNIPPETS.map((s, i) => (
           <button
             key={s.label}
@@ -127,8 +127,8 @@ export function CodePlayground() {
 
       <div className="grid md:grid-cols-2">
         {/* Editor */}
-        <div className="relative border-b border-white/5 md:border-b-0 md:border-r">
-          <div className="flex items-center justify-between border-b border-white/5 px-4 py-2 font-mono text-xs text-muted">
+        <div className="relative border-b border-line md:border-b-0 md:border-r">
+          <div className="flex items-center justify-between border-b border-line px-4 py-2 font-mono text-xs text-muted">
             <span>playground.js</span>
             <span className="text-emerald/60">javascript</span>
           </div>
@@ -143,11 +143,11 @@ export function CodePlayground() {
 
         {/* Output */}
         <div>
-          <div className="flex items-center gap-2 border-b border-white/5 px-4 py-2 font-mono text-xs text-muted">
+          <div className="flex items-center gap-2 border-b border-line px-4 py-2 font-mono text-xs text-muted">
             <Terminal size={13} className="text-emerald/70" /> output
           </div>
           <div className="h-72 overflow-auto p-4 font-mono text-sm">
-            {!hasRun && <p className="text-muted">{"// press Run to execute your code"}</p>}
+            {!hasRun && <p className="text-muted">"press Run to execute your code"</p>}
             {output.map((line, i) => (
               <p key={i} className={line.type === "error" ? "text-rose-400" : "text-silver"}>
                 <span className="select-none text-emerald/50">{"> "}</span>
@@ -159,16 +159,16 @@ export function CodePlayground() {
       </div>
 
       {/* Controls */}
-      <div className="flex items-center gap-2 border-t border-white/5 bg-navy-800/60 p-3">
+      <div className="flex items-center gap-2 border-t border-line bg-navy-800 p-3">
         <button
           onClick={run}
-          className="btn-shimmer inline-flex items-center gap-1.5 rounded-md bg-emerald px-4 py-1.5 text-sm font-semibold text-navy-950 transition-colors hover:bg-emerald-bright"
+          className="inline-flex items-center gap-1.5 rounded-md bg-emerald px-4 py-1.5 text-sm font-semibold text-white transition-colors hover:bg-emerald-bright"
         >
           <Play size={14} className="fill-navy-950" /> Run
         </button>
         <button
           onClick={reset}
-          className="inline-flex items-center gap-1.5 rounded-md border border-white/10 px-4 py-1.5 text-sm text-silver transition-colors hover:border-emerald/40 hover:text-emerald-bright"
+          className="inline-flex items-center gap-1.5 rounded-md border border-line px-4 py-1.5 text-sm text-silver transition-colors hover:border-emerald/40 hover:text-emerald-bright"
         >
           <RotateCcw size={14} /> Reset
         </button>

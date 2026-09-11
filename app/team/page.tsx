@@ -6,12 +6,11 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { TeamMemberCard } from "@/components/cards/TeamMemberCard";
-import { CircuitBackground } from "@/components/effects/CircuitBackground";
 import { LEADERSHIP, OFFICER_BOARD, BRANCH_LEADERSHIP, ELECTIONS } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Team",
-  description: "Meet the students who run the Emerald Hacking & Coding Club — our founders and the officer structure across every branch.",
+  description: "Meet the students who run the Hacking & Innovation Club, our founders and the officer structure across every branch.",
 };
 
 export default function TeamPage() {
@@ -24,7 +23,7 @@ export default function TeamPage() {
             The people who <span className="text-gradient">make it real</span>.
           </>
         }
-        subtitle="EHCC is built by students, for students. Meet the crew turning curiosity into code."
+        subtitle="EHIC is built by students, for students. Meet the crew turning curiosity into code."
       />
 
       {/* Leadership */}
@@ -47,7 +46,6 @@ export default function TeamPage() {
 
       {/* Officer structure */}
       <section className="relative section pt-0">
-        <CircuitBackground animate={false} density="sparse" />
         <div className="container-x relative">
           <SectionHeader
             eyebrow="officer structure"
@@ -56,11 +54,11 @@ export default function TeamPage() {
           />
 
           {/* Main board */}
-          <h3 className="mt-12 text-center text-xl font-semibold text-white">Main Board</h3>
+          <h3 className="mt-12 text-center text-xl font-semibold text-silver">Main Board</h3>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {OFFICER_BOARD.map((o, i) => (
               <Reveal key={o.position} delay={(i % 4) * 0.06}>
-                <div className="flex h-full flex-col rounded-xl border border-white/5 bg-navy-800/50 p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-emerald/30 hover:shadow-glow">
+                <div className="flex h-full flex-col surface p-6 text-center card-lift">
                   <h4 className="text-lg font-semibold text-emerald-bright">{o.position}</h4>
                   {o.count > 1 && (
                     <div className="mt-2 flex justify-center">
@@ -74,11 +72,11 @@ export default function TeamPage() {
           </div>
 
           {/* Branch leadership */}
-          <h3 className="mt-14 text-center text-xl font-semibold text-white">Branch Leadership</h3>
+          <h3 className="mt-14 text-center text-xl font-semibold text-silver">Branch Leadership</h3>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {BRANCH_LEADERSHIP.map((b, i) => (
               <Reveal key={b.branch} delay={(i % 3) * 0.08}>
-                <div className="flex h-full flex-col rounded-xl border border-white/5 bg-navy-800/50 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-emerald/30 hover:shadow-glow">
+                <div className="flex h-full flex-col surface p-6 card-lift">
                   <h4 className="text-lg font-semibold text-emerald-bright">{b.branch}</h4>
                   <div className="mt-3 flex flex-wrap gap-1.5">
                     {b.positions.map((p) => (
@@ -93,7 +91,7 @@ export default function TeamPage() {
 
           {/* Elections */}
           <Reveal>
-            <div className="mt-12 grid gap-6 rounded-2xl border border-white/5 bg-navy-800/40 p-8 text-center sm:grid-cols-3">
+            <div className="mt-12 grid gap-6 surface p-8 text-center sm:grid-cols-3">
               <div>
                 <p className="text-sm font-semibold text-emerald-bright">When</p>
                 <p className="mt-1 text-muted">{ELECTIONS.when}</p>
@@ -115,9 +113,9 @@ export default function TeamPage() {
       <section className="section pt-0">
         <div className="container-x">
           <Reveal>
-            <div className="flex flex-col items-center gap-4 rounded-2xl border border-emerald/20 bg-navy-800/60 p-10 text-center">
-              <p className="font-mono text-sm text-emerald">{"// the roster is open"}</p>
-              <h3 className="text-2xl font-bold text-white md:text-3xl">Want your name here?</h3>
+            <div className="flex flex-col items-center gap-4 rounded-2xl border border-emerald/20 bg-navy-800 p-10 text-center">
+              <p className="eyebrow">the roster is open</p>
+              <h3 className="text-2xl font-bold text-silver md:text-3xl">Want your name here?</h3>
               <p className="max-w-md text-muted">
                 We&apos;re always looking for builders, hackers, designers, and the curious. Come join the team.
               </p>

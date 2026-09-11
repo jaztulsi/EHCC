@@ -5,7 +5,7 @@ import type { Workshop } from "@/lib/types";
 
 export function WorkshopCard({ workshop }: { workshop: Workshop }) {
   return (
-    <article className="group flex h-full flex-col rounded-xl border border-white/5 bg-navy-800/50 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-emerald/30 hover:shadow-glow">
+    <article className="group flex h-full flex-col surface p-6 card-lift">
       <div className="mb-4 flex items-start justify-between">
         <span className="inline-flex rounded-lg bg-emerald/10 p-2.5 text-emerald-bright transition-colors group-hover:bg-emerald/20">
           <Icon name={workshop.icon} className="h-5 w-5" />
@@ -13,7 +13,7 @@ export function WorkshopCard({ workshop }: { workshop: Workshop }) {
         <Badge tone={toneFor(workshop.difficulty)}>{workshop.difficulty}</Badge>
       </div>
 
-      <h3 className="text-lg font-semibold text-white transition-colors group-hover:text-emerald-bright">
+      <h3 className="text-lg font-semibold text-silver transition-colors group-hover:text-emerald-bright">
         {workshop.title}
       </h3>
       <p className="mt-1.5 text-sm leading-relaxed text-muted">{workshop.description}</p>
@@ -26,7 +26,7 @@ export function WorkshopCard({ workshop }: { workshop: Workshop }) {
         ))}
       </ul>
 
-      <div className="mt-5 flex items-center gap-1.5 border-t border-white/5 pt-4 text-xs text-muted">
+      <div className="mt-5 flex items-center gap-1.5 border-t border-line pt-4 text-xs text-muted">
         <Layers size={13} className="text-emerald/70" />
         {workshop.sessions} session{workshop.sessions > 1 ? "s" : ""}
       </div>

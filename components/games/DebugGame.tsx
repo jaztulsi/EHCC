@@ -40,9 +40,9 @@ export function DebugGame() {
   return (
     <GameShell
       title="debug-the-code"
-      subtitle="find the bug in each snippet — 10 rounds"
+      subtitle="find the bug in each snippet, 10 rounds"
       onRestart={restart}
-      shareText={done ? `I caught ${score}/${total} bugs in EHCC Debug the Code! Think you can do better?` : undefined}
+      shareText={done ? `I caught ${score}/${total} bugs in EHIC Debug the Code! Think you can do better?` : undefined}
     >
       {!done ? (
         <div>
@@ -55,7 +55,7 @@ export function DebugGame() {
 
           <p className="text-sm text-silver">{challenge.prompt}</p>
 
-          <pre className="mt-3 overflow-x-auto rounded-lg border border-white/10 bg-navy-950 p-4 font-mono text-sm leading-relaxed text-emerald-bright">
+          <pre className="mt-3 overflow-x-auto rounded-card border border-bark-line bg-bark p-4 font-mono text-sm leading-relaxed text-emerald-circuit">
             <code>{challenge.code}</code>
           </pre>
 
@@ -70,10 +70,10 @@ export function DebugGame() {
                   disabled={selected !== null}
                   className={cn(
                     "flex w-full items-center justify-between gap-3 rounded-lg border px-4 py-2.5 text-left text-sm transition-all",
-                    selected === null && "border-white/10 hover:border-emerald/40 hover:bg-emerald/5",
+                    selected === null && "border-line hover:border-emerald/40 hover:bg-emerald/5",
                     selected !== null && isAnswer && "border-emerald bg-emerald/10 text-emerald-bright",
-                    selected !== null && isPicked && !isAnswer && "border-rose-500 bg-rose-500/10 text-rose-300",
-                    selected !== null && !isAnswer && !isPicked && "border-white/5 opacity-50"
+                    selected !== null && isPicked && !isAnswer && "border-rose-300 bg-rose-50 text-rose-700",
+                    selected !== null && !isAnswer && !isPicked && "border-line opacity-50"
                   )}
                 >
                   <span className="font-mono">{opt}</span>
@@ -85,14 +85,14 @@ export function DebugGame() {
           </div>
 
           {selected !== null && (
-            <div className="mt-4 rounded-lg border border-emerald/20 bg-navy-800/60 p-3">
+            <div className="mt-4 rounded-lg border border-emerald/20 bg-navy-800 p-3">
               <p className="text-sm text-silver">
                 <span className="font-semibold text-emerald-bright">Explanation: </span>
                 {challenge.explanation}
               </p>
               <button
                 onClick={next}
-                className="btn-shimmer mt-3 rounded-md bg-emerald px-5 py-1.5 text-sm font-semibold text-navy-950 hover:bg-emerald-bright"
+                className="mt-3 rounded-md bg-emerald px-5 py-1.5 text-sm font-semibold text-white hover:bg-emerald-bright"
               >
                 {round + 1 >= total ? "See results" : "Next bug →"}
               </button>
@@ -102,7 +102,7 @@ export function DebugGame() {
       ) : (
         <div className="text-center">
           <p className="font-mono text-sm text-muted">debugging complete</p>
-          <p className="my-3 font-mono text-5xl font-bold text-white">
+          <p className="my-3 font-mono text-5xl font-bold text-silver">
             {score}<span className="text-muted">/{total}</span>
           </p>
           <p className="font-mono text-sm text-emerald-bright">
@@ -110,7 +110,7 @@ export function DebugGame() {
           </p>
           <button
             onClick={restart}
-            className="btn-shimmer mt-5 rounded-md bg-emerald px-6 py-2 text-sm font-semibold text-navy-950 hover:bg-emerald-bright"
+            className="mt-5 rounded-md bg-emerald px-6 py-2 text-sm font-semibold text-white hover:bg-emerald-bright"
           >
             Play again
           </button>

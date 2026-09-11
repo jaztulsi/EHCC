@@ -10,7 +10,7 @@ import { useProgress } from "./useProgress";
 function inline(text: string) {
   return text.split("`").map((part, i) =>
     i % 2 === 1 ? (
-      <code key={i} className="rounded bg-navy-950 px-1 py-0.5 font-mono text-[0.85em] text-emerald-bright">
+      <code key={i} className="rounded bg-navy-700 px-1 py-0.5 font-mono text-[0.85em] text-emerald-bright">
         {part}
       </code>
     ) : (
@@ -48,10 +48,10 @@ export function Quiz({
   }
 
   return (
-    <div className="rounded-2xl border border-emerald/20 bg-navy-800/50 p-6 md:p-8">
+    <div className="rounded-2xl border border-emerald/20 bg-navy-800 p-6 md:p-8">
       <div className="flex items-center gap-2">
         <Trophy size={18} className="text-emerald-bright" />
-        <h3 className="text-xl font-bold text-white">Quiz</h3>
+        <h3 className="text-xl font-bold text-silver">Quiz</h3>
         {already && (
           <span className="ml-auto inline-flex items-center gap-1.5 rounded-full bg-emerald/15 px-3 py-1 text-xs font-semibold text-emerald-bright">
             <CheckCircle2 size={13} /> Completed
@@ -80,10 +80,10 @@ export function Quiz({
                     className={cn(
                       "flex items-center gap-3 rounded-lg border px-4 py-2.5 text-left text-sm transition-colors disabled:cursor-default",
                       !submitted && chosen && "border-emerald bg-emerald/10 text-emerald-bright",
-                      !submitted && !chosen && "border-white/10 text-silver hover:border-emerald/40",
+                      !submitted && !chosen && "border-line text-silver hover:border-emerald/40",
                       showState && isCorrect && "border-emerald bg-emerald/15 text-emerald-bright",
                       submitted && chosen && !isCorrect && "border-red-500/50 bg-red-500/10 text-red-300",
-                      submitted && !chosen && !isCorrect && "border-white/10 text-muted"
+                      submitted && !chosen && !isCorrect && "border-line text-muted"
                     )}
                   >
                     <span className="flex-1">{inline(opt)}</span>
@@ -98,29 +98,29 @@ export function Quiz({
       </div>
 
       {/* Result / actions */}
-      <div className="mt-6 border-t border-white/5 pt-6">
+      <div className="mt-6 border-t border-line pt-6">
         {!submitted ? (
           <button
             onClick={submit}
             disabled={!allAnswered}
-            className="inline-flex items-center gap-2 rounded-lg bg-emerald px-6 py-3 font-semibold text-navy-950 transition-colors hover:bg-emerald-bright disabled:opacity-50"
+            className="inline-flex items-center gap-2 rounded-lg bg-emerald px-6 py-3 font-semibold text-white transition-colors hover:bg-emerald-bright disabled:opacity-50"
           >
             Submit quiz
           </button>
         ) : passed ? (
           <div className="flex flex-wrap items-center gap-3">
             <span className="inline-flex items-center gap-2 rounded-lg bg-emerald/15 px-5 py-3 font-semibold text-emerald-bright">
-              <CheckCircle2 size={18} /> Passed {correct}/{questions.length} — lesson complete!
+              <CheckCircle2 size={18} /> Passed {correct}/{questions.length}, lesson complete!
             </span>
           </div>
         ) : (
           <div className="flex flex-wrap items-center gap-3">
             <span className="inline-flex items-center gap-2 rounded-lg bg-red-500/10 px-5 py-3 font-semibold text-red-300">
-              <XCircle size={18} /> {correct}/{questions.length} correct — review and try again
+              <XCircle size={18} /> {correct}/{questions.length} correct, review and try again
             </span>
             <button
               onClick={retry}
-              className="inline-flex items-center gap-1.5 rounded-md border border-white/10 px-4 py-2 text-sm text-silver transition-colors hover:border-emerald/40 hover:text-emerald-bright"
+              className="inline-flex items-center gap-1.5 rounded-md border border-line px-4 py-2 text-sm text-silver transition-colors hover:border-emerald/40 hover:text-emerald-bright"
             >
               <RotateCcw size={14} /> Retry
             </button>

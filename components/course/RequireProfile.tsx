@@ -9,7 +9,7 @@ export function RequireProfile({ children }: { children: React.ReactNode }) {
   const { profile, loaded } = useProfile();
 
   if (!loaded) {
-    return <div className="h-40 animate-pulse rounded-2xl border border-white/5 bg-navy-800/40" />;
+    return <div className="h-40 animate-pulse surface" />;
   }
   if (profile) return <>{children}</>;
 

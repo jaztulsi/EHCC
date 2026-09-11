@@ -26,7 +26,7 @@ export function Catalog() {
   return (
     <div>
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <h2 className="text-2xl font-bold text-white">
+        <h2 className="text-2xl font-bold text-silver">
           Course catalog <span className="font-mono text-base text-muted">({COURSE_COUNT})</span>
         </h2>
         <div className="relative">
@@ -35,7 +35,7 @@ export function Catalog() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search courses…"
-            className="w-56 rounded-lg border border-white/10 bg-navy-950 py-2.5 pl-9 pr-4 text-sm text-silver outline-none transition-colors placeholder:text-muted/60 focus:border-emerald/50"
+            className="w-56 rounded-lg border border-line bg-navy-950 py-2.5 pl-9 pr-4 text-sm text-silver outline-none transition-colors placeholder:text-muted/60 focus:border-emerald/50"
           />
         </div>
       </div>
@@ -49,7 +49,7 @@ export function Catalog() {
               "rounded-full border px-3.5 py-1.5 text-sm transition-colors",
               topic === t
                 ? "border-emerald bg-emerald/10 text-emerald-bright"
-                : "border-white/10 text-muted hover:border-white/25"
+                : "border-line text-muted hover:border-line"
             )}
           >
             {t}
@@ -64,7 +64,7 @@ export function Catalog() {
             <Link
               key={c.id}
               href={`/courses/${c.id}`}
-              className="group flex h-full flex-col rounded-xl border border-white/5 bg-navy-800/50 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-emerald/30 hover:shadow-glow"
+              className="group flex h-full flex-col surface p-6 card-lift"
             >
               <div className="flex items-start justify-between">
                 <span className="inline-flex rounded-xl bg-emerald/10 p-3 text-emerald-bright">
@@ -74,7 +74,7 @@ export function Catalog() {
                   {c.difficulty}
                 </Badge>
               </div>
-              <h3 className="mt-4 flex items-center gap-2 text-xl font-bold text-white">
+              <h3 className="mt-4 flex items-center gap-2 text-xl font-bold text-silver">
                 {c.title}
                 {loaded && p.complete && <CheckCircle2 size={16} className="text-emerald" />}
               </h3>
@@ -86,7 +86,7 @@ export function Catalog() {
               </div>
 
               {loaded && profile && p.done > 0 && (
-                <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-navy-950">
+                <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-navy-700">
                   <div className="h-full rounded-full bg-emerald" style={{ width: `${p.pct}%` }} />
                 </div>
               )}

@@ -5,20 +5,23 @@ type Variant = "primary" | "outline" | "ghost";
 type Size = "sm" | "md" | "lg";
 
 const base =
-  "btn-shimmer inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-200 will-change-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald/60 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950 motion-reduce:transform-none motion-reduce:transition-none disabled:opacity-50 disabled:pointer-events-none";
+  "inline-flex items-center justify-center gap-2 rounded-full font-medium tracking-title " +
+  "transition-[transform,background-color,box-shadow,border-color] duration-300 ease-apple " +
+  "hover:-translate-y-px active:translate-y-0 active:scale-[0.975] " +
+  "motion-reduce:transform-none disabled:opacity-50 disabled:pointer-events-none";
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-emerald text-navy-950 font-semibold hover:bg-emerald-bright hover:shadow-glow-md",
+    "bg-emerald text-white font-semibold shadow-glow hover:bg-emerald-bright hover:shadow-glow-md",
   outline:
-    "border border-emerald/50 text-emerald-bright hover:bg-emerald/10 hover:border-emerald hover:shadow-glow",
-  ghost: "text-silver hover:bg-white/5 hover:text-white",
+    "border border-line bg-white/70 text-silver shadow-glow hover:border-emerald/35 hover:bg-white hover:shadow-glow-md",
+  ghost: "text-muted hover:bg-emerald/[0.07] hover:text-emerald",
 };
 
 const sizes: Record<Size, string> = {
   sm: "px-3.5 py-1.5 text-sm",
   md: "px-5 py-2.5 text-sm",
-  lg: "px-7 py-3.5 text-base",
+  lg: "px-6 py-3 text-[15px]",
 };
 
 interface CommonProps {
