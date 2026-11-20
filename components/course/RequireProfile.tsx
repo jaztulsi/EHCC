@@ -1,6 +1,5 @@
 "use client";
 
-import { Lock } from "lucide-react";
 import { useProfile } from "./useProfile";
 import { SignUpCard } from "./SignUpCard";
 
@@ -9,17 +8,15 @@ export function RequireProfile({ children }: { children: React.ReactNode }) {
   const { profile, loaded } = useProfile();
 
   if (!loaded) {
-    return <div className="h-40 animate-pulse surface" />;
+    return <div className="h-40 rounded-card bg-raised" aria-hidden />;
   }
   if (profile) return <>{children}</>;
 
   return (
-    <div>
-      <div className="mb-6 flex items-center gap-3 rounded-xl border border-emerald/20 bg-emerald/5 px-4 py-3 text-sm text-silver">
-        <Lock size={16} className="shrink-0 text-emerald-bright" />
-        Sign up (free) to start this course, take the quizzes, and save your progress.
-      </div>
-      <SignUpCard heading="Sign up to start learning" />
-    </div>
+    <SignUpCard
+      eyebrow="Profile needed"
+      heading="Create a profile to start"
+      blurb="Lessons, quizzes and saved progress need a profile. It's free, takes a name and an email, and stays in this browser."
+    />
   );
 }

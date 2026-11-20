@@ -2,14 +2,14 @@ import { cn } from "@/lib/utils";
 
 type Tone = "emerald" | "navy" | "amber" | "blue" | "violet" | "rose";
 
-/** A quiet tag. Colour only shows as a small dot, and only where it means something (difficulty). */
-const dots: Record<Tone, string | null> = {
-  emerald: "bg-accent",
-  amber: "bg-[#c9a227]",
-  rose: "bg-[#e5603d]",
-  blue: null,
-  violet: null,
-  navy: null,
+/** The homepage chip: mono caps in an ink outline. Difficulty gets the homepage colours: mint, sun, coral pink. */
+const fills: Record<Tone, string> = {
+  emerald: "bg-mint",
+  amber: "bg-sun",
+  rose: "bg-blush",
+  blue: "bg-card",
+  violet: "bg-card",
+  navy: "bg-card",
 };
 
 export function Badge({
@@ -23,22 +23,21 @@ export function Badge({
   className?: string;
   mono?: boolean;
 }) {
-  const dot = dots[tone];
   return (
     <span
       className={cn(
-        "inline-flex h-6 items-center gap-1.5 rounded-md border border-line bg-raised/50 px-2 text-xs font-medium text-ink-2",
+        "inline-flex h-6 items-center gap-1 rounded-full border-2 border-ink px-2.5 font-mono text-[11px] font-medium uppercase tracking-[0.1em] text-ink",
+        fills[tone],
         mono && "font-mono",
         className
       )}
     >
-      {dot && <span className={cn("h-1.5 w-1.5 rounded-full", dot)} aria-hidden />}
       {children}
     </span>
   );
 }
 
-/** Difficulty gets a dot: green, marker, coral. Event types stay plain. */
+/** Difficulty: Beginner mint, Intermediate sun, Advanced coral pink. */
 export function toneFor(label: string): Tone {
   switch (label) {
     case "Beginner":

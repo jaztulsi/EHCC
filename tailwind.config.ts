@@ -1,8 +1,8 @@
 import type { Config } from "tailwindcss";
 
 /**
- * EHIC design system, Tailwind side. The values live in styles/tokens.css as CSS variables,
- * so light, dark and the Konami terminal all re-theme from one place.
+ * EHIC design system for the courses and games pages, Tailwind side. The values live in
+ * styles/tokens.css (the homepage's paper, ink and emerald) as CSS variables.
  *
  * Legacy names (navy, silver, muted, bark, emerald-*) are kept as aliases of the new roles
  * so the courses and games pages pick up the system without a rename.
@@ -23,6 +23,14 @@ const config: Config = {
         positive: v("positive"),
         negative: v("negative"),
         mat: { DEFAULT: v("mat"), 2: v("mat-2"), text: v("mat-text"), muted: v("mat-text-2"), accent: v("mat-accent") },
+        // homepage inks
+        paper: "#f4eedc",
+        card: "#fffdf5",
+        sun: "#ffd23f",
+        coral: "#ff5a3c",
+        mint: "#bff3dd",
+        blush: "#ffd2c6",
+        kraft: "#c89a5e",
 
         // legacy aliases
         canvas: { DEFAULT: v("bg"), warm: v("bg"), cool: v("bg") },
@@ -50,12 +58,15 @@ const config: Config = {
         display: ["var(--font-display)", "var(--font-body)", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
-      letterSpacing: { display: "-0.03em", title: "-0.015em" },
-      borderRadius: { card: "14px", panel: "18px", hero: "18px" },
+      letterSpacing: { display: "-0.035em", title: "-0.02em" },
+      borderRadius: { card: "12px", panel: "16px", hero: "16px" },
       boxShadow: {
         glow: "var(--shadow-sm)",
         "glow-md": "var(--shadow-md)",
-        "glow-lg": "var(--shadow-md)",
+        "glow-lg": "var(--shadow-object)",
+        hard: "var(--shadow-sm)",
+        "hard-md": "var(--shadow-md)",
+        "hard-lg": "var(--shadow-object)",
         "glow-text": "none",
         rim: "none",
         "rim-dark": "none",

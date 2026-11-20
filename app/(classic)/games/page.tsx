@@ -12,22 +12,24 @@ export default function GamesPage() {
   return (
     <>
       <PageHero
-        eyebrow="games"
+        eyebrow="Games · built by the club"
         title={
           <>
-            Take a break. <span className="text-gradient">Learn while you play.</span>
+            Take a break.
+            <br />
+            Learn while you play
           </>
         }
-        subtitle="Four browser games built by the club, sharpen your typing, your number sense, your debugging eye, and your CS knowledge. Scores save locally."
+        subtitle="Four browser games for your typing, binary, debugging and computer science trivia. Scores save in this browser"
       />
 
       <section className="relative section">
         <div className="container-x relative">
           <SectionHeader
             align="left"
-            eyebrow="arcade"
+            eyebrow="Arcade"
             title="Pick your game"
-            subtitle="Click any card to launch it. Green terminal aesthetic included, no quarters required."
+            subtitle="Pick a game to start. Keyboard players can answer with A to D and move on with Enter"
           />
           <div className="mt-10">
             <GamesHub />

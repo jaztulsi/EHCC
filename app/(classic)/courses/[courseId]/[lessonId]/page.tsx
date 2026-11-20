@@ -30,7 +30,7 @@ function Inline({ text }: { text: string }) {
         i % 2 === 1 ? (
           <code
             key={i}
-            className="rounded bg-navy-700 px-1.5 py-0.5 font-mono text-[0.85em] text-emerald-bright"
+            className="rounded bg-raised px-1.5 py-0.5 font-mono text-[0.88em] text-ink"
           >
             {part}
           </code>
@@ -55,31 +55,31 @@ export default function LessonPage({
     <article className="section">
       <div className="container-x max-w-3xl">
         {/* Breadcrumb */}
-        <div className="flex flex-wrap items-center gap-2 font-mono text-xs text-muted">
-          <Link href="/courses" className="transition-colors hover:text-emerald-bright">
+        <div className="eyebrow flex flex-wrap items-center gap-2">
+          <Link href="/courses" className="transition-colors hover:text-accent">
             Courses
           </Link>
           <span>/</span>
-          <Link href={`/courses/${course.id}`} className="transition-colors hover:text-emerald-bright">
+          <Link href={`/courses/${course.id}`} className="transition-colors hover:text-accent">
             {course.title}
           </Link>
         </div>
 
-        <h1 className="mt-4 text-3xl font-bold text-silver md:text-4xl">{lesson.title}</h1>
+        <h1 className="mt-4 text-4xl leading-[0.95] text-ink md:text-6xl">{lesson.title}</h1>
         <div className="mt-3 flex items-center gap-3">
           <Badge tone="navy" mono>
             <Clock size={12} className="mr-1 inline" /> {lesson.minutes} min
           </Badge>
-          <p className="text-muted">{lesson.summary}</p>
+          <p className="text-ink-2">{lesson.summary}</p>
         </div>
 
         <RequireProfile>
         {/* Reading */}
         <div className="mt-8">
-          <div className="mb-3 flex items-center gap-2 font-mono text-sm text-emerald">
-            <BookOpen size={15} /> Read
+          <div className="eyebrow mb-4 flex items-center gap-2 !text-ink">
+            <BookOpen size={16} /> Read
           </div>
-          <div className="space-y-4 leading-relaxed text-silver">
+          <div className="surface space-y-4 p-6 text-[17px] leading-[1.7] text-ink md:p-8">
             {lesson.reading.map((p, i) => (
               <p key={i}>
                 <Inline text={p} />
@@ -90,8 +90,8 @@ export default function LessonPage({
 
         {/* Videos */}
         <div className="mt-10">
-          <div className="mb-3 flex items-center gap-2 font-mono text-sm text-emerald">
-            <PlayCircle size={15} /> Watch
+          <div className="eyebrow mb-4 flex items-center gap-2 !text-ink">
+            <PlayCircle size={16} /> Watch
           </div>
           <div className="grid gap-3">
             {lesson.videos.map((vid, i) => (
@@ -102,14 +102,14 @@ export default function LessonPage({
                 rel="noopener noreferrer"
                 className="group flex items-center gap-4 surface p-4 card-lift"
               >
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-emerald/10 font-mono text-sm font-bold text-emerald-bright">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-ink bg-sun font-mono text-sm font-bold text-ink">
                   {i + 1}
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className="truncate font-semibold text-silver">{vid.title}</p>
-                  <p className="text-sm text-muted">{vid.channel}</p>
+                  <p className="truncate font-semibold text-ink">{vid.title}</p>
+                  <p className="text-sm text-ink-2">{vid.channel}</p>
                 </div>
-                <PlayCircle size={22} className="shrink-0 text-muted transition-colors group-hover:text-emerald-bright" />
+                <PlayCircle size={22} className="shrink-0 text-ink-2 transition-colors group-hover:text-accent" />
               </a>
             ))}
           </div>
@@ -122,7 +122,7 @@ export default function LessonPage({
         </RequireProfile>
 
         {/* Prev / next */}
-        <div className="mt-10 flex items-center justify-between gap-4 border-t border-line pt-8">
+        <div className="mt-12 flex items-center justify-between gap-4 border-t-2 border-ink/15 pt-8">
           {prev ? (
             <Button href={`/courses/${course.id}/${prev.id}`} variant="ghost" size="sm">
               <ArrowLeft size={16} /> {prev.title}

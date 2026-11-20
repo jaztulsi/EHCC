@@ -12,21 +12,21 @@ export function CourseLessons({ courseId, lessons }: { courseId: string; lessons
   return (
     <div>
       {/* Progress */}
-      <div className="rounded-2xl border border-emerald/20 bg-navy-800 p-6">
+      <div className="surface p-6">
         <div className="flex items-center justify-between">
-          <p className="eyebrow">course.progress</p>
+          <p className="eyebrow">Your progress</p>
           {p.complete && (
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald/15 px-3 py-1 text-xs font-semibold text-emerald-bright">
+            <span className="inline-flex items-center gap-1.5 rounded-full border-2 border-ink bg-mint px-3 py-1 font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-ink">
               <Award size={13} /> Certificate earned
             </span>
           )}
         </div>
-        <p className="mt-1 text-xl font-bold text-silver">
+        <p className="mt-1 text-xl font-bold text-ink">
           {loaded ? p.done : 0} of {p.total} lessons complete
         </p>
-        <div className="mt-3 h-2.5 w-full overflow-hidden rounded-full bg-navy-700">
+        <div className="mt-3 h-3 w-full overflow-hidden rounded-full border-2 border-ink bg-card">
           <div
-            className="h-full rounded-full bg-emerald transition-all duration-500"
+            className="h-full rounded-full bg-emerald transition-[width] duration-500"
             style={{ width: `${loaded ? p.pct : 0}%` }}
           />
         </div>
@@ -43,20 +43,20 @@ export function CourseLessons({ courseId, lessons }: { courseId: string; lessons
                 className="group flex items-center gap-4 surface p-4 card-lift"
               >
                 {done ? (
-                  <CheckCircle2 size={22} className="shrink-0 text-emerald" />
+                  <CheckCircle2 size={24} className="shrink-0 text-accent" />
                 ) : (
-                  <Circle size={22} className="shrink-0 text-muted/50" />
+                  <Circle size={22} className="shrink-0 text-ink-3" />
                 )}
                 <div className="flex-1">
-                  <p className="font-semibold text-silver">
-                    <span className="font-mono text-sm text-emerald">{i + 1}.</span> {l.title}
+                  <p className="font-semibold text-ink">
+                    <span className="font-mono text-sm text-ink-3">{String(i + 1).padStart(2, "0")}</span> {l.title}
                   </p>
-                  <p className="mt-0.5 text-sm text-muted">{l.summary}</p>
+                  <p className="mt-0.5 text-sm text-ink-2">{l.summary}</p>
                 </div>
-                <span className="hidden items-center gap-1 font-mono text-xs text-muted sm:inline-flex">
+                <span className="hidden items-center gap-1 font-mono text-xs text-ink-2 sm:inline-flex">
                   <Clock size={12} /> {l.minutes}m
                 </span>
-                <ArrowRight size={16} className="text-muted transition-transform group-hover:translate-x-1" />
+                <ArrowRight size={16} className="text-ink-2 transition-transform group-hover:translate-x-1" />
               </Link>
             </li>
           );

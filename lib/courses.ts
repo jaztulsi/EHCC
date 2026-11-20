@@ -43,13 +43,13 @@ export const COURSES: Course[] = [
     icon: "FileCode2",
     topic: "Python",
     difficulty: "Beginner",
-    tagline: "The on-ramp to everything else.",
+    tagline: "The on-ramp to everything else",
     description: "Variables, logic, loops, and functions in Python, the language behind our Data Science and AI branches.",
     lessons: [
       {
         id: "variables-types",
         title: "Variables & Types",
-        summary: "Name values and know what kind they are.",
+        summary: "Name values and know what kind they are",
         minutes: 12,
         reading: [
           "A variable is a name that points at a value; you assign with `=`. Python's core types are strings (text in quotes), ints and floats (numbers), and booleans (`True`/`False`). The type decides what you can do with a value.",
@@ -69,7 +69,7 @@ export const COURSES: Course[] = [
       {
         id: "logic-and-loops",
         title: "Logic & Loops",
-        summary: "Make code decide and repeat.",
+        summary: "Make code decide and repeat",
         minutes: 14,
         reading: [
           "`if` / `elif` / `else` run different blocks depending on a condition built from comparisons (`==`, `<`, `>=`) and `and` / `or` / `not`. Indentation defines the block, Python is strict about it.",
@@ -94,13 +94,13 @@ export const COURSES: Course[] = [
     icon: "Globe",
     topic: "Web Dev",
     difficulty: "Beginner",
-    tagline: "Build and style your first page.",
+    tagline: "Build and style your first page",
     description: "The structure and style of every website, the skills our Tech Master team uses to build sites like this one.",
     lessons: [
       {
         id: "html-structure",
         title: "HTML: Structure",
-        summary: "The skeleton of every page.",
+        summary: "The skeleton of every page",
         minutes: 12,
         reading: [
           "HTML describes structure and content with tags. `<h1>` is a heading, `<p>` a paragraph, `<a href>` a link, `<img>` an image. Most tags come in pairs: an opening `<p>` and a closing `</p>`.",
@@ -120,7 +120,7 @@ export const COURSES: Course[] = [
       {
         id: "css-style",
         title: "CSS: Style",
-        summary: "Control how it looks.",
+        summary: "Control how it looks",
         minutes: 13,
         reading: [
           "CSS sets colors, spacing, fonts, and layout. You write a selector (what to target) and a set of properties (how it should look): `h1 { color: #22c55e; }`.",
@@ -145,13 +145,13 @@ export const COURSES: Course[] = [
     icon: "Code2",
     topic: "Web Dev",
     difficulty: "Beginner",
-    tagline: "Make pages do things.",
+    tagline: "Make pages do things",
     description: "The language that runs in every browser, respond to clicks, change content, and fetch data.",
     lessons: [
       {
         id: "js-basics",
         title: "JavaScript Basics",
-        summary: "Variables, functions, and the DOM.",
+        summary: "Variables, functions, and the DOM",
         minutes: 14,
         reading: [
           "You already know the ideas from Python, variables, conditions, loops, functions. JavaScript's syntax differs (`let`/`const`, curly braces, `===`), but the thinking transfers directly.",
@@ -176,13 +176,13 @@ export const COURSES: Course[] = [
     icon: "GitBranch",
     topic: "Tools",
     difficulty: "Beginner",
-    tagline: "How teams ship together.",
+    tagline: "How teams ship together",
     description: "Version control, branches, and pull requests, the workflow every EHIC project runs on.",
     lessons: [
       {
         id: "commits-branches",
         title: "Commits & Branches",
-        summary: "Save checkpoints and work in parallel.",
+        summary: "Save checkpoints and work in parallel",
         minutes: 12,
         reading: [
           "A commit is a saved snapshot of your files with a message describing the change, a save point you can rewind to. The habit: small change, clear commit, repeat.",
@@ -207,13 +207,13 @@ export const COURSES: Course[] = [
     icon: "Terminal",
     topic: "Tools",
     difficulty: "Beginner",
-    tagline: "Talk to your computer directly.",
+    tagline: "Talk to your computer directly",
     description: "Navigate, move files, and run tools from the terminal, the developer's default workspace.",
     lessons: [
       {
         id: "terminal-basics",
         title: "Terminal Basics",
-        summary: "Move around and manage files.",
+        summary: "Move around and manage files",
         minutes: 10,
         reading: [
           "The terminal runs one command at a time. `pwd` shows where you are, `ls` lists files, `cd` changes directory, `mkdir` makes a folder. These four get you most of the way.",
@@ -238,13 +238,13 @@ export const COURSES: Course[] = [
     icon: "Sparkles",
     topic: "AI",
     difficulty: "Beginner",
-    tagline: "Ask well, get better results.",
+    tagline: "Ask well, get better results",
     description: "Get reliable, useful output from AI models, a core skill of the AI Principles / Programming branch.",
     lessons: [
       {
         id: "prompt-basics",
         title: "Prompting Basics",
-        summary: "Context, goal, format, examples.",
+        summary: "Context, goal, format, examples",
         minutes: 11,
         reading: [
           "A prompt is your instruction to the model. Vague prompts get vague answers. The fixes are simple: give context, state the goal clearly, show the format you want, and ask it to work step by step.",
@@ -269,13 +269,13 @@ export const COURSES: Course[] = [
     icon: "Bot",
     topic: "AI",
     difficulty: "Intermediate",
-    tagline: "Ship real things faster.",
+    tagline: "Ship real things faster",
     description: "Use AI as a force multiplier to prototype, debug, and build, while still owning and understanding the result.",
     lessons: [
       {
         id: "ai-as-tool",
         title: "AI as a Build Tool",
-        summary: "Scaffold, explain, and prototype fast.",
+        summary: "Scaffold, explain, and prototype fast",
         minutes: 12,
         reading: [
           "AI can scaffold a page, explain an error, draft a function, or turn an idea into a first prototype in minutes. Used well, it removes the blank-page problem.",
@@ -300,13 +300,13 @@ export const COURSES: Course[] = [
     icon: "Atom",
     topic: "Web Dev",
     difficulty: "Intermediate",
-    tagline: "Build interfaces from components.",
+    tagline: "Build interfaces from components",
     description: "Components, props, and state, the library behind this very website.",
     lessons: [
       {
         id: "components-props",
         title: "Components & Props",
-        summary: "Reusable pieces that take inputs.",
+        summary: "Reusable pieces that take inputs",
         minutes: 13,
         reading: [
           "A React component is a function that returns UI. You compose small components into bigger ones, a page is just components inside components.",
@@ -331,13 +331,13 @@ export const COURSES: Course[] = [
     icon: "BarChart3",
     topic: "Data Science",
     difficulty: "Intermediate",
-    tagline: "Turn raw data into insight.",
+    tagline: "Turn raw data into insight",
     description: "pandas, cleaning, and visualization, the Data Science branch's core toolkit.",
     lessons: [
       {
         id: "pandas-intro",
         title: "Working with pandas",
-        summary: "Load, clean, and explore data.",
+        summary: "Load, clean, and explore data",
         minutes: 14,
         reading: [
           "pandas is Python's data workhorse. A DataFrame is a table you can filter, group, and summarize in a line or two. Most data work is loading a file into a DataFrame and asking questions of it.",
@@ -362,13 +362,13 @@ export const COURSES: Course[] = [
     icon: "BrainCircuit",
     topic: "AI",
     difficulty: "Intermediate",
-    tagline: "Programs that learn from data.",
+    tagline: "Programs that learn from data",
     description: "The intuition and the code behind models that find patterns and make predictions.",
     lessons: [
       {
         id: "ml-concepts",
         title: "Core ML Concepts",
-        summary: "Training, features, and overfitting.",
+        summary: "Training, features, and overfitting",
         minutes: 13,
         reading: [
           "Instead of hand-coding every rule, an ML model learns patterns from example data (features and labels) and uses them to predict on new, unseen inputs.",
@@ -393,13 +393,13 @@ export const COURSES: Course[] = [
     icon: "Network",
     topic: "AI",
     difficulty: "Advanced",
-    tagline: "The math that learns.",
+    tagline: "The math that learns",
     description: "How layers of simple units combine to recognize patterns, built from intuition up.",
     lessons: [
       {
         id: "how-nets-learn",
         title: "How Networks Learn",
-        summary: "Neurons, weights, and backprop.",
+        summary: "Neurons, weights, and backprop",
         minutes: 15,
         reading: [
           "A neural network is layers of connected 'neurons'. Each connection has a weight, and training nudges those weights so the network's output gets closer to the right answer.",
@@ -424,13 +424,13 @@ export const COURSES: Course[] = [
     icon: "Database",
     topic: "Data Science",
     difficulty: "Intermediate",
-    tagline: "Store and query structured data.",
+    tagline: "Store and query structured data",
     description: "Tables, queries, and relationships, where real apps keep their data.",
     lessons: [
       {
         id: "sql-basics",
         title: "SQL Basics",
-        summary: "SELECT, WHERE, and JOIN.",
+        summary: "SELECT, WHERE, and JOIN",
         minutes: 13,
         reading: [
           "A relational database stores data in tables of rows and columns. SQL is the language you use to ask questions: `SELECT name FROM members WHERE grade = 10`.",
@@ -455,13 +455,13 @@ export const COURSES: Course[] = [
     icon: "Plug",
     topic: "Web Dev",
     difficulty: "Intermediate",
-    tagline: "How programs talk to each other.",
+    tagline: "How programs talk to each other",
     description: "Requests, responses, and JSON, the glue between every modern app and service.",
     lessons: [
       {
         id: "http-json",
         title: "Requests, Responses & JSON",
-        summary: "The language of the web.",
+        summary: "The language of the web",
         minutes: 12,
         reading: [
           "An API lets one program request data or actions from another using set rules. Over HTTP you send a request (a method like GET or POST and a URL) and get back a response with a status code and data.",
@@ -486,13 +486,13 @@ export const COURSES: Course[] = [
     icon: "ShieldCheck",
     topic: "Cybersecurity",
     difficulty: "Intermediate",
-    tagline: "Think like an attacker, defend like a pro.",
+    tagline: "Think like an attacker, defend like a pro",
     description: "Threat models, common web exploits, and safe habits, hands-on, CTF-style thinking.",
     lessons: [
       {
         id: "security-foundations",
         title: "Security Foundations",
-        summary: "Threats, passwords, and encryption.",
+        summary: "Threats, passwords, and encryption",
         minutes: 12,
         reading: [
           "Security starts with a threat model: who might attack, what they want, and what you're protecting. You can't defend everything, so you defend what matters against realistic attackers.",
@@ -517,13 +517,13 @@ export const COURSES: Course[] = [
     icon: "Binary",
     topic: "Programming",
     difficulty: "Intermediate",
-    tagline: "Write code that scales.",
+    tagline: "Write code that scales",
     description: "Core algorithms and how to reason about efficiency, essential for interviews and competitions.",
     lessons: [
       {
         id: "big-o",
         title: "Big-O & Efficiency",
-        summary: "How code grows with input.",
+        summary: "How code grows with input",
         minutes: 13,
         reading: [
           "An algorithm is a step-by-step procedure to solve a problem. Big-O notation describes how its time or memory grows as the input gets larger, ignoring constants, `O(n)` is linear, `O(n²)` is quadratic.",
@@ -548,13 +548,13 @@ export const COURSES: Course[] = [
     icon: "MessageSquare",
     topic: "Projects",
     difficulty: "Intermediate",
-    tagline: "Automate your server.",
+    tagline: "Automate your server",
     description: "A hands-on project course: build a bot that responds to commands and events.",
     lessons: [
       {
         id: "first-bot",
         title: "Your First Bot",
-        summary: "Commands, events, and tokens.",
+        summary: "Commands, events, and tokens",
         minutes: 14,
         reading: [
           "A Discord bot is a program that logs into Discord and reacts to events, messages, joins, reactions. You register it in the Discord developer portal and drive it with a library like discord.py or discord.js.",
@@ -579,13 +579,13 @@ export const COURSES: Course[] = [
     icon: "Gamepad2",
     topic: "Projects",
     difficulty: "Beginner",
-    tagline: "Loops, input, and drawing.",
+    tagline: "Loops, input, and drawing",
     description: "The core loop behind every game, update, draw, repeat, and how to handle player input.",
     lessons: [
       {
         id: "game-loop",
         title: "The Game Loop",
-        summary: "Update, render, repeat.",
+        summary: "Update, render, repeat",
         minutes: 11,
         reading: [
           "Every game runs a loop: read input, update the game state (positions, score), draw the frame, and repeat many times per second. Smooth movement is just small updates done fast.",
@@ -610,13 +610,13 @@ export const COURSES: Course[] = [
     icon: "Rocket",
     topic: "Tools",
     difficulty: "Beginner",
-    tagline: "Put it on the internet.",
+    tagline: "Put it on the internet",
     description: "Take a project from your laptop to a public URL people can actually use, like this site on Vercel.",
     lessons: [
       {
         id: "deploy-basics",
         title: "Deploying a Project",
-        summary: "From localhost to a live URL.",
+        summary: "From localhost to a live URL",
         minutes: 10,
         reading: [
           "A project isn't real until someone else can open it. Free hosts like Vercel, Netlify, and GitHub Pages take your code and give you a public URL, often by connecting your GitHub repo so every push auto-deploys.",
@@ -641,13 +641,13 @@ export const COURSES: Course[] = [
     icon: "Trophy",
     topic: "Projects",
     difficulty: "Beginner",
-    tagline: "Build and pitch in 24 hours.",
+    tagline: "Build and pitch in 24 hours",
     description: "How to scope, build, and present a project under time pressure, the Hackathon branch's edge.",
     lessons: [
       {
         id: "hackathon-strategy",
         title: "Scope, Build, Pitch",
-        summary: "Win with focus, not features.",
+        summary: "Win with focus, not features",
         minutes: 11,
         reading: [
           "Hackathons are won by focus. Pick one clear problem, build the smallest version that shows the idea, and leave time to polish the demo. Judges remember a working story, not a feature list.",
@@ -672,13 +672,13 @@ export const COURSES: Course[] = [
     icon: "Target",
     topic: "Programming",
     difficulty: "Advanced",
-    tagline: "Solve problems under pressure.",
+    tagline: "Solve problems under pressure",
     description: "Patterns, data structures, and communication for technical interviews and competitions.",
     lessons: [
       {
         id: "interview-patterns",
         title: "Patterns & Communication",
-        summary: "Think out loud, use the right structure.",
+        summary: "Think out loud, use the right structure",
         minutes: 13,
         reading: [
           "Most interview problems are variations on a few patterns, two pointers, hash maps for lookups, sliding windows, recursion. Recognizing the pattern is half the battle; practice builds that recognition.",

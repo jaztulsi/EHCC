@@ -1,65 +1,107 @@
 "use client";
 
-import { useState } from "react";
-import { ArrowRight, GraduationCap } from "lucide-react";
+import { useEffect, useId, useState } from "react";
+import { ArrowRight, Check, Lock } from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import { play } from "@/lib/sound";
+import { cn } from "@/lib/utils";
 import { useProfile } from "./useProfile";
 
-/** Reusable local-profile sign-up form (name + email; no password, no backend). */
+/** Local profile sign-up: a name and an email, no password, no backend. */
 export function SignUpCard({
-  heading = "Create your student profile",
-  blurb = "Sign up to unlock the courses, track progress, resume lessons, and earn certificates. It's free, your profile is saved to this browser.",
+  eyebrow = "Free profile",
+  heading = "Create your profile",
+  blurb = "A profile unlocks the lessons and quizzes, remembers where you stopped and collects your certificates. It takes a name and an email.",
+  className,
 }: {
+  eyebrow?: string;
   heading?: string;
   blurb?: string;
+  className?: string;
 }) {
   const { signIn } = useProfile();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [created, setCreated] = useState(false);
+  const id = useId();
   const valid = name.trim().length > 1 && /.+@.+\..+/.test(email);
 
+  // Each useProfile() keeps its own copy of the profile, so the nav and the page around this card
+  // only see the new profile after a reload. The save runs in an effect before this one.
+  useEffect(() => {
+    if (!created) return;
+    const t = window.setTimeout(() => window.location.reload(), 450);
+    return () => window.clearTimeout(t);
+  }, [created]);
+
   return (
-    <div className="rounded-2xl border border-emerald/20 bg-navy-800 p-6 md:p-8">
-      <div className="flex items-center gap-2">
-        <GraduationCap className="text-emerald-bright" size={22} />
-        <h2 className="text-2xl font-bold text-silver">{heading}</h2>
+    <div
+      className={cn(
+        "grid gap-8 surface p-6 shadow-[var(--shadow-sm)] md:grid-cols-2 md:gap-12 md:p-10",
+        className
+      )}
+    >
+      <div>
+        <p className="eyebrow">{eyebrow}</p>
+        <h2 className="mt-4 text-[28px] font-medium leading-[1.15] tracking-title text-ink">{heading}</h2>
+        <p className="mt-3 max-w-md text-base leading-7 text-ink-2">{blurb}</p>
       </div>
-      <p className="mt-2 max-w-lg text-muted">{blurb}</p>
+
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          if (valid) signIn(name, email);
+          if (!valid || created) return;
+          signIn(name, email);
+          play("success");
+          setCreated(true);
         }}
-        className="mt-6 grid gap-4 sm:grid-cols-2"
+        className="grid gap-4"
       >
-        <input
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Your name"
-          className={inputCls}
-          required
-        />
-        <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          type="email"
-          placeholder="you@school.edu"
-          className={inputCls}
-          required
-        />
-        <button
-          type="submit"
-          disabled={!valid}
-          className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald px-6 py-3 font-semibold text-white transition-colors hover:bg-emerald-bright disabled:opacity-50 sm:col-span-2"
-        >
-          Start learning <ArrowRight size={17} />
-        </button>
+        <div className="grid gap-2">
+          <label htmlFor={`${id}-name`} className="text-sm font-medium text-ink-2">
+            Name
+          </label>
+          <input
+            id={`${id}-name`}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            autoComplete="name"
+            placeholder="Maya Chen"
+            className="input"
+            required
+          />
+        </div>
+        <div className="grid gap-2">
+          <label htmlFor={`${id}-email`} className="text-sm font-medium text-ink-2">
+            Email
+          </label>
+          <input
+            id={`${id}-email`}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+            autoComplete="email"
+            placeholder="you@school.edu"
+            className="input"
+            required
+          />
+        </div>
+        <Button type="submit" disabled={!valid || created} data-sfx="none" className="mt-2 w-full">
+          {created ? (
+            <>
+              <Check strokeWidth={1.5} aria-hidden /> Profile created
+            </>
+          ) : (
+            <>
+              Create profile <ArrowRight strokeWidth={1.5} aria-hidden />
+            </>
+          )}
+        </Button>
+        <p className="flex items-center gap-2 text-[13px] leading-5 text-ink-3">
+          <Lock size={16} strokeWidth={1.5} className="shrink-0" aria-hidden />
+          Saved in this browser only. No password, nothing sent anywhere.
+        </p>
       </form>
-      <p className="mt-3 font-mono text-xs text-muted">
-        "profile + progress are stored in your browser only"
-      </p>
     </div>
   );
 }
-
-const inputCls =
-  "rounded-lg border border-line bg-navy-950 px-4 py-2.5 text-sm text-silver outline-none transition-colors placeholder:text-muted/60 focus:border-emerald/50";

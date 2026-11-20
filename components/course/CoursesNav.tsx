@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { GraduationCap, LayoutDashboard, BookOpen, Home, Gamepad2 } from "lucide-react";
+import { BookOpen, Gamepad2, Home, LayoutDashboard } from "lucide-react";
+import { LogoMark } from "@/components/ui/Logo";
 import { cn } from "@/lib/utils";
 import { useProfile } from "./useProfile";
 
@@ -20,76 +21,89 @@ export function CoursesNav({ standalone = true }: { standalone?: boolean }) {
   const isActive = (href: string, exact?: boolean) =>
     exact ? pathname === href : pathname === href || pathname.startsWith(href + "/");
 
+  const initials = profile
+    ? profile.name
+        .trim()
+        .split(/\s+/)
+        .slice(0, 2)
+        .map((w) => w.charAt(0).toUpperCase())
+        .join("")
+    : "";
+
   return (
-    <header
-      className={cn(
-        "z-40 border-b border-line bg-white",
-        standalone ? "sticky top-0" : "relative"
-      )}
-    >
-      <nav className="mx-auto flex h-16 w-full max-w-6xl items-center gap-2 px-4 sm:px-6 lg:px-8">
-        <Link href="/courses" className="mr-2 flex items-center gap-2">
-          <span className="inline-flex rounded-lg bg-emerald/15 p-1.5 text-emerald-bright">
-            <GraduationCap size={18} />
-          </span>
-          <span className="font-bold text-silver">
-            EHIC <span className="text-emerald-bright">Academy</span>
-          </span>
+    <header className={cn("z-40 border-b border-line bg-bg", standalone ? "sticky top-0" : "relative")}>
+      <nav
+        aria-label="Courses"
+        className="mx-auto flex h-14 w-full max-w-[calc(var(--max)+var(--gutter)*2)] items-center gap-6 px-[var(--gutter)]"
+      >
+        <Link href="/courses" className="flex shrink-0 items-center gap-2 rounded-md text-[15px] font-medium text-ink">
+          {standalone && <LogoMark size={24} />}
+          EHIC Courses
         </Link>
 
-        <div className="ml-2 hidden items-center gap-1 sm:flex">
-          {TABS.map((t) => (
-            <Link
-              key={t.href}
-              href={t.href}
-              className={cn(
-                "inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm transition-colors",
-                isActive(t.href, t.exact)
-                  ? "bg-emerald/10 text-emerald-bright"
-                  : "text-muted hover:text-silver"
-              )}
-            >
-              <t.icon size={15} /> {t.label}
-            </Link>
-          ))}
+        <div className="hidden items-center gap-1 sm:flex">
+          {TABS.map((t) => {
+            const active = isActive(t.href, t.exact);
+            return (
+              <Link
+                key={t.href}
+                href={t.href}
+                aria-current={active ? "page" : undefined}
+                className={cn(
+                  "inline-flex h-8 items-center gap-2 rounded-[10px] px-3 text-sm font-medium transition-colors",
+                  active ? "bg-raised text-ink" : "text-ink-2 hover:bg-raised/60 hover:text-ink"
+                )}
+              >
+                <t.icon size={16} strokeWidth={1.5} className={active ? "text-ink-2" : "text-ink-3"} aria-hidden />
+                {t.label}
+              </Link>
+            );
+          })}
         </div>
 
-        <div className="ml-auto">
-          {loaded && profile ? (
+        <div className="ml-auto flex items-center">
+          {!loaded ? (
+            <span className="h-8 w-8" aria-hidden />
+          ) : profile ? (
             <Link
               href="/courses/dashboard"
-              className="inline-flex items-center gap-2 rounded-full border border-emerald/30 bg-emerald/10 px-3 py-1.5 text-sm font-medium text-emerald-bright transition-colors hover:border-emerald/50"
+              className="inline-flex h-8 items-center gap-2 rounded-[10px] pl-1 pr-3 text-sm font-medium text-ink-2 transition-colors hover:bg-raised hover:text-ink"
             >
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald text-xs font-bold text-white">
-                {profile.name.trim().charAt(0).toUpperCase()}
+              <span
+                className="flex h-6 w-6 items-center justify-center rounded-full bg-raised font-mono text-[11px] font-medium text-ink-2 ring-1 ring-ink/10"
+                aria-hidden
+              >
+                {initials}
               </span>
               <span className="hidden sm:inline">{profile.name.split(" ")[0]}</span>
+              <span className="sr-only sm:hidden">Your dashboard</span>
             </Link>
           ) : (
-            <Link
-              href="/courses"
-              className="inline-flex items-center gap-1.5 rounded-lg bg-emerald px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-bright"
-            >
-              Sign up free
+            <Link href="/courses#signup" className="btn btn-primary btn-sm">
+              Create profile
             </Link>
           )}
         </div>
       </nav>
 
-      {/* Mobile tabs */}
-      <div className="flex items-center gap-1 border-t border-line px-4 py-2 sm:hidden">
-        {TABS.map((t) => (
-          <Link
-            key={t.href}
-            href={t.href}
-            className={cn(
-              "inline-flex flex-1 items-center justify-center gap-1.5 rounded-md px-2 py-1.5 text-xs transition-colors",
-              isActive(t.href, t.exact) ? "bg-emerald/10 text-emerald-bright" : "text-muted"
-            )}
-          >
-            <t.icon size={14} /> {t.label}
-          </Link>
-        ))}
+      {/* Small screens: the tabs get their own row */}
+      <div className="grid grid-cols-4 gap-1 border-t border-line px-[var(--gutter)] py-2 sm:hidden">
+        {TABS.map((t) => {
+          const active = isActive(t.href, t.exact);
+          return (
+            <Link
+              key={t.href}
+              href={t.href}
+              aria-current={active ? "page" : undefined}
+              className={cn(
+                "inline-flex h-8 items-center justify-center rounded-[10px] text-[13px] font-medium transition-colors",
+                active ? "bg-raised text-ink" : "text-ink-2 hover:text-ink"
+              )}
+            >
+              {t.label}
+            </Link>
+          );
+        })}
       </div>
     </header>
   );

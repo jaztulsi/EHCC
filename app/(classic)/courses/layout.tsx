@@ -7,7 +7,7 @@ export default function CoursesLayout({ children }: { children: React.ReactNode 
   const standalone = /^(ehic|hic|ehcc)-courses/.test(host);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pt-5">
       <CoursesNav standalone={standalone} />
       {children}
     </div>

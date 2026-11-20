@@ -23,7 +23,7 @@ export function SiteFooter() {
       <div className="site-foot-in">
         <div className="foot-brand">
           <a href="/" className="brand brand-lg" aria-label="EHIC home">
-            <Image src="/logo-mark.png" alt="" width={40} height={40} />
+            <Image src="/logo-mark.png" alt="" width={44} height={44} />
             <span>EHIC</span>
           </a>
           <p className="foot-tag">{CLUB.tagline}</p>

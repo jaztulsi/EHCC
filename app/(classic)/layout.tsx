@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
-import { bootScript, fontVars } from "@/app/fonts";
+import { fontVars } from "@/app/fonts";
 import { SiteNav } from "@/components/site/SiteNav";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { Sfx } from "@/components/site/Toggles";
@@ -35,10 +35,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f6f3ec" },
-    { media: "(prefers-color-scheme: dark)", color: "#12110f" },
-  ],
+  themeColor: "#f4eedc",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -47,11 +44,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const coursesOnly = /^(ehic|hic|ehcc)-courses/.test(host);
 
   return (
-    <html lang="en" className={fontVars} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: bootScript }} />
-      </head>
-      <body className="flex min-h-screen flex-col">
+    <html lang="en" className={fontVars}>
+      <body className="app flex min-h-screen flex-col">
         {!coursesOnly && <SiteNav />}
         <PageTransition>
           <main className="flex-1">{children}</main>

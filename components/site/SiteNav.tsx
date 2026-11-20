@@ -1,11 +1,11 @@
 "use client";
-// One nav for every page. Under it runs the ruler: it measures how far down the page you are,
-// and the club's gem walks along it.
+// The nav on the courses and games pages, drawn like the homepage's: a paper bar,
+// and the club's gem walking along its bottom edge as you scroll.
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
-import { SoundToggle, ThemeToggle } from "./Toggles";
+import { SoundToggle } from "./Toggles";
 
 const LINKS = [
   ["About", "/#about"],
@@ -42,7 +42,7 @@ export function SiteNav() {
     const step = () => {
       const max = document.documentElement.scrollHeight - innerHeight;
       const p = max > 0 ? Math.min(1, scrollY / max) : 0;
-      const x = Math.round((p * (el.clientWidth - 14)) / 6) * 6; // 6px strides, so the legs swap on whole steps
+      const x = Math.round((p * (el.clientWidth - 22)) / 6) * 6; // 6px strides, so the legs swap on whole steps
       el.style.setProperty("--p", String(p));
       el.style.setProperty("--x", `${x}px`);
       walker.dataset.step = String((x / 6) % 2);
@@ -73,7 +73,7 @@ export function SiteNav() {
     <header className="site-nav">
       <div className="site-nav-row">
         <a href="/" className="brand" aria-label="EHIC home">
-          <Image src="/logo-mark.png" alt="" width={28} height={28} priority />
+          <Image src="/logo-mark.png" alt="" width={34} height={34} priority />
           <span>EHIC</span>
         </a>
         <nav className="site-links" aria-label="Main">
@@ -85,13 +85,12 @@ export function SiteNav() {
         </nav>
         <div className="site-tools">
           <SoundToggle />
-          <ThemeToggle />
-          <a className="btn btn-primary btn-sm" href="/#join">
+          <a className="btn btn-primary" href="/#join">
             Join
           </a>
           <button
             type="button"
-            className="tool site-menu"
+            className="site-menu"
             aria-expanded={open}
             aria-controls="site-drop"
             onClick={() => setOpen((o) => !o)}
@@ -105,7 +104,7 @@ export function SiteNav() {
       <div className="nav-ruler" ref={ruler} aria-hidden>
         <div className="nav-ruler-fill" />
         <div className="walker">
-          <svg viewBox="0 0 26 30" width="14" height="16">
+          <svg viewBox="0 0 26 30" width="22" height="26">
             <path d="M9 9L7 2M17 9l2-7" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
             <path d="M6 7h14l5 6-12 11L1 13z" fill="var(--emerald)" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
             <circle cx="10" cy="13" r="1.7" fill="currentColor" />

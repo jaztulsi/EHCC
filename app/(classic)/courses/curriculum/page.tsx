@@ -3,7 +3,7 @@ import { Catalog } from "@/components/course/Catalog";
 
 export const metadata: Metadata = {
   title: "Curriculum",
-  description: "Browse all 20 EHIC Academy courses across Python, the web, data, AI, security, and more.",
+  description: "Browse all 20 EHIC courses across Python, the web, data, AI, security, and more.",
 };
 
 export default function CurriculumPage() {
@@ -11,11 +11,10 @@ export default function CurriculumPage() {
     <section className="px-4 py-10 sm:px-6 md:py-14 lg:px-8">
       <div className="mx-auto w-full max-w-6xl">
         <div className="mb-8">
-          <p className="eyebrow">curriculum</p>
-          <h1 className="mt-1 text-3xl font-bold text-silver md:text-4xl">Every course</h1>
-          <p className="mt-2 max-w-xl text-muted">
-            Twenty tracks, from first line of code to interview prep. Filter by topic or search, then
-            sign up to start.
+          <p className="eyebrow">Curriculum</p>
+          <h1 className="page-title !text-[clamp(40px,6vw,72px)]">Every course</h1>
+          <p className="page-lede">
+            Twenty tracks, from a first line of code to interview prep. Filter by topic or search, then sign up to start
           </p>
         </div>
         <Catalog />

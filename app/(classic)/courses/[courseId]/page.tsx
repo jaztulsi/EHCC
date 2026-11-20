@@ -29,33 +29,33 @@ export default function CoursePage({ params }: { params: { courseId: string } })
       <div className="container-x max-w-3xl">
         <Link
           href="/courses"
-          className="inline-flex items-center gap-1.5 font-mono text-xs text-muted transition-colors hover:text-emerald-bright"
+          className="eyebrow inline-flex items-center gap-1.5 transition-colors hover:text-ink"
         >
           <ArrowLeft size={13} /> All courses
         </Link>
 
         <div className="mt-5 flex items-start gap-5">
-          <span className="inline-flex shrink-0 rounded-2xl bg-emerald/10 p-4 text-emerald-bright shadow-glow">
+          <span className="inline-flex shrink-0 rounded-2xl border-[2.5px] border-ink bg-mint p-4 text-ink shadow-hard">
             <Icon name={course.icon} className="h-10 w-10" />
           </span>
           <div>
             <div className="flex flex-wrap items-center gap-2">
               <Badge tone={toneFor(course.difficulty)} mono>{course.difficulty}</Badge>
               <Badge tone="navy" mono>{course.topic}</Badge>
-              <span className="font-mono text-xs text-muted">
+              <span className="font-mono text-xs text-ink-2">
                 {course.lessons.length} lessons · ~{totalMin} min
               </span>
             </div>
-            <h1 className="mt-3 text-3xl font-bold text-silver md:text-4xl">{course.title}</h1>
-            <p className="mt-1 text-emerald-bright">{course.tagline}</p>
+            <h1 className="mt-3 text-4xl leading-[0.95] text-ink md:text-6xl">{course.title}</h1>
+            <p className="mt-2 text-lg text-ink-2">{course.tagline}</p>
           </div>
         </div>
 
-        <p className="mt-6 leading-relaxed text-silver">{course.description}</p>
+        <p className="mt-6 leading-relaxed text-ink">{course.description}</p>
 
-        <div className="mt-6 flex items-center gap-2 surface px-4 py-3 text-sm text-muted">
-          <PlayCircle size={16} className="text-emerald-bright" />
-          Every lesson: reading, three curated videos, and a quiz you must pass to complete it.
+        <div className="mt-6 flex items-center gap-2 surface px-4 py-3 text-sm text-ink-2">
+          <PlayCircle size={18} className="shrink-0 text-ink" />
+          Every lesson is a reading, three videos and a quiz you pass to complete it
         </div>
 
         <div className="mt-10">

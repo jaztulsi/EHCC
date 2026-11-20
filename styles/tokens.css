@@ -1,180 +1,70 @@
 /* ============================================================
-   EHIC design tokens. Shared by every page (home, courses, games).
-   World: a workbench in G-225. Warm paper, a green cutting mat, ink.
-   Colors are stored as RGB channels so Tailwind can add alpha.
+   EHIC tokens for the courses and games pages.
+   Same paper, ink and emerald as the homepage (styles/stopmotion.css),
+   toned down for pages people read and play on: straight edges instead
+   of cut paper, no tilt, the same hard ink shadows.
+   Colors are RGB channels so Tailwind can add alpha.
    ============================================================ */
 
 :root {
   color-scheme: light;
 
-  /* workbench (light) */
-  --c-bg: 246 243 236;        /* #f6f3ec page, warm paper */
-  --c-surface: 253 251 247;   /* #fdfbf7 card */
-  --c-raised: 238 233 223;    /* #eee9df hover, input, active row */
-  --c-text: 29 27 23;         /* #1d1b17 primary */
-  --c-text-2: 90 83 72;       /* #5a5348 secondary */
-  --c-text-3: 117 109 97;     /* #756d61 muted, meta only */
-  --c-accent: 12 106 76;      /* #0c6a4c emerald, the school colour */
-  --c-accent-hover: 9 88 63;  /* #09583f */
-  --c-accent-edge: 6 66 47;   /* keycap edge under the primary button */
+  --c-bg: 244 238 220;        /* #f4eedc paper, the homepage desk */
+  --c-surface: 255 253 245;   /* #fffdf5 card stock */
+  --c-raised: 235 226 200;    /* #ebe2c8 second paper */
+  --c-text: 16 26 22;         /* #101a16 ink */
+  --c-text-2: 66 78 71;       /* #424e47 */
+  --c-text-3: 90 100 93;      /* #5a645d meta */
+  --c-accent: 11 107 79;      /* #0b6b4f emerald-700 */
+  --c-accent-hover: 8 57 43;  /* #08392b emerald-900 */
+  --c-accent-edge: 16 26 22;
   --c-on-accent: 255 255 255;
-  --c-positive: 22 128 74;
-  --c-negative: 190 52 38;
+  --c-positive: 11 107 79;
+  --c-negative: 176 42 20;    /* #b02a14, the homepage form error */
 
-  /* the cutting mat: one deep green band per page, and the footer */
-  --c-mat: 14 58 43;          /* #0e3a2b */
-  --c-mat-2: 10 44 33;        /* #0a2c21 */
-  --c-mat-text: 238 241 234;
-  --c-mat-text-2: 168 192 178;
-  --c-mat-accent: 127 211 168;
+  /* the dark emerald set from the homepage, and the credits black */
+  --c-mat: 6 42 32;           /* #062a20 */
+  --c-mat-2: 6 10 8;          /* #060a08 */
+  --c-mat-text: 244 238 220;
+  --c-mat-text-2: 191 243 221; /* mint */
+  --c-mat-accent: 255 210 63;  /* sun */
 
-  --line: rgb(var(--c-text) / 0.1);
-  --line-strong: rgb(var(--c-text) / 0.18);
-  --mat-line: rgb(var(--c-mat-text) / 0.1);
-  --shadow-sm: 0 1px 2px rgb(29 27 23 / 0.06);
-  --shadow-md: 0 1px 2px rgb(29 27 23 / 0.05), 0 8px 24px rgb(29 27 23 / 0.07);
-  --shadow-object: 0 2px 4px rgb(29 27 23 / 0.08), 0 18px 40px -12px rgb(29 27 23 / 0.28);
+  --line: rgb(var(--c-text) / 0.14);
+  --line-strong: rgb(var(--c-text) / 0.3);
+  --mat-line: rgb(var(--c-mat-text) / 0.12);
 
-  /* printed things keep their inks in both themes: illustrations, badges, the countdown */
-  --ink: #1d1b17;
-  --paper: #fbf8f1;
-  --marker: #f2c94c;
-  --coral: #e5603d;
+  /* homepage materials */
+  --ink: #101a16;
+  --paper: #f4eedc;
+  --card: #fffdf5;
+  --sun: #ffd23f;
+  --coral: #ff5a3c;
+  --mint: #bff3dd;
   --kraft: #c89a5e;
-  --mint: #cdeedc;
-  --emerald: #0c6a4c;
-  --sketch: #fbf8f1; /* graph paper under the drawings */
-  --nav-h: 71px;
-  --font-display: var(--font-body);
+  --emerald: #0b6b4f;
+  --emerald-500: #10b981;
+  --border: 2.5px solid var(--ink);
+  --shadow-sm: 3px 4px 0 rgb(6 20 14 / 0.26);
+  --shadow-md: 5px 7px 2px rgb(6 20 14 / 0.32);
+  --shadow-object: 9px 13px 3px rgb(6 20 14 / 0.3);
+  --dots: radial-gradient(rgb(16 26 22 / 0.05) 1px, transparent 1.5px);
+  --set-dots: radial-gradient(rgb(191 243 221 / 0.08) 1.1px, transparent 1.6px);
+  --torn: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 40V22l28-9 31 11 22-14 37 8 19-9 33 13 26-7 40 10 18-12 35 6 27-10 30 12 22-6 41 9 24-13 32 8 25-6 38 11 21-9 34 7 29-12 36 10 23-7 39 9 26-11 31 8 28-6 35 12 24-10 30 7 37-8 22 11 33-9 27 6 40-10 19 12 32-7 26 9 34-12 29 8 36-5V40z'/%3E%3C/svg%3E");
 
-  /* shape and motion */
+  /* shape and motion. Presses snap on two frames, like the homepage's stop-motion buttons */
   --r-sm: 6px;
   --r-md: 10px;
-  --r-lg: 14px;
-  --r-xl: 18px;
+  --r-lg: 12px;
+  --r-xl: 16px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --snap: 100ms steps(2, end);
   --t-fast: 150ms;
   --t-mid: 220ms;
   --t-slow: 420ms;
-  --gutter: clamp(16px, 4vw, 48px);
-  --max: 1200px;
+  --gutter: clamp(16px, 5vw, 72px);
+  --max: 1180px;
 }
-
-/* after hours (dark): follows the system unless someone picked light */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    color-scheme: dark;
-    --c-bg: 18 17 15;
-    --c-surface: 27 26 22;
-    --c-raised: 36 34 29;
-    --c-text: 238 232 220;
-    --c-text-2: 170 163 151;
-    --c-text-3: 139 132 120;
-    --c-accent: 69 184 134;
-    --c-accent-hover: 95 200 154;
-    --c-accent-edge: 30 120 84;
-    --c-on-accent: 8 20 15;
-    --c-positive: 76 195 138;
-    --c-negative: 229 72 77;
-    --c-mat: 11 40 32;
-    --c-mat-2: 8 30 24;
-    --sketch: #e7e1d4;
-    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
-    --shadow-md: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.3);
-    --shadow-object: 0 2px 4px rgb(0 0 0 / 0.3), 0 18px 40px -12px rgb(0 0 0 / 0.6);
-  }
-}
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --c-bg: 18 17 15;
-  --c-surface: 27 26 22;
-  --c-raised: 36 34 29;
-  --c-text: 238 232 220;
-  --c-text-2: 170 163 151;
-  --c-text-3: 139 132 120;
-  --c-accent: 69 184 134;
-  --c-accent-hover: 95 200 154;
-  --c-accent-edge: 30 120 84;
-  --c-on-accent: 8 20 15;
-  --c-positive: 76 195 138;
-  --c-negative: 229 72 77;
-  --c-mat: 11 40 32;
-  --c-mat-2: 8 30 24;
-  --sketch: #e7e1d4;
-  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
-  --shadow-md: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.3);
-  --shadow-object: 0 2px 4px rgb(0 0 0 / 0.3), 0 18px 40px -12px rgb(0 0 0 / 0.6);
-}
-
-/* Konami code: the terminal. An easter egg, so it gets to be loud. */
-:root.hacker {
-  color-scheme: dark;
-  --c-bg: 2 10 6;
-  --c-surface: 4 18 11;
-  --c-raised: 8 30 18;
-  --c-text: 120 255 170;
-  --c-text-2: 80 210 130;
-  --c-text-3: 60 170 105;
-  --c-accent: 120 255 170;
-  --c-accent-hover: 170 255 200;
-  --c-accent-edge: 40 140 80;
-  --c-on-accent: 2 10 6;
-  --c-mat: 0 0 0;
-  --c-mat-2: 0 0 0;
-  --c-mat-text: 120 255 170;
-  --c-mat-text-2: 80 210 130;
-  --c-mat-accent: 170 255 200;
-}
-:root.hacker body { font-family: var(--font-mono), ui-monospace, monospace; }
-:root.hacker img { filter: grayscale(1) sepia(1) hue-rotate(80deg) saturate(4) brightness(0.85); }
-
-/* ---------- shared pieces both layouts use ---------- */
-
-/* The signature: a ruler. Section labels sit on it, the nav measures scroll with it. */
-.rule {
-  display: flex;
-  align-items: flex-end;
-  gap: 12px;
-  height: 20px;
-  font-size: 13px;
-  line-height: 16px;
-  font-weight: 500;
-  color: rgb(var(--c-text-2));
-}
-.rule-no {
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 12px;
-  color: rgb(var(--c-text-3));
-  font-variant-numeric: tabular-nums;
-}
-.rule-ticks {
-  flex: 1;
-  height: 8px;
-  align-self: flex-end;
-  margin-bottom: 4px;
-  background:
-    linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat,
-    repeating-linear-gradient(90deg, currentColor 0 1px, transparent 1px 40px) 0 100% / 100% 8px no-repeat,
-    repeating-linear-gradient(90deg, currentColor 0 1px, transparent 1px 8px) 0 100% / 100% 4px no-repeat;
-  opacity: 0.32;
-  transform-origin: left;
-  max-width: 320px;
-}
-
-/* Theme / sound / icon buttons in the nav */
-.tool {
-  display: inline-grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: var(--r-md);
-  color: rgb(var(--c-text-2));
-  transition: background-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
-}
-.tool:hover { background: rgb(var(--c-raised)); color: rgb(var(--c-text)); }
-.tool:active { transform: scale(0.96); }
-.tool svg { width: 18px; height: 18px; }
 
 @media (prefers-reduced-motion: reduce) {
-  .rule-ticks { transform: none !important; }
+  :root { --snap: 1ms; }
 }
