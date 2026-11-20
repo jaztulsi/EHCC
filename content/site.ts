@@ -8,8 +8,8 @@ export const CLUB = {
   city: "Dublin, CA",
   tagline: "We build. We break. We ship.",
   founded: "2025",
-  instagram: "@ehcc",
-  instagramUrl: "https://www.instagram.com/ehcc/",
+  instagram: "@ehcc_26",
+  instagramUrl: "https://www.instagram.com/ehcc_26/",
   email: "ehs.hackingcoding.club@gmail.com",
   discordUrl: "", // add an invite link and the Discord button shows up
   github: "https://github.com/jaztulsi/EHCC",
