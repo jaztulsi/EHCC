@@ -2,6 +2,7 @@
 // The opening shot. One camera move (made in Wan, cut into public/intro by scripts/intro-frames.sh) is scrubbed by scroll:
 // the hero pins, the title sits over the wide shot of campus, then the camera pushes into G-225 and lands on a laptop,
 // where the pitch arrives. The frame shown eases toward the scroll position, so scrolling back up plays it in reverse.
+// Between the title and the landing, `beats` (one caption per shot) tell the story as the camera passes each scene.
 // No frames yet: the hero is just the title. Phones, short screens and reduced motion get the first frame as a still.
 import { useEffect, useRef, type ReactNode } from "react";
 
@@ -11,7 +12,9 @@ const clamp = (v: number) => Math.min(1, Math.max(0, v));
 const ease = (t: number) => t * t * (3 - 2 * t);
 const src = (k: number) => `/intro/f-${String(k + 1).padStart(3, "0")}.jpg`;
 
-export default function HeroFilm({ frames, land, children }: { frames: number; land: ReactNode; children: ReactNode }) {
+type Beat = { kicker: string; line: string };
+
+export default function HeroFilm({ frames, beats, land, children }: { frames: number; beats: Beat[]; land: ReactNode; children: ReactNode }) {
   const root = useRef<HTMLElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
 
@@ -24,6 +27,7 @@ export default function HeroFilm({ frames, land, children }: { frames: number; l
     const landEl = el.querySelector<HTMLElement>(".hero-land")!;
     const shade = el.querySelector<HTMLElement>(".film-shade")!;
     const dim = el.querySelector<HTMLElement>(".film-dim")!;
+    const beatEls = Array.from(el.querySelectorAll<HTMLElement>(".film-beat"));
     const mq = matchMedia(FILM);
     let teardown = () => {};
 
@@ -93,6 +97,13 @@ export default function HeroFilm({ frames, land, children }: { frames: number; l
         landEl.style.opacity = String(inn);
         landEl.style.transform = `translate3d(0,${(26 * (1 - inn)).toFixed(1)}px,0)`;
         landEl.inert = inn < 0.5;
+        // each caption is centred on its stretch of the move: full within ±0.07 of it, gone by ±0.14
+        const p = clamp(cur / MOVE);
+        beatEls.forEach((b, j) => {
+          const o = clamp((0.14 - Math.abs(p - (j + 1) / (beatEls.length + 1))) / 0.07);
+          b.style.opacity = String(o);
+          b.style.transform = `translate3d(0,${(18 * (1 - o)).toFixed(1)}px,0)`;
+        });
         if (cur !== target || shown === -1) raf = requestAnimationFrame(tick);
       };
       const kick = () => (raf ||= requestAnimationFrame(tick));
@@ -108,7 +119,7 @@ export default function HeroFilm({ frames, land, children }: { frames: number; l
         cancelAnimationFrame(raf);
         ro.disconnect();
         removeEventListener("scroll", kick);
-        for (const n of [open, landEl, shade, dim]) n.removeAttribute("style");
+        for (const n of [open, landEl, shade, dim, ...beatEls]) n.removeAttribute("style");
         open.inert = landEl.inert = false;
         teardown = () => {};
       };
@@ -122,7 +133,13 @@ export default function HeroFilm({ frames, land, children }: { frames: number; l
   }, [frames]);
 
   return (
-    <section ref={root} id="top" className="hero set" aria-labelledby="hero-h">
+    <section
+      ref={root}
+      id="top"
+      className="hero set"
+      aria-labelledby="hero-h"
+      style={{ "--film-h": `${Math.max(285, Math.round(100 + frames * 2.6))}svh` } as React.CSSProperties} // longer film, longer scroll
+    >
       <div className="hero-stick">
         {frames > 0 && (
           <>
@@ -135,6 +152,13 @@ export default function HeroFilm({ frames, land, children }: { frames: number; l
           </>
         )}
         <div className="hero-open">{children}</div>
+        {frames > 0 &&
+          beats.map((b) => (
+            <p key={b.line} className="film-beat">
+              <span className="mono">{b.kicker}</span>
+              {b.line}
+            </p>
+          ))}
         {frames > 0 && <div className="hero-land">{land}</div>}
       </div>
     </section>

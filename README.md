@@ -61,25 +61,26 @@ The look comes from stepped motion: no easing, every pose holds until the next f
 - The nav's pause button toggles `html.still`, which freezes all motion (accessibility).
 - `prefers-reduced-motion` is honored: the layout adds `rm` to `<html>`, the intro is skipped, and counters, confetti, and the cursor are off.
 
-## Opening film (Wan)
+## Opening film (MiniMax)
 
-The hero is an ALL IN-style scroll film (`components/stop/HeroFilm.tsx`): one camera move, cut into stills, scrubbed by scroll while the hero pins. The title sits over the wide shot; the pitch lands on the laptop. With no stills in `public/intro` the hero is just the title, so the site works before the clip exists. Phones, short screens and reduced motion get the first frame as a still.
+The hero is an ALL IN-style scroll film (`components/stop/HeroFilm.tsx`): four shots that chain into one continuous camera move, cut into stills and scrubbed by scroll while the hero pins. The title sits over the campus at dusk, two captions tell the story as the camera enters G-225 and finds the laptop, and the pitch lands in the dark right third of the last frame. With no stills in `public/intro` the hero is just the title, so the site works before the footage exists. Phones, short screens and reduced motion get the first frame as a still.
 
-1. Make the clip in Wan 3.0 (text-to-video, 16:9, at least 1280x720, 6 to 8 seconds, one continuous shot). Prompt:
+Make the whole thing with one command (needs ffmpeg, `brew install ffmpeg`, and a MiniMax API key):
 
-   > One continuous, unbroken camera move, no cuts. A handcrafted miniature tabletop diorama of a California high school at dusk, built from painted wood, felt and cardboard, shot like a stop-motion film set with soft tilt-shift depth of field. Start wide and high: a low two-story school building with a sign reading "G" on the wall, palm trees, warm lit windows, deep emerald-green sky fading to gold at the horizon. The camera glides slowly forward and down toward one glowing window, passes smoothly through it into a small classroom, room G-225: rows of desks, a whiteboard covered in scribbled code and diagrams, laptops with stickers, string lights, warm desk lamps. The camera keeps pushing in and tilts down onto a single open laptop on the front desk, its screen glowing bright emerald green and lighting the desk. End almost top-down on the laptop and desk, framed slightly left, with calm, dark, empty space on the right third of the frame. Smooth, steady, constant-speed dolly, cinematic, rich emerald and warm amber color palette, soft shadows, high detail, no people, no text except the "G" sign.
+```bash
+echo "MINIMAX_API_KEY=your-key" >> .env.local
+node scripts/film.mjs
+```
 
-   Negative prompt: `cuts, scene changes, camera shake, fast motion, people, faces, hands, readable text, watermark, logo, blurry, warping, morphing objects, flicker, cartoon outlines, low detail`
+It films four 8-second 2K shots with MiniMax H3, starting each on the last frame of the one before, saves them to `film/` (gitignored), then cuts them into `public/intro`. About $4 a full pass. Shots already in `film/` are kept: delete one (and those after it) to re-shoot it. The shot prompts live at the top of `scripts/film.mjs`.
 
-   Keep the right third of the last frame empty: the pitch sits there.
+Made the footage somewhere else? Cut it yourself, one clip or several in order:
 
-2. Cut it into stills (needs ffmpeg: `brew install ffmpeg`):
+```bash
+sh scripts/intro-frames.sh shot-1.mp4 shot-2.mp4 shot-3.mp4 shot-4.mp4
+```
 
-   ```bash
-   sh scripts/intro-frames.sh intro.mp4
-   ```
-
-   That writes `public/intro/f-001.jpg` … `f-072.jpg`. Reload: the film turns on. Delete `public/intro` to turn it off.
+Delete `public/intro` to turn the film off.
 
 ## Easter eggs
 

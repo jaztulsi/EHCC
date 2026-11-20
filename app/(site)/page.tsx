@@ -143,6 +143,10 @@ export default function Home() {
         {/* HERO */}
         <HeroFilm
           frames={frames}
+          beats={[
+            { kicker: "Room G-225 · After the last bell", line: "One room stays lit." },
+            { kicker: "Hackathon · Data Science · AI", line: "Students here ship real things." },
+          ]}
           land={
             <>
               <p className="mono" style={{ color: "var(--sun)" }}>

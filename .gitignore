@@ -38,3 +38,6 @@ mcp/.venv/
 __pycache__/
 *.pyc
 .vercel
+
+# MiniMax footage (scripts/film.mjs); the cut stills in public/intro are what ship
+film/
