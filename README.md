@@ -1,99 +1,102 @@
-# EHIC, Emerald Hacking & Innovation Club
+# EHIC website
 
-The official website for the **Emerald Hacking & Innovation Club** at Emerald High School, Dublin CA.
+Site for the Emerald Hacking & Innovation Club (EHIC), Emerald High School, Dublin, CA. The homepage is built in a stop-motion "Tabletop Studio" style: paper cutouts, clay, film grain, and everything moving at 12 frames per second.
 
-> Think. Build. Elevate.
+Stack: Next.js 14 (App Router), Tailwind, a React Three Fiber clay scene in the hero, and a GSAP opening sequence.
 
-Built with Next.js 14 (App Router), TypeScript, Tailwind CSS, and Framer Motion.
-
-## Getting started
+## Run it
 
 ```bash
 npm install
 npm run dev      # http://localhost:3000
+npm run build    # production build, run this before deploying
+npm start        # serve the build
 ```
 
-```bash
-npm run build    # production build
-npm run start    # serve the production build
-```
+Deploy with `vercel --prod`. The Vercel project is "ehcc" and the site is live at https://ehcc.vercel.app.
 
-If `npm install` fails with a TLS error, your network is filtering the npm
-registry. Install through a mirror instead:
+## Routes
 
-```bash
-npm install --registry=https://registry.npmmirror.com
-```
+Two root layouts, each with its own CSS:
 
-## Pages
+- `app/(site)/` is the homepage at `/` (`layout.tsx`, `page.tsx`). Styles: `styles/stopmotion.css`.
+- `app/(classic)/` is `/courses` and `/games`. Styles: `app/(classic)/globals.css`.
 
-| Route       | What's there |
-|-------------|--------------|
-| `/`         | Parallax hero, count-up stats, branch cards, scroll-linked approach rail, featured events, closing call to action |
-| `/about`    | Club story, branches, leadership, achievements timeline |
-| `/events`   | Filtered events, featured banner, guest-speaker spotlights |
-| `/projects` | Category-filtered project grid, pinned featured cards |
-| `/learn`    | Workshops, in-browser JS code playground, roadmaps, resource library, concept cards |
-| `/games`    | Four games: Code Breaker (typing), Binary Quiz, Debug the Code, CS Trivia |
-| `/courses`  | Course platform: 20 courses, lessons, quizzes, progress, certificates |
-| `/team`     | Leadership and full member roster |
-| `/join`     | Value props, membership form link, FAQ accordion |
+Old URLs redirect in `next.config.mjs` (`/about` goes to `/#about`, `/team` to `/#crew`, `/learn` to `/courses`, and so on). `app/sitemap.ts` lists `/`, `/courses`, `/games`.
 
-## Project structure
+## Editing content
 
-```
-app/                 Next.js routes, metadata, robots, sitemap
-components/
-  ui/                Logo, Button, Badge, Reveal, SectionHeader, StatCounter, Timeline, Icon, PageHero
-  layout/            Navbar, Footer, PageTransition
-  cards/             Event, Project, TeamMember, Workshop, Concept cards
-  home/              Hero, Approach
-  events/ projects/ learn/ join/ games/ course/   page-specific components
-lib/
-  data.ts            All static content (edit here to update the site)
-  courses.ts         Course and lesson content
-  types.ts           Shared TypeScript types
-  utils.ts           cn() helper
-  useLocalStorage.ts SSR-safe persisted state
-public/logo-mark.png Dragon mark, used in the navbar, footer, favicon, and hero
-public/logo.png      Full dragon lockup with wordmark
-```
+Every word on the homepage lives in `content/site.ts`. Edit it and the site updates.
 
-## Design system
+| Export | Controls |
+| --- | --- |
+| `CLUB` | Name, school, tagline, meeting days/time/room, Instagram, email, Discord link (blank hides the button), GitHub, membership form URL |
+| `MEETING` | Countdown target: `days` (JS numbering, 0 = Sunday, so `[3, 4]` is Wed/Thu), `hour`, `minute`, `lengthMin`. Uses the visitor's local browser time |
+| `MARQUEE` | Scrolling topic strip under the hero |
+| `STORY` | The four "About" comic panels |
+| `WHAT_WE_DO` | The six flip cards |
+| `REEL` | "Previously on EHIC" events list, newest first (`featured` gets the logo) |
+| `UP_NEXT` | "Coming up" list next to the countdown |
+| `PROJECTS` | Cards on the film strip (`href` makes a card a link) |
+| `STATS` | Trophy shelf numbers; they count up when scrolled into view |
+| `CREW` | Officers: `id`, name, role, sticker, bio |
+| `ADVISOR` | Faculty advisor name; adds a "Directed by" credit when set |
+| `FAQS` | FAQ accordion |
+| `INTERESTS` | Interest options in the badge form |
+| `FUN_FACTS` | Facts shown when someone clicks the lightbulb |
 
-Defined in `tailwind.config.ts` and `app/globals.css`.
+### Team photos
 
-**Surfaces.** The page is never flat white. A sage-tinted canvas sits at the
-base, `band-warm` and `band-cool` alternate behind sections, white `.surface`
-cards float above, and `band-dark` anchors the approach section and footer.
+Drop `public/team/<id>.jpg` (or `.jpeg`, `.png`, `.webp`) where `<id>` matches an `id` in `CREW`, for example `public/team/shivani.jpg`. It shows up automatically. Without a photo the card shows initials and "Photo soon".
 
-- Canvas: `canvas`, `canvas-warm`, `canvas-cool`
-- Cards: `.surface` (white, hairline, inner highlight)
-- Deep band: `bark`, `bark-soft`, `bark-line`, `bark-ink`, `bark-muted`
-- Legacy aliases `navy-950/900/800/700` remap onto the above, so older markup
-  re-themes from the config without edits.
+## Motion and frame rate
 
-**Colour.** The accent is sampled directly off the dragon mark: `emerald`
-(`#2b6a45`), `emerald-bright` (`#1a422d`), `emerald-circuit` (`#55a969`).
-`clay`, `lagoon`, and `iris` exist only to colour-code event types.
+The look comes from stepped motion: no easing, every pose holds until the next frame snaps in.
 
-**Type.** The sans stack leads with `-apple-system`, so Apple hardware renders
-SF Pro and everything else falls back to Inter. Display sizes use tight
-tracking (`tracking-display`), body text stays optically relaxed.
+- `FPS` (12) and `FPS_SECONDARY` (8, for background cast, counters, confetti) are in `lib/motion/index.ts`.
+- CSS reads the frame clock from `--fps` on `<html>`, set in `app/(site)/layout.tsx`. `--f` (in `styles/stopmotion.css`) is one frame. **Keep the `FPS` constant in the layout in sync with `lib/motion`**; the motion file is client-only, so the number is repeated.
+- Animations use `steps()` / `step-end`, never smooth easing. In GSAP use `HOLD` (`steps(1)`) and set poses on whole frames.
+- Entrances: any element with `data-enter` starts hidden and gets the class `.in` from `Director` when it scrolls into view (the hero's are revealed by `HeroIntro`). Use `--i` for stagger.
+- Off-screen sections get `.off`, which pauses their CSS animations.
+- The nav's pause button toggles `html.still`, which freezes all motion (accessibility).
+- `prefers-reduced-motion` is honored: the layout adds `rm` to `<html>`, the intro is skipped, and counters, confetti, and the cursor are off.
 
-**Materials.** `.material-chrome` is a translucent, saturation-boosted surface
-used by the navbar so content tints it while scrolling underneath.
+## Opening film (Wan)
 
-**Motion.** Transitions run on `ease-apple`
-(`cubic-bezier(0.32, 0.72, 0, 1)`). Scroll entrances are springs via
-`<Reveal>`, not duration curves. `.card-lift` handles hover elevation.
+The hero is an ALL IN-style scroll film (`components/stop/HeroFilm.tsx`): one camera move, cut into stills, scrubbed by scroll while the hero pins. The title sits over the wide shot; the pitch lands on the laptop. With no stills in `public/intro` the hero is just the title, so the site works before the clip exists. Phones, short screens and reduced motion get the first frame as a still.
 
-## Notes
+1. Make the clip in Wan 3.0 (text-to-video, 16:9, at least 1280x720, 6 to 8 seconds, one continuous shot). Prompt:
 
-- No backend. All content is static in `lib/data.ts` and `lib/courses.ts`.
-- The code playground runs user JavaScript in-browser via a sandboxed
-  `Function` with an injected `console`.
-- Course progress, profiles, and game scores persist in `localStorage`.
-- Every animation respects `prefers-reduced-motion`.
-- The courses subdomain check accepts the `ehic-`, `hic-`, and legacy `ehcc-`
-  prefixes so existing deployments keep working.
+   > One continuous, unbroken camera move, no cuts. A handcrafted miniature tabletop diorama of a California high school at dusk, built from painted wood, felt and cardboard, shot like a stop-motion film set with soft tilt-shift depth of field. Start wide and high: a low two-story school building with a sign reading "G" on the wall, palm trees, warm lit windows, deep emerald-green sky fading to gold at the horizon. The camera glides slowly forward and down toward one glowing window, passes smoothly through it into a small classroom, room G-225: rows of desks, a whiteboard covered in scribbled code and diagrams, laptops with stickers, string lights, warm desk lamps. The camera keeps pushing in and tilts down onto a single open laptop on the front desk, its screen glowing bright emerald green and lighting the desk. End almost top-down on the laptop and desk, framed slightly left, with calm, dark, empty space on the right third of the frame. Smooth, steady, constant-speed dolly, cinematic, rich emerald and warm amber color palette, soft shadows, high detail, no people, no text except the "G" sign.
+
+   Negative prompt: `cuts, scene changes, camera shake, fast motion, people, faces, hands, readable text, watermark, logo, blurry, warping, morphing objects, flicker, cartoon outlines, low detail`
+
+   Keep the right third of the last frame empty: the pitch sits there.
+
+2. Cut it into stills (needs ffmpeg: `brew install ffmpeg`):
+
+   ```bash
+   sh scripts/intro-frames.sh intro.mp4
+   ```
+
+   That writes `public/intro/f-001.jpg` … `f-072.jpg`. Reload: the film turns on. Delete `public/intro` to turn it off.
+
+## Easter eggs
+
+All handled in `components/stop/Director.tsx`.
+
+- Konami code (up up down down left right left right b a): toggles Hacker Mode (`html.hacker`).
+- Type "ship it" anywhere: a rocket flies across.
+
+## components/stop
+
+| File | What it does |
+| --- | --- |
+| `Art.tsx` | Hand-drawn SVG doodles, story art, trophies, the paper hand (server-safe) |
+| `BadgeForm.tsx` | Crew badge maker, then hands off to the Google membership form; nothing typed leaves the browser |
+| `Chrome.tsx` | Paper cursor, scroll film strip, nav progress walker, pause-motion toggle |
+| `Countdown.tsx` | Next-meeting countdown from `MEETING` |
+| `Director.tsx` | Entrances, off-screen pausing, counters, card flips, easter eggs, toasts |
+| `FilmReel.tsx` | Draggable project film strip with rubber-banding and a spring snap sampled at 12 fps |
+| `HeroIntro.tsx` | GSAP opening shot: lamp on, letters placed, sticker slap |
+| `HeroFilm.tsx` | The scroll-scrubbed opening film, and the hero around it |
