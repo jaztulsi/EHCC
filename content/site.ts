@@ -120,7 +120,7 @@ export const STATS = [
   { value: 2, prefix: "#", label: "at the world's largest HS hackathon", trophy: "cup" },
   { value: 3, label: "branches to build in", trophy: "star" },
   { value: 20, label: "free courses on our platform", trophy: "cup" },
-  { value: 6, label: "student officers", trophy: "medal" },
+  { value: 7, label: "student officers", trophy: "medal" },
   { value: 45, label: "minutes, every other Thursday", trophy: "star" },
   { value: 1, label: "hackathon hosted (so far)", trophy: "medal" },
 ] as const;
@@ -129,6 +129,7 @@ export const CREW = [
   { id: "shaurya", name: "Shaurya Nigam", role: "President", sticker: "Events", bio: "Runs the board, keeps every team on schedule, makes the final call." },
   { id: "jasraj", name: "Jasraj Tulsi", role: "Vice President", sticker: "Events", bio: "Co-leads meetings and handles outside partners. Co-runs monthly events." },
   { id: "joseph", name: "Joseph", role: "Secretary", sticker: "Hackathons", bio: "Minutes, attendance, the shared drive, and the club inbox." },
+  { id: "svanik", name: "Svanik Thakur", role: "Officer", sticker: "Hackathons", bio: "Helps run meetings and gets new members building on day one." },
   { id: "sanjana", name: "Sanjana", role: "Treasurer", sticker: "Finance", bio: "Budget, sponsors, school funding, and the all-important snack fund." },
   { id: "shivani", name: "Shivani Venkata", role: "Data Science Lead", sticker: "Tech", bio: "Runs the Data Science branch, workshops, and fair projects." },
   { id: "alex", name: "Alexander Xu", role: "AI / Programming Lead", sticker: "Tech", bio: "Runs the AI branch: practical AI, prompting, and the Python underneath." },
