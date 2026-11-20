@@ -1,14 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
+import { Bricolage_Grotesque, DM_Sans, JetBrains_Mono } from "next/font/google";
 import { CLUB } from "@/content/site";
-import { bootScript, fontVars } from "@/app/fonts";
-import { SiteNav } from "@/components/site/SiteNav";
-import { SiteFooter } from "@/components/site/SiteFooter";
-import { Sfx } from "@/components/site/Toggles";
-import "@/styles/base.css";
-import "@/styles/tokens.css";
-import "@/styles/site.css";
-import "@/styles/home.css";
+import "@/styles/stopmotion.css";
+
+const display = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-display", display: "swap" });
+const body = DM_Sans({ subsets: ["latin"], variable: "--font-body", display: "swap" });
+const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
+
+// Must match FPS in lib/motion (that file is client-only, so the number is repeated here).
+const FPS = 12;
 
 export const metadata: Metadata = {
   metadataBase: new URL(CLUB.url),
@@ -22,27 +23,26 @@ export const metadata: Metadata = {
   },
 };
 
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f6f3ec" },
-    { media: "(prefers-color-scheme: dark)", color: "#12110f" },
-  ],
-};
+export const viewport: Viewport = { themeColor: "#062A20", width: "device-width", initialScale: 1 };
 
 export default function SiteLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={fontVars} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${display.variable} ${body.variable} ${mono.variable}`}
+      style={{ "--fps": FPS } as CSSProperties}
+      suppressHydrationWarning
+    >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: bootScript }} />
+        {/* Tag the page before paint so entrances start hidden only when JS can reveal them. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "document.documentElement.classList.add('js');if(matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('rm')",
+          }}
+        />
       </head>
-      <body>
-        <SiteNav />
-        {children}
-        <SiteFooter />
-        <Sfx />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
