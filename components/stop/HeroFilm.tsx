@@ -1,7 +1,7 @@
 "use client";
-// The opening shot. One camera move (made in Wan, cut into public/intro by scripts/intro-frames.sh) is scrubbed by scroll:
-// the hero pins, the title sits over the wide shot of campus, then the camera pushes into G-225 and lands on a laptop,
-// where the pitch arrives. The frame shown eases toward the scroll position, so scrolling back up plays it in reverse.
+// The opening shot. One drone move (film/film.mp4 from scripts/film.mjs, cut into public/intro by scripts/intro-frames.sh)
+// is scrubbed by scroll: the hero pins, the title sits over the aerial shot of campus, then the drone flies into G-225 and
+// lands on the TV, where the pitch arrives. The frame shown eases toward the scroll position, so scrolling back up plays it in reverse.
 // Between the title and the landing, `beats` (one caption per shot) tell the story as the camera passes each scene.
 // No frames yet: the hero is just the title. Phones, short screens and reduced motion get the first frame as a still.
 import { useEffect, useRef, type ReactNode } from "react";
@@ -13,8 +13,30 @@ const ease = (t: number) => t * t * (3 - 2 * t);
 const src = (k: number) => `/intro/f-${String(k + 1).padStart(3, "0")}.jpg`;
 
 type Beat = { kicker: string; line: string };
+// The TV the film lands on: where its screen is in the last frame ([x, y, w, h] as fractions of the frame) and what it says.
+// Once that frame is up, a coded screen takes over from the one in the footage, so the title can animate and stay spelled right.
+type Tv = { box: [number, number, number, number]; title: string; sub: string };
 
-export default function HeroFilm({ frames, beats, land, children }: { frames: number; beats: Beat[]; land: ReactNode; children: ReactNode }) {
+const letters = (s: string) =>
+  [...s].map((c, i) => (
+    <span key={i} style={{ "--i": i } as React.CSSProperties}>
+      {c === " " ? " " : c}
+    </span>
+  ));
+
+export default function HeroFilm({
+  frames,
+  beats,
+  land,
+  tv,
+  children,
+}: {
+  frames: number;
+  beats: Beat[];
+  land: ReactNode;
+  tv?: Tv;
+  children: ReactNode;
+}) {
   const root = useRef<HTMLElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
 
@@ -27,6 +49,7 @@ export default function HeroFilm({ frames, beats, land, children }: { frames: nu
     const landEl = el.querySelector<HTMLElement>(".hero-land")!;
     const shade = el.querySelector<HTMLElement>(".film-shade")!;
     const dim = el.querySelector<HTMLElement>(".film-dim")!;
+    const screen = el.querySelector<HTMLElement>(".film-tv");
     const beatEls = Array.from(el.querySelectorAll<HTMLElement>(".film-beat"));
     const mq = matchMedia(FILM);
     let teardown = () => {};
@@ -86,6 +109,7 @@ export default function HeroFilm({ frames, beats, land, children }: { frames: nu
         if (Math.abs(target - cur) < 0.0004) cur = target;
         const k = Math.round(ease(clamp(cur / MOVE)) * (frames - 1));
         if (k !== shown) draw(k);
+        screen?.toggleAttribute("data-on", shown === frames - 1 && !!imgs[frames - 1]); // the TV wakes once the drone has landed
         // the title leaves as the camera starts moving; the pitch arrives once it has landed
         const out = clamp(cur / 0.16);
         const inn = clamp((cur - MOVE + 0.06) / 0.14);
@@ -93,7 +117,7 @@ export default function HeroFilm({ frames, beats, land, children }: { frames: nu
         open.style.transform = `translate3d(${(-60 * out).toFixed(1)}px,0,0)`;
         open.inert = out > 0.5;
         shade.style.opacity = String(1 - out);
-        dim.style.opacity = String(inn * 0.55);
+        dim.style.opacity = String(inn); // strength lives in the .film-dim gradient
         landEl.style.opacity = String(inn);
         landEl.style.transform = `translate3d(0,${(26 * (1 - inn)).toFixed(1)}px,0)`;
         landEl.inert = inn < 0.5;
@@ -121,6 +145,7 @@ export default function HeroFilm({ frames, beats, land, children }: { frames: nu
         removeEventListener("scroll", kick);
         for (const n of [open, landEl, shade, dim, ...beatEls]) n.removeAttribute("style");
         open.inert = landEl.inert = false;
+        screen?.removeAttribute("data-on");
         teardown = () => {};
       };
     };
@@ -147,6 +172,19 @@ export default function HeroFilm({ frames, beats, land, children }: { frames: nu
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={src(0)} alt="" decoding="async" fetchPriority="high" className="film-poster" />
             <canvas ref={canvas} aria-hidden className="film-canvas" />
+            {tv && (
+              <div
+                aria-hidden
+                className="film-tv"
+                style={{ "--x": tv.box[0], "--y": tv.box[1], "--w": tv.box[2], "--h": tv.box[3] } as React.CSSProperties}
+              >
+                <p className="tv-title">
+                  {letters(tv.title)}
+                  <i className="tv-caret" />
+                </p>
+                <p className="tv-sub">{letters(tv.sub)}</p>
+              </div>
+            )}
             <div aria-hidden className="film-shade" />
             <div aria-hidden className="film-dim" />
           </>

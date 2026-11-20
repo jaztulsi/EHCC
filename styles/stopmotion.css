@@ -394,16 +394,61 @@ h1, h2, h3 { text-wrap: balance; }
 .film-canvas { display: none; }
 .hero[data-film] .film-canvas { display: block; }
 .film-shade { background: linear-gradient(90deg, rgba(6, 42, 32, 0.9), rgba(6, 42, 32, 0.55) 55%, rgba(6, 42, 32, 0.2)); }
-.film-dim { background: linear-gradient(270deg, var(--emerald-950), transparent 70%); opacity: 0; }
+.film-dim { background: linear-gradient(0deg, rgba(1, 8, 5, 0.9), rgba(1, 8, 5, 0.6) 18%, transparent 34%); opacity: 0; } /* under the pitch band, clear of the TV */
 .hero:not([data-film]) .film-dim { display: none; }
 .hero-land { position: relative; z-index: 3; padding: 0 var(--gutter) 96px; max-width: 640px; }
-.hero[data-film] .hero-land { position: absolute; top: 50%; right: var(--gutter); translate: 0 -50%; width: min(540px, 40vw); padding: 0; opacity: 0; }
+/* the film lands on the TV, centred: the pitch is a band along the bottom, text left, buttons right */
+.hero[data-film] .hero-land {
+  position: absolute; left: var(--gutter); right: var(--gutter); bottom: clamp(20px, 4svh, 48px); max-width: none; padding: 0; opacity: 0;
+  display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 20px 40px;
+}
+.hero[data-film] .hero-land .h2 { font-size: clamp(1.875rem, 3.2vw, 3rem); line-height: 1; }
+.hero[data-film] .hero-land :is(.h2, .lede) { margin-top: 10px; }
+.hero[data-film] .hero-land .lede { max-width: none; }
+.hero[data-film] .hero-land .hero-ctas { margin-top: 0; }
 .hero-land em { font-style: normal; color: var(--sun); }
+/* the TV in G-225 (the `tv` prop of HeroFilm): a coded screen over the one in the last frame. It's placed with the same
+   cover math as the canvas: --s is a 16th of the frame's drawn width, and --x/--y/--w/--h are the screen's box in the frame */
+.hero[data-film] .hero-stick { container-type: size; }
+.film-tv { display: none; }
+.hero[data-film] .film-tv {
+  --s: max(6.25cqw, 11.1111cqh);
+  position: absolute; pointer-events: none; overflow: hidden; container-type: size;
+  left: calc(50cqw + (var(--x) - 0.5) * 16 * var(--s)); top: calc(50cqh + (var(--y) - 0.5) * 9 * var(--s));
+  width: calc(var(--w) * 16 * var(--s)); height: calc(var(--h) * 9 * var(--s));
+  display: grid; place-content: center; justify-items: center; text-align: center;
+  background: radial-gradient(90% 80% at 50% 42%, #08503b, #003f2e 60%, #00372a); /* the footage's screen, lit a touch */
+  color: #eef3f0; opacity: 0; transition: opacity 0.18s;
+}
+.film-tv[data-on] { opacity: 1; }
+.film-tv::before, .film-tv::after { content: ""; position: absolute; inset: 0; pointer-events: none; }
+.film-tv::after { background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.06) 44%, transparent 56%); } /* glass */
+.film-tv::before { height: 30%; background: linear-gradient(transparent, rgba(255, 255, 255, 0.16) 50%, transparent); transform: translateY(-100%); }
+.film-tv[data-on]::before { animation: tv-sweep 0.7s ease-out; } /* power-on */
+.tv-title, .tv-sub { display: flex; font-family: var(--font-display), system-ui, sans-serif; text-shadow: 0 0 0.4em rgba(238, 243, 240, 0.18); }
+.tv-title { font-weight: 800; font-size: 17cqw; line-height: 1; letter-spacing: -0.02em; }
+.tv-sub { margin-top: 2.4cqw; font-weight: 700; font-size: 3.9cqw; line-height: 1.2; perspective: 30cqw; }
+.tv-title span, .tv-sub span { display: inline-block; }
+.tv-caret { width: 0.07em; height: 0.7em; margin: 0 0 0.04em 0.08em; align-self: center; background: var(--sun, #ffd23f); opacity: 0; }
+/* EHIC drops in letter by letter with a glitch; the name spins in under it, then a spin runs through it every few seconds */
+.film-tv[data-on] .tv-title span { animation: tv-drop 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) calc(0.1s + var(--i) * 0.07s) both, tv-glitch 0.5s steps(1) calc(0.1s + var(--i) * 0.07s); }
+.film-tv[data-on] .tv-caret { animation: tv-blink 1s steps(1) 0.5s infinite; }
+.film-tv[data-on] .tv-sub span { animation: tv-spin 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) calc(0.45s + var(--i) * 0.025s) both, tv-wave 7s ease-in-out calc(2.4s + var(--i) * 0.04s) infinite; }
+@keyframes tv-sweep { to { transform: translateY(440%); } }
+@keyframes tv-drop { from { opacity: 0; transform: translateY(-0.3em) scale(1.25); filter: blur(0.06em); } }
+@keyframes tv-glitch { 0% { text-shadow: -0.05em 0 #ff3d6e, 0.05em 0 #35e8ff; } 35% { text-shadow: 0.04em 0 #ff3d6e, -0.03em 0 #35e8ff; } 70% { text-shadow: -0.015em 0 #ff3d6e, 0.015em 0 #35e8ff; } }
+@keyframes tv-blink { 50% { opacity: 1; } }
+@keyframes tv-spin { from { opacity: 0; transform: rotateY(-540deg); } }
+@keyframes tv-wave { 0% { transform: rotateX(0); } 10%, 100% { transform: rotateX(360deg); } }
 .film-beat { display: none; }
 .hero[data-film] .film-beat {
   display: grid; gap: 14px; position: absolute; left: var(--gutter); bottom: 14svh; z-index: 3; max-width: 15ch; opacity: 0; pointer-events: none;
   font-family: var(--font-display); font-weight: 800; font-size: clamp(2.5rem, 5.2vw, 4.75rem); line-height: 0.98; letter-spacing: -0.03em;
   color: var(--paper); text-shadow: 0 2px 30px rgba(1, 8, 5, 0.65);
+}
+.hero[data-film] .film-beat::before { /* the facade is near-white: a soft wash keeps the caption readable over it */
+  content: ""; position: absolute; inset: -45% -55% -45% -30%; z-index: -1;
+  background: radial-gradient(closest-side, rgba(1, 8, 5, 0.62), rgba(1, 8, 5, 0.3) 60%, transparent);
 }
 .film-beat .mono { color: var(--sun); font-size: 0.8rem; letter-spacing: 0.12em; font-weight: 600; text-shadow: none; }
 .ehic {

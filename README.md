@@ -63,21 +63,23 @@ The look comes from stepped motion: no easing, every pose holds until the next f
 
 ## Opening film (MiniMax)
 
-The hero is an ALL IN-style scroll film (`components/stop/HeroFilm.tsx`): four shots that chain into one continuous camera move, cut into stills and scrubbed by scroll while the hero pins. The title sits over the campus at dusk, two captions tell the story as the camera enters G-225 and finds the laptop, and the pitch lands in the dark right third of the last frame. With no stills in `public/intro` the hero is just the title, so the site works before the footage exists. Phones, short screens and reduced motion get the first frame as a still.
+The hero is a scroll-scrubbed drone film (`components/stop/HeroFilm.tsx`): cut into stills and scrubbed by scroll while the hero pins. It starts on a real aerial photo of campus, flies through a second-floor window of the G building, comes out in G-225 and lands on the TV showing the EHIC title, where the pitch arrives. The title sits over the opening, and two captions tell the story on the way in. With no stills in `public/intro` the hero is just the title, so the site works before the footage exists. Phones, short screens and reduced motion get the first frame as a still.
 
-Make the whole thing with one command (needs ffmpeg, `brew install ffmpeg`, and a MiniMax API key):
+Make it with MiniMax H3 (needs ffmpeg, `brew install ffmpeg`, a MiniMax API key, and the aerial photo cropped 16:9 at `film/campus.jpg`):
 
 ```bash
 echo "MINIMAX_API_KEY=your-key" >> .env.local
-node scripts/film.mjs
+TAKES=2 node scripts/film.mjs
 ```
 
-It films four 8-second 2K shots with MiniMax H3, starting each on the last frame of the one before, saves them to `film/` (gitignored), then cuts them into `public/intro`. About $4 a full pass. Shots already in `film/` are kept: delete one (and those after it) to re-shoot it. The shot prompts live at the top of `scripts/film.mjs`.
+That renders two takes of each 2K shot side by side (about $0.13 a second) into `film/` (gitignored). Rename the keeper of each to `film/shot-N.mp4`, then run `node scripts/film.mjs` again: it trims the shots, joins them and writes `film/film.mp4`. Shots already in `film/` are kept: delete one to re-shoot it, or add `SHOT=N` to render just that one. The prompts, and where the edit stops using each shot (`end`), live at the top of `scripts/film.mjs`. A `chain` shot starts on the frame where the edit leaves the shot before it and cuts straight on, so a good opening can be kept and only the part that went wrong re-shot; the others join with a fade through white.
 
-Made the footage somewhere else? Cut it yourself, one clip or several in order:
+The film lands on the TV in G-225. Once its last frame is up, a coded screen (`.film-tv` in `styles/stopmotion.css`) takes over the TV, so the EHIC title animates and stays spelled right. Its box in that frame is the `tv` prop in `app/(site)/page.tsx`: re-measure it whenever the last shot changes.
+
+Put the cut on the homepage:
 
 ```bash
-sh scripts/intro-frames.sh shot-1.mp4 shot-2.mp4 shot-3.mp4 shot-4.mp4
+FRAMES=120 sh scripts/intro-frames.sh film/film.mp4
 ```
 
 Delete `public/intro` to turn the film off.

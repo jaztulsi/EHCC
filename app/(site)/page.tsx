@@ -144,20 +144,22 @@ export default function Home() {
         <HeroFilm
           frames={frames}
           beats={[
-            { kicker: "Room G-225 · After the last bell", line: "One room stays lit." },
-            { kicker: "Hackathon · Data Science · AI", line: "Students here ship real things." },
+            { kicker: "Emerald High School · Dublin, CA", line: "Where Dublin's builders meet." },
+            { kicker: "Room G-225 · Every other Thursday", line: "Students here ship real things." },
           ]}
+          // the screen's box in public/intro's last frame, measured from its emerald pixels
+          tv={{ box: [0.2212, 0.2144, 0.4738, 0.49], title: "EHIC", sub: "Emerald Hacking and Innovation Club" }}
           land={
             <>
-              <p className="mono" style={{ color: "var(--sun)" }}>
-                Scene 00 · You walk in
-              </p>
-              <p className="h2 mt-4">
-                Pull up a <em>desk.</em>
-              </p>
-              <p className="lede mt-5">
-                No experience. No fee. Every other Thursday at {CLUB.meetingTime}, in {CLUB.meetingRoom}.
-              </p>
+              <div>
+                <p className="mono" style={{ color: "var(--sun)" }}>
+                  Scene 00 · You walk in
+                </p>
+                <p className="h2 mt-4">
+                  Pull up a <em>desk.</em>
+                </p>
+                <p className="lede mt-5">No experience, no fee. Every other Thursday in G-225.</p>
+              </div>
               <div className="hero-ctas mt-8">
                 <a className="btn btn-coral" href="#join">
                   Join the crew <Arrow />
