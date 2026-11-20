@@ -27,45 +27,46 @@ export const CLUB = {
 // CONFIRM: `from` must be a real meeting Thursday, and the Access Period start time.
 export const MEETING = { day: 4, from: "2026-11-19", hour: 10, minute: 0, lengthMin: 45 };
 
+// The "On the bench" strip under the hero.
 export const MARQUEE = ["AI / ML", "Web", "Hardware", "Cybersecurity", "Data Science", "Hackathons", "Guest Speakers", "Python"];
 
 export const STORY = [
   {
     scene: "01",
-    title: "Lights on.",
+    title: "Lights on",
     body: "2025. A handful of Emerald students wanted one room where you could show up with an idea and leave with something that runs.",
     art: "bulb",
   },
   {
     scene: "02",
-    title: "Three branches.",
+    title: "Three branches",
     body: "Hackathon, Data Science, and AI Principles / Programming. Pick one, or wander between all three.",
     art: "branches",
   },
   {
     scene: "03",
-    title: "Every other Thursday.",
+    title: "Every other Thursday",
     body: "Access Period, every other Thursday. Mr. Voung's room (G-225) fills up with laptops, snacks, and half-finished side projects.",
     art: "clock",
   },
   {
     scene: "04",
-    title: "Then we shipped.",
+    title: "Then we shipped",
     body: "Second place at the world's largest high school hackathon. Then we threw our own: DublinHacx.",
     art: "trophy",
   },
 ] as const;
 
 export const WHAT_WE_DO = [
-  { title: "Workshops", kicker: "Weekly", paper: "kraft", body: "Python, web, Git, prompt engineering. Short, hands-on sessions where you write the code, not just watch it." },
-  { title: "Hackathons", kicker: "3–4 a year", paper: "graph", body: "Rotating teams, picked so new members get a seat. We prep together, then go build something in a day." },
-  { title: "Project Teams", kicker: "3 branches", paper: "mint", body: "Hackathon, Data Science, and AI / Programming. Each branch runs its own builds with a student lead." },
-  { title: "Guest Speakers", kicker: "Monthly", paper: "lined", body: "Engineers and data scientists come in to talk about real jobs, real code, and what they wish they'd learned earlier." },
-  { title: "Competitions", kicker: "Ongoing", paper: "sun", body: "Monthly data challenges, AI build-offs, and outside contests. Friendly, loud, and very good for your GitHub." },
-  { title: "Community Projects", kicker: "Tri-Valley", paper: "cream", body: "Tools for our school and the Tri-Valley, plus Alameda County Fair data projects from the Data Science branch." },
+  { title: "Workshops", kicker: "Weekly", icon: "laptop", body: "Python, web, Git, prompt engineering. Short, hands-on sessions where you write the code, not just watch it." },
+  { title: "Hackathons", kicker: "3–4 a year", icon: "timer", body: "Rotating teams, picked so new members get a seat. We prep together, then go build something in a day." },
+  { title: "Project teams", kicker: "3 branches", icon: "branch", body: "Hackathon, Data Science, and AI / Programming. Each branch runs its own builds with a student lead." },
+  { title: "Guest speakers", kicker: "Monthly", icon: "mic", body: "Engineers and data scientists come in to talk about real jobs, real code, and what they wish they'd learned earlier." },
+  { title: "Competitions", kicker: "Ongoing", icon: "flag", body: "Monthly data challenges, AI build-offs, and outside contests. Friendly, loud, and very good for your GitHub." },
+  { title: "Community projects", kicker: "Tri-Valley", icon: "pin", body: "Tools for our school and the Tri-Valley, plus Alameda County Fair data projects from the Data Science branch." },
 ] as const;
 
-// "Previously on EHIC". Newest first.
+// "Previously on EHIC". Newest first. `featured` gets the logo.
 export const REEL = [
   {
     tag: "Our hackathon",
@@ -108,13 +109,13 @@ export const UP_NEXT = [
 ] as const;
 
 export const PROJECTS = [
-  { title: "EHIC Courses", tag: "Platform", body: "20 courses with lessons, quizzes, and certificates. Free for members.", href: "/courses", color: "mint" },
-  { title: "Practice Arcade", tag: "Games", body: "Code Breaker, Binary Quiz, Debug the Code, and CS Trivia, right in the browser.", href: "/games", color: "sun" },
-  { title: "DublinHacx", tag: "Event", body: "Branding, site, judging, and logistics for our own hackathon.", color: "coral" },
-  { title: "This website", tag: "Web", body: "Next.js, three.js clay, and a motion engine locked to 12 frames a second.", href: "https://github.com/jaztulsi/EHCC", color: "paper" },
-  { title: "Fair-ready models", tag: "Data", body: "Data Science branch projects headed to the Alameda County Fair.", color: "mint" },
-  { title: "Runner-up build", tag: "Win", body: "The project that took 2nd at the world's largest high school hackathon.", color: "sun" },
-  { title: "Your project", tag: "Open slot", body: "Pitch it at a meeting. We'll help you build it and ship it.", href: "#join", color: "paper" },
+  { title: "EHIC Courses", tag: "Platform", body: "20 courses with lessons, quizzes, and certificates. Free for members.", href: "/courses" },
+  { title: "Practice Arcade", tag: "Games", body: "Code Breaker, Binary Quiz, Debug the Code, and CS Trivia, right in the browser.", href: "/games" },
+  { title: "DublinHacx", tag: "Event", body: "Branding, site, judging, and logistics for our own hackathon." },
+  { title: "This website", tag: "Web", body: "Next.js and Tailwind, with a split-flap countdown, a badge printer and its own synthesized sound kit.", href: "https://github.com/jaztulsi/EHCC" },
+  { title: "Fair-ready models", tag: "Data", body: "Data Science branch projects headed to the Alameda County Fair." },
+  { title: "Runner-up build", tag: "Win", body: "The project that took 2nd at the world's largest high school hackathon." },
+  { title: "Your project", tag: "Open slot", body: "Pitch it at a meeting. We'll help you build it and ship it.", href: "#join" },
 ] as const;
 
 export const STATS = [

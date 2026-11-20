@@ -1,296 +1,121 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* ============================================================
+   Courses and games. Tokens, base and the nav/footer come from
+   styles/tokens.css, styles/base.css and styles/site.css.
+   These are the shared pieces the app pages are built from.
+   Older class names (surface, card-lift, eyebrow, band-dark...) are
+   kept so every page picks up the system.
+   ============================================================ */
 
-/* ===========================================================================
-   EHIC stylesheet.
-   Structure: base (type + canvas) -> materials -> surfaces -> motion.
-   =========================================================================== */
+.section { padding: 72px var(--gutter); }
+@media (min-width: 768px) { .section { padding-block: 96px; } }
+.container-x { width: 100%; max-width: var(--max); margin-inline: auto; }
 
-@layer base {
-  :root {
-    color-scheme: light;
+/* page header: the label on its ruler, then the title */
+.page-head { border-bottom: 1px solid var(--line); }
+.page-head-in { width: 100%; max-width: calc(var(--max) + var(--gutter) * 2); margin-inline: auto; padding: 56px var(--gutter) 48px; }
+@media (min-width: 768px) { .page-head-in { padding-block: 88px 64px; } }
+.page-title {
+  margin-top: 20px;
+  font-size: clamp(36px, 5vw, 56px);
+  line-height: 1.06;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+.page-lede { margin-top: 20px; max-width: 40rem; font-size: 18px; line-height: 28px; color: rgb(var(--c-text-2)); }
 
-    /* Apple's standard interface curve, reused everywhere. */
-    --ease-apple: cubic-bezier(0.32, 0.72, 0, 1);
-    --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  html {
-    scroll-behavior: smooth;
-    /* Keeps sticky headings clear of anchored content. */
-    scroll-padding-top: 5.5rem;
-  }
-
-  body {
-    @apply bg-canvas text-silver antialiased;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    font-synthesis-weight: none;
-  }
-
-  /* Display type: tight tracking, balanced ragging, optical weight. */
-  h1,
-  h2,
-  h3,
-  h4 {
-    @apply font-display text-silver;
-    text-wrap: balance;
-  }
-  h1 {
-    letter-spacing: -0.026em;
-  }
-  h2,
-  h3 {
-    letter-spacing: -0.018em;
-  }
-
-  p {
-    text-wrap: pretty;
-  }
-
-  ::selection {
-    background: rgba(85, 169, 105, 0.28);
-    @apply text-silver;
-  }
-
-  ::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
-  }
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #c2d0c6;
-    border-radius: 9999px;
-    border: 3px solid transparent;
-    background-clip: content-box;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #a3b6a9;
-    background-clip: content-box;
-  }
-
-  :focus-visible {
-    outline: 2px solid #2b6a45;
-    outline-offset: 3px;
-    border-radius: 6px;
-  }
+/* the eyebrow is the ruler label everywhere */
+.eyebrow {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  height: 20px;
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 500;
+  color: rgb(var(--c-text-2));
+}
+.eyebrow::after {
+  content: "";
+  flex: 1;
+  max-width: 240px;
+  height: 8px;
+  margin-bottom: 4px;
+  background:
+    linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat,
+    repeating-linear-gradient(90deg, currentColor 0 1px, transparent 1px 40px) 0 100% / 100% 8px no-repeat,
+    repeating-linear-gradient(90deg, currentColor 0 1px, transparent 1px 8px) 0 100% / 100% 4px no-repeat;
+  opacity: 0.32;
 }
 
-@layer components {
-  /* ---- Layout rhythm ---------------------------------------------------- */
-  .section {
-    @apply px-4 sm:px-6 lg:px-8 py-20 md:py-28;
-  }
+/* surfaces */
+.surface, .glass, .material-panel {
+  background: rgb(var(--c-surface));
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+}
+.material-chrome { background: rgb(var(--c-bg)); }
+.card-lift {
+  transition: border-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease), background-color var(--t-fast) var(--ease);
+}
+.card-lift:hover { border-color: var(--line-strong); box-shadow: var(--shadow-md); }
+.band-dark { background: rgb(var(--c-mat)); color: rgb(var(--c-mat-text)); }
+.band-warm, .band-cool { background: rgb(var(--c-bg)); }
+.hero-wash { position: relative; }
+.text-gradient { color: inherit; }
+.rule-fade { height: 1px; background: var(--line); }
+.sheen { position: relative; }
 
-  .container-x {
-    @apply mx-auto w-full max-w-6xl;
-  }
+/* small things */
+.kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border: 1px solid var(--line-strong);
+  border-bottom-width: 2px;
+  border-radius: var(--r-sm);
+  background: rgb(var(--c-surface));
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12px;
+  line-height: 1;
+  color: rgb(var(--c-text-2));
+}
+.meta { font-family: var(--font-mono), ui-monospace, monospace; font-size: 12px; line-height: 16px; color: rgb(var(--c-text-3)); font-variant-numeric: tabular-nums; }
+.link-underline { text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 3px; transition: text-decoration-color var(--t-fast) var(--ease); }
+.link-underline:hover { text-decoration-color: currentColor; }
+.mask-edges {
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
 
-  /* ---- Materials -------------------------------------------------------- */
-  /* Translucent chrome, the way Apple layers toolbars over content. */
-  .material-chrome {
-    background: rgba(243, 247, 243, 0.72);
-    backdrop-filter: saturate(180%) blur(20px);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-  }
-
-  .material-panel {
-    background: rgba(255, 255, 255, 0.66);
-    backdrop-filter: saturate(160%) blur(16px);
-    -webkit-backdrop-filter: saturate(160%) blur(16px);
-    @apply border border-white/70;
-  }
-
-  /* Legacy hook, now a real material. */
-  .glass {
-    @apply material-panel;
-  }
-
-  /* ---- Surfaces --------------------------------------------------------- */
-  /* The workhorse card: white on tinted canvas, hairline, inner highlight. */
-  .surface {
-    @apply rounded-card border border-line bg-white shadow-glow;
-    box-shadow:
-      0 1px 2px rgba(18, 41, 29, 0.05),
-      inset 0 1px 0 rgba(255, 255, 255, 0.75);
-  }
-
-  /* Card lift on hover. Rises, warms, and deepens its shadow. */
-  .card-lift {
-    transition:
-      transform 0.45s var(--ease-apple),
-      box-shadow 0.45s var(--ease-apple),
-      border-color 0.35s var(--ease-apple),
-      background-color 0.35s var(--ease-apple);
-    will-change: transform;
-  }
-  .card-lift:hover {
-    transform: translateY(-4px);
-    @apply border-emerald/30;
-    box-shadow:
-      0 18px 40px -16px rgba(18, 41, 29, 0.26),
-      0 3px 8px -3px rgba(18, 41, 29, 0.08),
-      inset 0 1px 0 rgba(255, 255, 255, 0.85);
-  }
-
-  /* Deep forest band. Anchors the page and breaks up the light sections. */
-  .band-dark {
-    @apply bg-bark text-bark-ink;
-    background-image:
-      radial-gradient(70% 100% at 15% 0%, rgba(85, 169, 105, 0.16), transparent 62%),
-      radial-gradient(60% 90% at 90% 100%, rgba(39, 107, 107, 0.16), transparent 60%);
-  }
-  .band-dark h1,
-  .band-dark h2,
-  .band-dark h3,
-  .band-dark h4 {
-    @apply text-bark-ink;
-  }
-
-  /* Alternating tinted bands so the page is never a sheet of white. */
-  .band-warm {
-    @apply bg-canvas-warm;
-  }
-  .band-cool {
-    @apply bg-canvas-cool;
-  }
-
-  /* ---- Ambient backdrop ------------------------------------------------- */
-  /* Soft aurora behind heroes. Low opacity, large radii, never neon. */
-  .hero-wash {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-  }
-  .hero-wash::before {
-    content: "";
-    position: absolute;
-    inset: -20% -10% auto -10%;
-    height: 130%;
-    z-index: -2;
-    background:
-      radial-gradient(38% 46% at 78% 14%, rgba(85, 169, 105, 0.30), transparent 68%),
-      radial-gradient(32% 40% at 12% 8%, rgba(39, 107, 107, 0.20), transparent 70%),
-      radial-gradient(40% 44% at 46% 96%, rgba(163, 95, 54, 0.13), transparent 72%);
-    filter: blur(6px);
-  }
-  /* Fine grain over the wash. Kills gradient banding, reads as paper. */
-  .hero-wash::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    opacity: 0.035;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-
-  /* Hairline rule that fades at both ends. */
-  .rule-fade {
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      theme("colors.line") 18%,
-      theme("colors.line") 82%,
-      transparent
-    );
-  }
-
-  /* Eyebrow pill used above section titles. */
-  .eyebrow {
-    @apply inline-flex items-center gap-2 rounded-full border border-emerald/20 bg-emerald/[0.06] px-3 py-1
-           text-[11px] font-semibold uppercase tracking-[0.13em] text-emerald;
-  }
-
-  /* Legacy hook: was a gradient headline, now just ink. */
-  .text-gradient {
-    @apply text-silver;
-  }
+/* code blocks in lessons and games: the one dark object on a light page */
+.code-block {
+  overflow-x: auto;
+  padding: 16px 20px;
+  border-radius: var(--r-md);
+  background: #1d1b17;
+  color: #eee8dc;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 14px;
+  line-height: 22px;
 }
 
-@layer utilities {
-  /* Underline that draws in from the left. */
-  .link-underline {
-    background-image: linear-gradient(currentColor, currentColor);
-    background-repeat: no-repeat;
-    background-position: 0 100%;
-    background-size: 0% 1px;
-    transition: background-size 0.35s var(--ease-apple);
-  }
-  .link-underline:hover {
-    background-size: 100% 1px;
-  }
-
-  /* Light sweep across a surface on hover. Used on the featured event card. */
-  .sheen {
-    position: relative;
-    overflow: hidden;
-  }
-  .sheen::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 38%;
-    transform: translateX(-120%);
-    background: linear-gradient(
-      100deg,
-      transparent,
-      rgba(255, 255, 255, 0.55),
-      transparent
-    );
-    pointer-events: none;
-  }
-  .sheen:hover::after {
-    animation: sheen 0.9s var(--ease-apple);
-  }
-
-  /* Scroll-driven reveal, CSS-only. Progressive enhancement: browsers with
-     no animation-timeline support just render the content at rest. */
-  @supports (animation-timeline: view()) {
-    .scroll-reveal {
-      animation: fade-up linear both;
-      animation-timeline: view();
-      animation-range: entry 5% cover 26%;
-    }
-  }
-
-  /* Edge fade for horizontal scrollers. */
-  .mask-edges {
-    mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
-  }
-
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  .no-scrollbar {
-    scrollbar-width: none;
-  }
+/* a quiet field */
+.input {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+  background: rgb(var(--c-surface));
+  color: rgb(var(--c-text));
+  font-size: 15px;
+  transition: border-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
 }
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  .card-lift:hover {
-    transform: none;
-  }
-  .sheen:hover::after {
-    animation: none;
-  }
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
-}
+.input::placeholder { color: rgb(var(--c-text-3)); }
+.input:focus { outline: none; border-color: rgb(var(--c-accent)); box-shadow: 0 0 0 3px rgb(var(--c-accent) / 0.18); }

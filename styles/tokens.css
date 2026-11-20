@@ -1,0 +1,180 @@
+/* ============================================================
+   EHIC design tokens. Shared by every page (home, courses, games).
+   World: a workbench in G-225. Warm paper, a green cutting mat, ink.
+   Colors are stored as RGB channels so Tailwind can add alpha.
+   ============================================================ */
+
+:root {
+  color-scheme: light;
+
+  /* workbench (light) */
+  --c-bg: 246 243 236;        /* #f6f3ec page, warm paper */
+  --c-surface: 253 251 247;   /* #fdfbf7 card */
+  --c-raised: 238 233 223;    /* #eee9df hover, input, active row */
+  --c-text: 29 27 23;         /* #1d1b17 primary */
+  --c-text-2: 90 83 72;       /* #5a5348 secondary */
+  --c-text-3: 117 109 97;     /* #756d61 muted, meta only */
+  --c-accent: 12 106 76;      /* #0c6a4c emerald, the school colour */
+  --c-accent-hover: 9 88 63;  /* #09583f */
+  --c-accent-edge: 6 66 47;   /* keycap edge under the primary button */
+  --c-on-accent: 255 255 255;
+  --c-positive: 22 128 74;
+  --c-negative: 190 52 38;
+
+  /* the cutting mat: one deep green band per page, and the footer */
+  --c-mat: 14 58 43;          /* #0e3a2b */
+  --c-mat-2: 10 44 33;        /* #0a2c21 */
+  --c-mat-text: 238 241 234;
+  --c-mat-text-2: 168 192 178;
+  --c-mat-accent: 127 211 168;
+
+  --line: rgb(var(--c-text) / 0.1);
+  --line-strong: rgb(var(--c-text) / 0.18);
+  --mat-line: rgb(var(--c-mat-text) / 0.1);
+  --shadow-sm: 0 1px 2px rgb(29 27 23 / 0.06);
+  --shadow-md: 0 1px 2px rgb(29 27 23 / 0.05), 0 8px 24px rgb(29 27 23 / 0.07);
+  --shadow-object: 0 2px 4px rgb(29 27 23 / 0.08), 0 18px 40px -12px rgb(29 27 23 / 0.28);
+
+  /* printed things keep their inks in both themes: illustrations, badges, the countdown */
+  --ink: #1d1b17;
+  --paper: #fbf8f1;
+  --marker: #f2c94c;
+  --coral: #e5603d;
+  --kraft: #c89a5e;
+  --mint: #cdeedc;
+  --emerald: #0c6a4c;
+  --sketch: #fbf8f1; /* graph paper under the drawings */
+  --nav-h: 71px;
+  --font-display: var(--font-body);
+
+  /* shape and motion */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 18px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --t-fast: 150ms;
+  --t-mid: 220ms;
+  --t-slow: 420ms;
+  --gutter: clamp(16px, 4vw, 48px);
+  --max: 1200px;
+}
+
+/* after hours (dark): follows the system unless someone picked light */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --c-bg: 18 17 15;
+    --c-surface: 27 26 22;
+    --c-raised: 36 34 29;
+    --c-text: 238 232 220;
+    --c-text-2: 170 163 151;
+    --c-text-3: 139 132 120;
+    --c-accent: 69 184 134;
+    --c-accent-hover: 95 200 154;
+    --c-accent-edge: 30 120 84;
+    --c-on-accent: 8 20 15;
+    --c-positive: 76 195 138;
+    --c-negative: 229 72 77;
+    --c-mat: 11 40 32;
+    --c-mat-2: 8 30 24;
+    --sketch: #e7e1d4;
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
+    --shadow-md: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.3);
+    --shadow-object: 0 2px 4px rgb(0 0 0 / 0.3), 0 18px 40px -12px rgb(0 0 0 / 0.6);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --c-bg: 18 17 15;
+  --c-surface: 27 26 22;
+  --c-raised: 36 34 29;
+  --c-text: 238 232 220;
+  --c-text-2: 170 163 151;
+  --c-text-3: 139 132 120;
+  --c-accent: 69 184 134;
+  --c-accent-hover: 95 200 154;
+  --c-accent-edge: 30 120 84;
+  --c-on-accent: 8 20 15;
+  --c-positive: 76 195 138;
+  --c-negative: 229 72 77;
+  --c-mat: 11 40 32;
+  --c-mat-2: 8 30 24;
+  --sketch: #e7e1d4;
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
+  --shadow-md: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.3);
+  --shadow-object: 0 2px 4px rgb(0 0 0 / 0.3), 0 18px 40px -12px rgb(0 0 0 / 0.6);
+}
+
+/* Konami code: the terminal. An easter egg, so it gets to be loud. */
+:root.hacker {
+  color-scheme: dark;
+  --c-bg: 2 10 6;
+  --c-surface: 4 18 11;
+  --c-raised: 8 30 18;
+  --c-text: 120 255 170;
+  --c-text-2: 80 210 130;
+  --c-text-3: 60 170 105;
+  --c-accent: 120 255 170;
+  --c-accent-hover: 170 255 200;
+  --c-accent-edge: 40 140 80;
+  --c-on-accent: 2 10 6;
+  --c-mat: 0 0 0;
+  --c-mat-2: 0 0 0;
+  --c-mat-text: 120 255 170;
+  --c-mat-text-2: 80 210 130;
+  --c-mat-accent: 170 255 200;
+}
+:root.hacker body { font-family: var(--font-mono), ui-monospace, monospace; }
+:root.hacker img { filter: grayscale(1) sepia(1) hue-rotate(80deg) saturate(4) brightness(0.85); }
+
+/* ---------- shared pieces both layouts use ---------- */
+
+/* The signature: a ruler. Section labels sit on it, the nav measures scroll with it. */
+.rule {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  height: 20px;
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 500;
+  color: rgb(var(--c-text-2));
+}
+.rule-no {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12px;
+  color: rgb(var(--c-text-3));
+  font-variant-numeric: tabular-nums;
+}
+.rule-ticks {
+  flex: 1;
+  height: 8px;
+  align-self: flex-end;
+  margin-bottom: 4px;
+  background:
+    linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat,
+    repeating-linear-gradient(90deg, currentColor 0 1px, transparent 1px 40px) 0 100% / 100% 8px no-repeat,
+    repeating-linear-gradient(90deg, currentColor 0 1px, transparent 1px 8px) 0 100% / 100% 4px no-repeat;
+  opacity: 0.32;
+  transform-origin: left;
+  max-width: 320px;
+}
+
+/* Theme / sound / icon buttons in the nav */
+.tool {
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--r-md);
+  color: rgb(var(--c-text-2));
+  transition: background-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
+}
+.tool:hover { background: rgb(var(--c-raised)); color: rgb(var(--c-text)); }
+.tool:active { transform: scale(0.96); }
+.tool svg { width: 18px; height: 18px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rule-ticks { transform: none !important; }
+}

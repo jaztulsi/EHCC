@@ -1,0 +1,273 @@
+/* ============================================================
+   Shared chrome: buttons, nav, footer. Used by every page.
+   ============================================================ */
+
+/* ---------- buttons: keys you press ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 18px;
+  border: 1px solid transparent;
+  border-radius: var(--r-md);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background-color var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+.btn svg { width: 16px; height: 16px; flex: none; }
+.btn:disabled { opacity: 0.5; pointer-events: none; }
+.btn-sm { height: 34px; padding: 0 14px; font-size: 14px; }
+.btn-lg { height: 48px; padding: 0 20px; font-size: 16px; }
+
+/* primary and secondary have a keycap edge: pressing one sinks it by a pixel, the click sound does the rest */
+.btn-primary {
+  background: rgb(var(--c-accent));
+  color: rgb(var(--c-on-accent));
+  box-shadow: 0 2px 0 rgb(var(--c-accent-edge)), inset 0 1px 0 rgb(255 255 255 / 0.14);
+}
+.btn-primary:hover { background: rgb(var(--c-accent-hover)); }
+.btn-secondary {
+  background: rgb(var(--c-surface));
+  color: rgb(var(--c-text));
+  border-color: var(--line-strong);
+  box-shadow: 0 2px 0 var(--line-strong);
+}
+.btn-secondary:hover { background: rgb(var(--c-raised)); }
+.btn-primary:active, .btn-secondary:active, .btn-light:active, .btn-glass:active {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 transparent;
+}
+.btn-ghost { color: rgb(var(--c-text-2)); }
+.btn-ghost:hover { background: rgb(var(--c-raised)); color: rgb(var(--c-text)); }
+
+/* on the film and the cutting mat */
+.btn-light {
+  background: #f3efe6;
+  color: #13241c;
+  box-shadow: 0 2px 0 #b9b2a3, inset 0 1px 0 rgb(255 255 255 / 0.6);
+}
+.btn-light:hover { background: #fff; }
+.btn-glass {
+  background: rgb(255 255 255 / 0.08);
+  color: #eef1ea;
+  border-color: rgb(255 255 255 / 0.22);
+  box-shadow: 0 2px 0 rgb(0 0 0 / 0.25);
+}
+.btn-glass:hover { background: rgb(255 255 255 / 0.14); }
+
+/* ---------- nav ---------- */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: rgb(var(--c-bg));
+  color: rgb(var(--c-text));
+  transition: background-color var(--t-mid) var(--ease);
+}
+.site-nav-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 56px;
+  max-width: calc(var(--max) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  border-radius: var(--r-sm);
+}
+.brand img { width: 28px; height: 28px; }
+.site-links { display: none; align-items: center; gap: 2px; margin-left: 12px; }
+.site-links a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(var(--c-text-2));
+  transition: background-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+.site-links a:hover { background: rgb(var(--c-raised)); color: rgb(var(--c-text)); }
+.site-links a[aria-current] { color: rgb(var(--c-text)); }
+.site-links a[aria-current]::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 1px;
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  border-radius: 50%;
+  background: rgb(var(--c-accent));
+}
+.site-tools { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+.site-tools .btn { margin-left: 8px; }
+@media (min-width: 1080px) {
+  .site-links { display: flex; }
+  .site-menu { display: none; }
+}
+@media (max-width: 420px) {
+  .site-tools .btn { display: none; }
+}
+
+/* the ruler: measures the page; the gem walks it */
+.nav-ruler {
+  position: relative;
+  height: 14px;
+  border-bottom: 1px solid var(--line-strong);
+  background:
+    repeating-linear-gradient(90deg, rgb(var(--c-text) / 0.3) 0 1px, transparent 1px 64px) 0 100% / 100% 7px no-repeat,
+    repeating-linear-gradient(90deg, rgb(var(--c-text) / 0.18) 0 1px, transparent 1px 8px) 0 100% / 100% 3px no-repeat;
+}
+.nav-ruler-fill {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: rgb(var(--c-accent));
+  transform-origin: left;
+  transform: scaleX(var(--p, 0));
+}
+.walker {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 14px;
+  height: 16px;
+  color: rgb(var(--c-text));
+  transform: translateX(var(--x, 0px));
+}
+.walker svg { display: block; }
+.walker .leg-b { display: none; }
+.walker[data-step="1"] .leg-a { display: none; }
+.walker[data-step="1"] .leg-b { display: inline; }
+
+.site-drop {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  display: grid;
+  padding: 4px var(--gutter) 16px;
+  background: rgb(var(--c-bg));
+  border-bottom: 1px solid var(--line-strong);
+  box-shadow: var(--shadow-md);
+  animation: drop var(--t-mid) var(--ease) both;
+}
+.site-drop a {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom: 1px solid var(--line);
+}
+.site-drop a:last-child { border-bottom: 0; }
+.site-drop a[aria-current] { color: rgb(var(--c-accent)); }
+@keyframes drop { from { opacity: 0; transform: translateY(-4px); } }
+
+/* ---------- footer: the cutting mat ---------- */
+.site-foot {
+  position: relative;
+  background: rgb(var(--c-mat-2));
+  color: rgb(var(--c-mat-text));
+}
+.site-foot::before { /* the mat's measuring edge */
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 10px;
+  background:
+    repeating-linear-gradient(90deg, rgb(var(--c-mat-text) / 0.28) 0 1px, transparent 1px 64px) 0 0 / 100% 10px no-repeat,
+    repeating-linear-gradient(90deg, rgb(var(--c-mat-text) / 0.16) 0 1px, transparent 1px 8px) 0 0 / 100% 5px no-repeat;
+}
+.site-foot-in {
+  display: grid;
+  gap: 40px;
+  max-width: calc(var(--max) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding: 72px var(--gutter) 56px;
+}
+.site-foot-in { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.foot-brand { grid-column: 1 / -1; }
+@media (min-width: 860px) {
+  .site-foot-in { grid-template-columns: 2fr 1fr 1fr 1fr; }
+  .foot-brand { grid-column: auto; }
+}
+.brand-lg { font-size: 28px; }
+.brand-lg img { width: 40px; height: 40px; }
+.foot-tag {
+  margin-top: 20px;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.foot-meet { margin-top: 12px; font-size: 14px; line-height: 22px; color: rgb(var(--c-mat-text-2)); }
+.foot-col h2 { margin-bottom: 12px; font-size: 13px; font-weight: 500; color: rgb(var(--c-mat-text-2)); }
+.foot-col a {
+  display: block;
+  width: fit-content;
+  padding: 6px 0;
+  font-size: 15px;
+  color: rgb(var(--c-mat-text));
+  transition: color var(--t-fast) var(--ease);
+}
+.foot-col a:hover { color: rgb(var(--c-mat-accent)); }
+.site-foot-base {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  max-width: calc(var(--max) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding: 20px var(--gutter) 28px;
+  border-top: 1px solid var(--mat-line);
+  font-size: 13px;
+  color: rgb(var(--c-mat-text-2));
+}
+
+/* the toast: one message at a time, bottom centre */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 90;
+  width: max-content;
+  max-width: calc(100% - 32px);
+  padding: 12px 16px;
+  border-radius: var(--r-md);
+  background: rgb(var(--c-text));
+  color: rgb(var(--c-bg));
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: var(--shadow-md);
+  translate: -50% 0;
+  animation: rise var(--t-slow) var(--ease) both;
+}
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } }

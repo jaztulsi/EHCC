@@ -1,11 +1,14 @@
 "use client";
-// Projects on a 35mm strip. Drag tracks 1:1, past the ends it rubber-bands, and on release
-// the flick is projected forward (Apple's deceleration formula) to pick a frame. The snap is
-// a critically damped spring that carries your release velocity, sampled at 12fps, so it lands in poses.
+// Projects laid out on the cutting mat. Drag tracks 1:1, past the ends it rubber-bands, and on release
+// the flick is projected forward (Apple's deceleration formula) to pick a card. The snap is a critically
+// damped spring that carries your release velocity. The mat's ruler edges slide with the cards.
 import { useEffect, useRef } from "react";
-import { FPS, prefersReducedMotion, startTicker } from "@/lib/motion";
+import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { prefersReducedMotion, startTicker } from "@/lib/motion";
 
-type Project = { title: string; tag: string; body: string; href?: string; color: string };
+type Project = { title: string; tag: string; body: string; href?: string };
+
+const FPS = 60;
 
 const project = (v: number, d = 0.998) => ((v / 1000) * d) / (1 - d);
 const rubberband = (o: number, dim: number, c = 0.55) => (o * dim * c) / (dim + c * Math.abs(o));
@@ -14,6 +17,7 @@ export default function FilmReel({ projects }: { projects: readonly Project[] })
   const film = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLOListElement>(null);
   const go = useRef<(dir: number) => void>(() => {});
+  const count = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const el = film.current!;
@@ -46,18 +50,18 @@ export default function FilmReel({ projects }: { projects: readonly Project[] })
     };
     const settle = (to: number, v0 = 0) => {
       halt();
+      if (count.current) count.current.textContent = String(snaps().indexOf(to) + 1).padStart(2, "0");
       if (prefersReducedMotion()) return paint(to);
       const u0 = x - to;
       const w = (2 * Math.PI) / 0.4; // response 0.4s, damping 1.0
-      let k = 0;
-      stop = startTicker(() => {
-        const t = ++k / FPS;
+      stop = startTicker((f) => {
+        const t = (f + 1) / FPS;
         const u = (u0 + (v0 + w * u0) * t) * Math.exp(-w * t);
-        if (Math.abs(u) < 0.5 || k > FPS * 2) {
+        if (Math.abs(u) < 0.5 || f > FPS * 2) {
           paint(to);
           halt();
         } else paint(to + u);
-      });
+      }, FPS);
     };
 
     const down = (e: PointerEvent) => {
@@ -103,7 +107,7 @@ export default function FilmReel({ projects }: { projects: readonly Project[] })
     };
     const focus = (e: FocusEvent) => {
       el.scrollLeft = 0; // the browser scrolls overflow:hidden boxes to show focus; we move the track instead
-      const f = (e.target as Element).closest(".frame") as HTMLElement | null;
+      const f = (e.target as Element).closest(".proj") as HTMLElement | null;
       if (f) settle(Math.max(min(), Math.min(0, gutter() - f.offsetLeft)));
     };
     const key = (e: KeyboardEvent) => {
@@ -142,46 +146,56 @@ export default function FilmReel({ projects }: { projects: readonly Project[] })
     };
   }, []);
 
+  const label = (href: string) => (href.startsWith("#") ? "Pitch yours" : href.startsWith("http") ? "View the code" : "Open it");
+
   return (
     <>
       <div
         ref={film}
-        className="film"
+        className="rail"
         role="region"
         aria-roledescription="carousel"
         aria-label="Projects. Drag, or use the left and right arrow keys."
         tabIndex={0}
       >
-        <ol ref={track} className="film-track">
+        <ol ref={track} className="rail-track">
           {projects.map((p, i) => (
-            <li key={p.title} className={`frame frame-${p.color}`} aria-label={`${i + 1} of ${projects.length}`}>
-              <span className="num mono">{String(i + 1).padStart(2, "0")}</span>
-              <span className="chip mono">{p.tag}</span>
-              <h3 className="h3">{p.title}</h3>
+            <li
+              key={p.title}
+              className={p.href?.startsWith("#") ? "proj proj-open" : "proj"}
+              aria-label={`${i + 1} of ${projects.length}`}
+            >
+              <div className="proj-top">
+                <span className="proj-no">{String(i + 1).padStart(2, "0")}</span>
+                <span className="proj-tag">{p.tag}</span>
+              </div>
+              <h3 className="proj-title">{p.title}</h3>
               <p>{p.body}</p>
               {p.href && (
                 <a
-                  className="go"
+                  className="proj-go"
                   href={p.href}
                   {...(p.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 >
-                  {p.href.startsWith("#") ? "Pitch yours →" : "Open it →"}
+                  {label(p.href)}
+                  {p.href.startsWith("http") ? <ArrowUpRight aria-hidden /> : <ArrowRight aria-hidden />}
                 </a>
               )}
             </li>
           ))}
         </ol>
       </div>
-      <div className="wrap film-ctl">
-        <p className="mono" style={{ color: "var(--mint-200)" }}>
-          ← Drag the film →
+      <div className="wrap rail-ctl">
+        <p className="rail-count">
+          <b ref={count}>01</b> / {String(projects.length).padStart(2, "0")}
         </p>
-        <div className="flex gap-4">
-          <button type="button" className="btn btn-paper" onClick={() => go.current(-1)} aria-label="Previous project">
-            ← Back
+        <p className="rail-hint">Drag the cards or use the arrow keys</p>
+        <div className="rail-btns">
+          <button type="button" className="btn btn-glass btn-icon" onClick={() => go.current(-1)} aria-label="Previous project">
+            <ChevronLeft aria-hidden />
           </button>
-          <button type="button" className="btn btn-sun" onClick={() => go.current(1)} aria-label="Next project">
-            Next →
+          <button type="button" className="btn btn-glass btn-icon" onClick={() => go.current(1)} aria-label="Next project">
+            <ChevronRight aria-hidden />
           </button>
         </div>
       </div>

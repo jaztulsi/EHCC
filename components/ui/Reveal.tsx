@@ -5,60 +5,31 @@ import { useRef } from "react";
 
 interface RevealProps {
   children: React.ReactNode;
-  /** Stagger delay in seconds. */
+  /** Stagger delay in seconds. Keep it to 0.05 steps. */
   delay?: number;
-  /** Direction the content travels in from. */
+  /** Kept for old call sites; every entrance is the same short fade and rise now. */
   from?: "up" | "down" | "left" | "right" | "none";
-  /** Scale up very slightly as it settles. Good for cards and media. */
   zoom?: boolean;
   className?: string;
   as?: "div" | "li" | "section" | "article";
 }
 
-const offset = {
-  up: { y: 26, x: 0 },
-  down: { y: -26, x: 0 },
-  left: { x: 32, y: 0 },
-  right: { x: -32, y: 0 },
-  none: { x: 0, y: 0 },
-};
+const EASE = [0.22, 1, 0.36, 1] as const;
 
-/**
- * Scroll-triggered entrance used across every section.
- *
- * The transition is a spring rather than a duration curve: it settles the way
- * Apple's interface animations do, with a little momentum and no bounce.
- */
-export function Reveal({
-  children,
-  delay = 0,
-  from = "up",
-  zoom = false,
-  className,
-  as = "div",
-}: RevealProps) {
+/** One entrance for the whole site: fade and rise 8px, once, on the shared ease-out. */
+export function Reveal({ children, delay = 0, from = "up", className, as = "div" }: RevealProps) {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-12% 0px -8% 0px" });
-  const reduceMotion = useReducedMotion();
+  const inView = useInView(ref, { once: true, margin: "0px 0px -8% 0px" });
+  const reduce = useReducedMotion();
   const MotionTag = motion[as];
-
-  // Reduced motion: fade only, no travel, no scale.
-  const initial = reduceMotion
-    ? { opacity: 0 }
-    : { opacity: 0, ...offset[from], ...(zoom ? { scale: 0.97 } : null) };
-
-  const animate = inView ? { opacity: 1, x: 0, y: 0, scale: 1 } : {};
+  const rise = reduce || from === "none" ? 0 : 8;
 
   return (
     <MotionTag
       ref={ref}
-      initial={initial}
-      animate={animate}
-      transition={
-        reduceMotion
-          ? { duration: 0.2, delay: 0 }
-          : { type: "spring", stiffness: 140, damping: 20, mass: 0.9, delay }
-      }
+      initial={{ opacity: 0, y: rise }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: reduce ? 0.15 : 0.42, ease: EASE, delay: reduce ? 0 : delay }}
       className={className}
     >
       {children}
@@ -66,15 +37,10 @@ export function Reveal({
   );
 }
 
-/**
- * Reveals each child in sequence. Saves threading `delay` by hand at call
- * sites that map over a list.
- */
+/** Reveals each child in turn, 50ms apart, at most six. */
 export function RevealGroup({
   children,
-  step = 0.07,
-  from = "up",
-  zoom = false,
+  step = 0.05,
   className,
 }: {
   children: React.ReactNode;
@@ -88,7 +54,7 @@ export function RevealGroup({
       {Array.isArray(children)
         ? children.map((child, i) => (
             // eslint-disable-next-line react/no-array-index-key
-            <Reveal key={i} delay={i * step} from={from} zoom={zoom}>
+            <Reveal key={i} delay={Math.min(i, 5) * step}>
               {child}
             </Reveal>
           ))

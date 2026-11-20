@@ -1,146 +1,70 @@
 import type { Config } from "tailwindcss";
 
 /**
- * EHIC design system.
+ * EHIC design system, Tailwind side. The values live in styles/tokens.css as CSS variables,
+ * so light, dark and the Konami terminal all re-theme from one place.
  *
- * Built on three ideas borrowed from Apple's HIG:
- *   1. Layered surfaces, not a flat page. The canvas is a tinted sage, cards
- *      are white and sit above it, and deep forest bands anchor the page.
- *   2. One accent, sampled from the dragon mark, plus two supporting tones
- *      used only to code event types.
- *   3. Depth from soft, layered shadow and a light inner highlight rather
- *      than from heavy borders.
- *
- * Legacy token names (navy/silver/muted) are kept as aliases so the whole
- * app re-themes from this one file.
+ * Legacy names (navy, silver, muted, bark, emerald-*) are kept as aliases of the new roles
+ * so the courses and games pages pick up the system without a rename.
  */
+const v = (name: string) => `rgb(var(--c-${name}) / <alpha-value>)`;
+
 const config: Config = {
-  content: [
-    "./app/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./lib/**/*.{ts,tsx}",
-  ],
+  content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./lib/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        // ---- Surfaces -----------------------------------------------------
-        canvas: {
-          DEFAULT: "#eff4ef", // page, sage-tinted
-          warm: "#f5f3ed", // alternating band, warmer
-          cool: "#eaf1f0", // alternating band, cooler
-        },
-        // Legacy aliases: cards resolve to white so they lift off the canvas.
-        navy: {
-          950: "#eff4ef",
-          900: "#ffffff",
-          800: "#ffffff",
-          700: "#e4ece6",
-        },
-        // Deep band used for the footer and feature sections.
-        bark: {
-          DEFAULT: "#12291d",
-          soft: "#1a3a29",
-          line: "#2a4b38",
-          ink: "#e9f1eb",
-          muted: "#9ab5a5",
-        },
+        // roles
+        bg: v("bg"),
+        surface: v("surface"),
+        raised: v("raised"),
+        ink: { DEFAULT: v("text"), 2: v("text-2"), 3: v("text-3") },
+        accent: { DEFAULT: v("accent"), hover: v("accent-hover"), on: v("on-accent") },
+        positive: v("positive"),
+        negative: v("negative"),
+        mat: { DEFAULT: v("mat"), 2: v("mat-2"), text: v("mat-text"), muted: v("mat-text-2"), accent: v("mat-accent") },
 
-        // ---- Ink ----------------------------------------------------------
-        silver: "#121a15", // primary ink
-        muted: "#586a5f", // secondary ink
-        line: "#dae3dc", // hairline
-
-        // ---- Accent, sampled off the dragon mark --------------------------
+        // legacy aliases
+        canvas: { DEFAULT: v("bg"), warm: v("bg"), cool: v("bg") },
+        navy: { 950: v("bg"), 900: v("surface"), 800: v("surface"), 700: v("raised") },
+        bark: { DEFAULT: v("mat"), soft: v("mat-2"), line: "rgb(var(--c-mat-text) / 0.12)", ink: v("mat-text"), muted: v("mat-text-2") },
+        silver: v("text"),
+        muted: v("text-2"),
+        faint: v("text-3"),
+        line: "rgb(var(--c-text) / 0.1)",
         emerald: {
-          DEFAULT: "#2b6a45",
-          bright: "#1a422d",
-          circuit: "#55a969",
-          deep: "#183d2a",
-          glow: "#55a969",
-          light: "#55a969",
-          pale: "#96d896",
+          DEFAULT: v("accent"),
+          bright: v("accent-hover"),
+          circuit: v("accent"),
+          deep: v("accent-hover"),
+          glow: v("accent"),
+          light: v("accent"),
+          pale: v("accent"),
         },
-        // Supporting tones. Used to colour-code event types, nothing else.
-        clay: "#a35f36",
-        lagoon: "#276b6b",
-        iris: "#514a86",
+        clay: v("text-2"),
+        lagoon: v("text-2"),
+        iris: v("text-2"),
       },
-
       fontFamily: {
-        // On Apple hardware this renders real SF Pro; Inter elsewhere.
-        sans: [
-          "-apple-system",
-          "BlinkMacSystemFont",
-          "SF Pro Text",
-          "var(--font-inter)",
-          "system-ui",
-          "sans-serif",
-        ],
-        display: [
-          "-apple-system",
-          "BlinkMacSystemFont",
-          "SF Pro Display",
-          "var(--font-inter)",
-          "system-ui",
-          "sans-serif",
-        ],
+        sans: ["var(--font-body)", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "var(--font-body)", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
-
-      // Apple's display type is set tight; body stays optically relaxed.
-      letterSpacing: {
-        display: "-0.026em",
-        title: "-0.018em",
-      },
-
-      borderRadius: {
-        card: "16px",
-        panel: "22px",
-        hero: "30px",
-      },
-
+      letterSpacing: { display: "-0.03em", title: "-0.015em" },
+      borderRadius: { card: "14px", panel: "18px", hero: "18px" },
       boxShadow: {
-        // Legacy names, now real elevation with a light inner highlight.
-        glow: "0 1px 2px rgba(18,41,29,0.05), 0 1px 1px rgba(18,41,29,0.04)",
-        "glow-md":
-          "0 8px 24px -10px rgba(18,41,29,0.20), 0 2px 6px -2px rgba(18,41,29,0.08)",
-        "glow-lg":
-          "0 26px 60px -22px rgba(18,41,29,0.30), 0 6px 16px -8px rgba(18,41,29,0.10)",
+        glow: "var(--shadow-sm)",
+        "glow-md": "var(--shadow-md)",
+        "glow-lg": "var(--shadow-md)",
         "glow-text": "none",
-        rim: "inset 0 1px 0 rgba(255,255,255,0.75)",
-        "rim-dark": "inset 0 1px 0 rgba(255,255,255,0.08)",
+        rim: "none",
+        "rim-dark": "none",
       },
-
-      transitionTimingFunction: {
-        // Apple's standard interface curve, and a softer overshoot.
-        apple: "cubic-bezier(0.32, 0.72, 0, 1)",
-        "apple-out": "cubic-bezier(0.16, 1, 0.3, 1)",
-      },
-
+      transitionTimingFunction: { apple: "cubic-bezier(0.22, 1, 0.36, 1)", "apple-out": "cubic-bezier(0.22, 1, 0.36, 1)" },
       keyframes: {
-        "fade-up": {
-          "0%": { opacity: "0", transform: "translateY(12px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
-        },
-        "marquee-x": {
-          "0%": { transform: "translateX(0)" },
-          "100%": { transform: "translateX(-50%)" },
-        },
-        drift: {
-          "0%, 100%": { transform: "translate3d(0,0,0) scale(1)" },
-          "50%": { transform: "translate3d(0,-18px,0) scale(1.04)" },
-        },
-        sheen: {
-          "0%": { transform: "translateX(-120%)" },
-          "100%": { transform: "translateX(220%)" },
-        },
+        "fade-up": { "0%": { opacity: "0", transform: "translateY(8px)" }, "100%": { opacity: "1", transform: "none" } },
       },
-      animation: {
-        "fade-up": "fade-up 0.5s cubic-bezier(0.16,1,0.3,1) forwards",
-        marquee: "marquee-x 38s linear infinite",
-        drift: "drift 16s ease-in-out infinite",
-        sheen: "sheen 0.9s cubic-bezier(0.32,0.72,0,1)",
-      },
+      animation: { "fade-up": "fade-up 0.42s cubic-bezier(0.22,1,0.36,1) both" },
     },
   },
   plugins: [],

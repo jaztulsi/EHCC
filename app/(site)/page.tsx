@@ -1,38 +1,21 @@
 import fs from "node:fs";
 import path from "node:path";
 import Image from "next/image";
-import type { CSSProperties } from "react";
+import type { CSSProperties, ReactNode } from "react";
+import { ArrowDown, ArrowRight, ArrowUpRight, Flag, GitBranch, Laptop, MapPin, Mic, Plus, Timer } from "lucide-react";
 import { ADVISOR, CLUB, CREW, FAQS, MARQUEE, PROJECTS, REEL, STATS, STORY, UP_NEXT, WHAT_WE_DO } from "@/content/site";
-import { Doodle, Hand, StoryArt, Trophy } from "@/components/stop/Art";
-import { Cursor, FilmStrip, ProgressWalker, StillToggle } from "@/components/stop/Chrome";
-import HeroFilm from "@/components/stop/HeroFilm";
-import HeroIntro from "@/components/stop/HeroIntro";
-import Director from "@/components/stop/Director";
-import Countdown from "@/components/stop/Countdown";
-import FilmReel from "@/components/stop/FilmReel";
-import BadgeForm from "@/components/stop/BadgeForm";
+import { Cup, StoryArt } from "@/components/home/Art";
+import HeroFilm from "@/components/home/HeroFilm";
+import Countdown from "@/components/home/Countdown";
+import ProjectStrip from "@/components/home/ProjectStrip";
+import BadgePrinter from "@/components/home/BadgePrinter";
+import Stage from "@/components/home/Stage";
 
 const css = (o: Record<string, string | number>) => o as CSSProperties;
-const TILT = [-1.5, 1.2, -0.8, 1.6, -1.1, 0.7, -1.3];
 
-const NAV = [
-  ["About", "#about"],
-  ["What we do", "#what"],
-  ["Events", "#events"],
-  ["Projects", "#projects"],
-  ["Crew", "#crew"],
-  ["Courses", "/courses"],
-  ["Games", "/games"],
-] as const;
+const ICONS = { laptop: Laptop, timer: Timer, branch: GitBranch, mic: Mic, flag: Flag, pin: MapPin } as const;
 
-const LETTERS = [
-  ["E", "m-felt", -4],
-  ["H", "m-card", 3],
-  ["I", "m-pcb", -2],
-  ["C", "m-clay", 5],
-] as const;
-
-/** Stills of the opening camera move, cut by scripts/intro-frames.sh. 0 = no film yet, the hero is just the title. */
+/** Stills of the opening camera move, cut by scripts/intro-frames.sh. 0 = no film yet, the hero is just the copy. */
 function filmFrames() {
   try {
     return fs.readdirSync(path.join(process.cwd(), "public/intro")).filter((f) => /^f-\d{3}\.jpg$/.test(f)).length;
@@ -53,186 +36,122 @@ function teamPhotos() {
   return out;
 }
 
-function SceneHead({ id, scene, roll, kicker, title, lede }: { id: string; scene: string; roll: string; kicker: string; title: string; lede?: string }) {
+/** Section head: the label sits on a ruler, then the title. */
+function Head({ id, no, name, title, lede }: { id: string; no: string; name: string; title: string; lede?: ReactNode }) {
   return (
-    <header className="scene-head">
-      <div className="clapper" data-enter aria-hidden>
-        <div className="clap-stick" />
-        <div className="clap-top" />
-        <div className="clap-board mono">
-          <span>Scene<b>{scene}</b></span>
-          <span>Take<b>1</b></span>
-          <span>Roll<b>{roll}</b></span>
-        </div>
-      </div>
-      <div>
-        <p className="mono" data-enter>{kicker}</p>
-        <h2 id={id} className="h2 mt-3" data-enter style={css({ "--i": 1 })}>
-          {title}
-        </h2>
-        {lede && (
-          <p className="lede mt-5" data-enter style={css({ "--i": 2 })}>
-            {lede}
-          </p>
-        )}
-      </div>
+    <header className="head">
+      <p className="rule" data-enter>
+        <span className="rule-no">{no}</span>
+        <span>{name}</span>
+        <span className="rule-ticks" aria-hidden />
+      </p>
+      <h2 id={id} className="h2" data-enter style={css({ "--i": 1 })}>
+        {title}
+      </h2>
+      {lede && (
+        <p className="lede" data-enter style={css({ "--i": 2 })}>
+          {lede}
+        </p>
+      )}
     </header>
   );
 }
 
-const Arrow = () => (
-  <svg viewBox="0 0 24 24" aria-hidden fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M4 12h15M13 6l6 6-6 6" />
-  </svg>
-);
+const initials = (name: string) =>
+  name
+    .split(" ")
+    .map((w) => w[0])
+    .join("");
 
 export default function Home() {
   const pics = teamPhotos();
   const frames = filmFrames();
+  const [lead, ...rest] = STATS;
+
   return (
     <>
       <a className="skip" href="#main">
         Skip to content
       </a>
-      <div className="fx" aria-hidden>
-        <div className="fx-grain" />
-        <div className="fx-vignette" />
-        <div className="fx-flicker" />
-        <div className="fx-dust">
-          <i />
-          <i />
-          <i />
-          <i />
-        </div>
-      </div>
-      <FilmStrip />
-      <Cursor />
-
-      <header className="nav">
-        <a href="#top" className="nav-brand">
-          <Image src="/logo-mark.png" alt="" width={34} height={34} priority />
-          EHIC
-        </a>
-        <nav className="nav-links" aria-label="Main">
-          {NAV.map(([t, h]) => (
-            <a key={h} href={h}>
-              {t}
-            </a>
-          ))}
-        </nav>
-        <div className="flex items-center gap-2">
-          <StillToggle />
-          <details className="nav-menu">
-            <summary>Menu</summary>
-            <nav className="nav-drop" aria-label="Main">
-              {NAV.map(([t, h]) => (
-                <a key={h} href={h}>
-                  {t}
-                </a>
-              ))}
-            </nav>
-          </details>
-          <a className="btn btn-coral" href="#join">
-            Join
-          </a>
-        </div>
-        <ProgressWalker />
-      </header>
 
       <main id="main">
-        {/* HERO */}
+        {/* HERO: the drone flies from the campus aerial into G-225 */}
         <HeroFilm
           frames={frames}
           beats={[
-            { kicker: "Emerald High School · Dublin, CA", line: "Where Dublin's builders meet." },
-            { kicker: "Room G-225 · Every other Thursday", line: "Students here ship real things." },
+            { kicker: "Emerald High School · Dublin, CA", line: "Where Dublin's builders meet" },
+            { kicker: "Building G · second floor", line: "Students here ship real things" },
           ]}
           // the screen's box in public/intro's last frame, measured from its emerald pixels
           tv={{ box: [0.2212, 0.2144, 0.4738, 0.49], title: "EHIC", sub: "Emerald Hacking and Innovation Club" }}
           land={
             <>
               <div>
-                <p className="mono" style={{ color: "var(--sun)" }}>
-                  Scene 00 · You walk in
-                </p>
-                <p className="h2 mt-4">
-                  Pull up a <em>desk.</em>
-                </p>
-                <p className="lede mt-5">No experience, no fee. Every other Thursday in G-225.</p>
+                <p className="hero-kicker">Room G-225 · {CLUB.meetingTime}</p>
+                <p className="land-h">Pull up a desk</p>
+                <p className="land-sub">No experience, no fee. {CLUB.meetingDays}</p>
               </div>
-              <div className="hero-ctas mt-8">
-                <a className="btn btn-coral" href="#join">
-                  Join the crew <Arrow />
+              <div className="hero-ctas">
+                <a className="btn btn-light btn-lg" href="#join">
+                  Join the club <ArrowRight aria-hidden />
                 </a>
-                <a className="btn btn-paper" href="#about">
-                  See the story
+                <a className="btn btn-glass btn-lg" href="#about">
+                  Read the story
                 </a>
               </div>
             </>
           }
         >
-          <div className="hero-grid">
-            <div>
-              <p className="hero-sub mono" data-enter>
-                {CLUB.school} · {CLUB.city} · Est. {CLUB.founded}
-              </p>
-              <h1 id="hero-h" className="ehic">
-                <span className="sr-only">EHIC: {CLUB.name}</span>
-                {LETTERS.map(([l, m, t], i) => (
-                  <span key={l} className="L" data-l={l} aria-hidden style={css({ "--tilt": `${t}deg`, "--i": i })}>
-                    <span className={`glyph ${m}`}>{l}</span>
-                  </span>
-                ))}
-              </h1>
-              <p className="sticker mono" data-enter style={css({ "--tilt": "-4deg" })}>
-                {CLUB.tagline}
-              </p>
-              <p className="hero-tag mt-6" data-enter style={css({ "--i": 1 })}>
-                {CLUB.name}
-              </p>
-              <p className="lede" data-enter style={css({ "--i": 2 })}>
-                {CLUB.description}
-              </p>
-              <div className="hero-ctas mt-9" data-enter style={css({ "--i": 3 })}>
-                <a className="btn btn-coral" href="#join">
-                  Join the Club <Arrow />
-                </a>
-                <a className="btn btn-paper" href="#projects">
-                  See What We Build
-                </a>
-              </div>
+          <div className="hero-copy">
+            <p className="hero-kicker" data-enter>
+              {CLUB.school} · {CLUB.city}
+            </p>
+            <h1 id="hero-h" className="hero-h1" data-enter style={css({ "--i": 1 })}>
+              Show up with an idea. Leave with something that runs
+            </h1>
+            <p className="hero-sub" data-enter style={css({ "--i": 2 })}>
+              The {CLUB.name} builds with code, data and AI. {CLUB.meetingDays} in G-225, no experience needed
+            </p>
+            <div className="hero-ctas" data-enter style={css({ "--i": 3 })}>
+              <a className="btn btn-light btn-lg" href="#join">
+                Join the club <ArrowRight aria-hidden />
+              </a>
+              <a className="btn btn-glass btn-lg" href="#projects">
+                See what we build
+              </a>
             </div>
           </div>
-          <a className="scroll-cue mono" href="#about">
-            <svg viewBox="0 0 24 24" aria-hidden fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 4v15M6 13l6 6 6-6" />
-            </svg>
-            {frames ? "Scroll to roll camera" : "Scroll"}
-          </a>
-          <div className="lamp-shade" aria-hidden />
-          <Hand />
-          <HeroIntro />
+          {frames > 0 && (
+            <a className="scroll-cue" href="#about" data-sfx="none">
+              <ArrowDown aria-hidden strokeWidth={1.5} />
+              Scroll to fly into G-225
+            </a>
+          )}
         </HeroFilm>
 
-        <div className="marquee" aria-hidden>
-          <div className="marquee-track">
-            {[...MARQUEE, ...MARQUEE].map((m, i) => (
-              <span key={i}>{m}</span>
-            ))}
+        {/* ON THE BENCH */}
+        <div className="bench">
+          <div className="wrap bench-in">
+            <p className="bench-label">On the bench</p>
+            <ul>
+              {MARQUEE.map((m) => (
+                <li key={m}>{m}</li>
+              ))}
+            </ul>
           </div>
         </div>
 
         {/* ABOUT */}
-        <section id="about" className="section desk torn" aria-labelledby="about-h">
+        <section id="about" className="section" aria-labelledby="about-h">
           <div className="wrap">
-            <SceneHead id="about-h" scene="01" roll="About" kicker="The story so far" title="Four panels. One club." />
-            <ol className="board">
+            <Head id="about-h" no="01" name="About" title="From one room to our own hackathon" />
+            <ol className="story">
               {STORY.map((s, i) => (
-                <li key={s.scene} className="panel" data-enter style={css({ "--i": i, "--tilt": `${TILT[i]}deg` })}>
+                <li key={s.scene} className="panel" data-enter style={css({ "--i": i })}>
                   <div className="panel-art">
                     <StoryArt art={s.art} />
                   </div>
-                  <span className="panel-cap mono">Panel {s.scene}</span>
+                  <p className="panel-no">{s.scene}</p>
                   <h3 className="h3">{s.title}</h3>
                   <p>{s.body}</p>
                 </li>
@@ -242,107 +161,21 @@ export default function Home() {
         </section>
 
         {/* WHAT WE DO */}
-        <section id="what" className="section set set-700 torn" aria-labelledby="what-h">
+        <section id="what" className="section section-top-0" aria-labelledby="what-h">
           <div className="wrap">
-            <SceneHead id="what-h" scene="02" roll="Crafts" kicker="What we do" title="Six ways in." lede="Hover or tap a card to flip it." />
-            <ul className="cards">
-              {WHAT_WE_DO.map((w, i) => (
-                <li key={w.title} data-enter style={css({ "--i": i % 3 })}>
-                  <div className="flip" role="button" tabIndex={0} aria-pressed="false" style={css({ "--tilt": `${TILT[i]}deg` })}>
-                    <div className="flip-in">
-                      <div className={`face p-${w.paper}`}>
-                        <span className="tape" aria-hidden />
-                        <Doodle i={i} />
-                        <p className="mono mt-4">{w.kicker}</p>
-                        <h3 className="h3">{w.title}</h3>
-                        <p className="flip-hint mono">Flip it ↻</p>
-                      </div>
-                      <div className="face face-back">
-                        <p className="mono mb-3">{w.title}</p>
-                        <p>{w.body}</p>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        {/* EVENTS */}
-        <section id="events" className="section desk torn" aria-labelledby="events-h">
-          <div className="wrap">
-            <SceneHead id="events-h" scene="03" roll="Events" kicker="Previously on EHIC" title="Meetings, hackathons, and one very big day." />
-            <div className="events-grid">
-              <div data-enter>
-                <Countdown />
-                <h3 className="h3 mt-12">Coming up</h3>
-                <ul className="upnext">
-                  {UP_NEXT.map((u) => (
-                    <li key={u.title}>
-                      <span>{u.title}</span>
-                      <span className="mono">{u.when}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="reel" data-enter style={css({ "--i": 1 })}>
-                <ol>
-                  {REEL.map((r) =>
-                    "featured" in r ? (
-                      <li key={r.title} className="shot shot-feature">
-                        <div className="logo">
-                          <Image src={r.logo} alt="DublinHacx logo" width={638} height={424} />
-                        </div>
-                        <div>
-                          <div className="shot-meta">
-                            <span className="chip mono">{r.tag}</span>
-                            <span className="mono">{r.when}</span>
-                          </div>
-                          <h3 className="h3">{r.title}</h3>
-                          <p className="mt-2">{r.body}</p>
-                        </div>
-                      </li>
-                    ) : (
-                      <li key={r.title} className="shot">
-                        <div className="shot-meta">
-                          <span className="chip mono">{r.tag}</span>
-                          <span className="mono">{r.when}</span>
-                        </div>
-                        <h3 className="h3">{r.title}</h3>
-                        <p className="mt-2">{r.body}</p>
-                      </li>
-                    )
-                  )}
-                </ol>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* PROJECTS */}
-        <section id="projects" className="section darkroom torn" aria-labelledby="projects-h">
-          <div className="wrap">
-            <SceneHead id="projects-h" scene="04" roll="Projects" kicker="Now showing" title="Things we built." lede="Grab the film and throw it." />
-          </div>
-          <FilmReel projects={PROJECTS} />
-        </section>
-
-        {/* WINS */}
-        <section className="section set torn" aria-labelledby="wins-h">
-          <div className="wrap">
-            <SceneHead id="wins-h" scene="05" roll="Wins" kicker="Trophy shelf" title="Small club. Loud shelf." />
-            <ul className="shelf">
-              {STATS.map((s, i) => {
-                const pre = "prefix" in s ? s.prefix : "";
+            <Head id="what-h" no="02" name="What we do" title="Six ways to get involved" lede="Every one of them is open to beginners" />
+            <ul className="drawers">
+              {WHAT_WE_DO.map((w, i) => {
+                const Icon = ICONS[w.icon];
                 return (
-                  <li key={s.label} className="trophy" data-enter style={css({ "--i": i % 3 })}>
-                    <Trophy kind={s.trophy} />
-                    <b data-count={s.value} data-prefix={pre}>
-                      {pre}
-                      {s.value}
-                    </b>
-                    <span>{s.label}</span>
+                  <li key={w.title} className="drawer" data-enter style={css({ "--i": i % 3 })}>
+                    <div className="drawer-top">
+                      <Icon aria-hidden strokeWidth={1.5} />
+                      <span className="drawer-label">{w.kicker}</span>
+                    </div>
+                    <h3 className="h3">{w.title}</h3>
+                    <p>{w.body}</p>
+                    <span className="drawer-pull" aria-hidden />
                   </li>
                 );
               })}
@@ -350,101 +183,181 @@ export default function Home() {
           </div>
         </section>
 
-        {/* CREW */}
-        <section id="crew" className="section desk torn" aria-labelledby="crew-h">
+        {/* EVENTS */}
+        <section id="events" className="section section-top-0" aria-labelledby="events-h">
           <div className="wrap">
-            <SceneHead id="crew-h" scene="06" roll="Crew" kicker="Cast & crew" title="The people behind the camera." />
+            <Head id="events-h" no="03" name="Events" title="Meetings, hackathons and one very big day" />
+            <div className="events">
+              <div className="events-side" data-enter>
+                <Countdown />
+                <h3 className="h4 mt-12">Coming up</h3>
+                <ul className="upnext">
+                  {UP_NEXT.map((u) => (
+                    <li key={u.title}>
+                      <span>{u.title}</span>
+                      <span className="meta">{u.when}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div data-enter style={css({ "--i": 1 })}>
+                <h3 className="h4">Previously on EHIC</h3>
+                <ol className="timeline">
+                  {REEL.map((r) => (
+                    <li key={r.title} className={"featured" in r ? "tl tl-feature" : "tl"}>
+                      <div className="tl-meta">
+                        <span className="tl-tag">{r.tag}</span>
+                        <span>{r.when}</span>
+                      </div>
+                      <div className="tl-body">
+                        {"logo" in r && (
+                          <div className="tl-logo">
+                            <Image src={r.logo} alt="DublinHacx logo" width={638} height={424} />
+                          </div>
+                        )}
+                        <div>
+                          <h4 className="h3">{r.title}</h4>
+                          <p>{r.body}</p>
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* PROJECTS, on the cutting mat */}
+        <section id="projects" className="section mat" aria-labelledby="projects-h">
+          <div className="wrap">
+            <Head id="projects-h" no="04" name="Projects" title="Things we built" />
+          </div>
+          <ProjectStrip projects={PROJECTS} />
+        </section>
+
+        {/* WINS */}
+        <section className="section" aria-labelledby="wins-h">
+          <div className="wrap">
+            <Head id="wins-h" no="05" name="Wins" title="Small club, loud shelf" />
+            <div className="wins">
+              <div className="win-lead" data-enter>
+                <Cup />
+                <div>
+                  <p className="win-fig">
+                    <span data-count={lead.value} data-prefix={"prefix" in lead ? lead.prefix : ""}>
+                      {"prefix" in lead ? lead.prefix : ""}
+                      {lead.value}
+                    </span>
+                  </p>
+                  <p className="win-cap">{lead.label}</p>
+                </div>
+              </div>
+              <dl className="win-list" data-enter style={css({ "--i": 1 })}>
+                {rest.map((s) => (
+                  <div key={s.label}>
+                    <dt>{s.label}</dt>
+                    <dd data-count={s.value}>{s.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+        </section>
+
+        {/* CREW */}
+        <section id="crew" className="section section-top-0" aria-labelledby="crew-h">
+          <div className="wrap">
+            <Head id="crew-h" no="06" name="Crew" title="The people who run it" />
             <ul className="crew">
               {CREW.map((c, i) => (
-                <li key={c.id} data-enter style={css({ "--i": i % 3 })}>
-                  <article className="cutout" style={css({ "--tilt": `${TILT[i]}deg` })}>
-                    <span className="tape" aria-hidden />
-                    <div className="porthole">
+                <li key={c.id} data-enter style={css({ "--i": i % 4 })}>
+                  <article className="idcard">
+                    <span className="lanyard" aria-hidden />
+                    <div className="id-band">
+                      <span>EHIC crew</span>
+                      <span>{c.sticker}</span>
+                    </div>
+                    <div className="id-photo">
                       {pics[c.id] ? (
-                        <Image src={pics[c.id]} alt={`Portrait of ${c.name}`} fill sizes="168px" />
+                        <Image src={pics[c.id]} alt={`Portrait of ${c.name}`} fill sizes="96px" />
                       ) : (
-                        <>
-                          <span className="initials" aria-hidden>
-                            {c.name
-                              .split(" ")
-                              .map((w) => w[0])
-                              .join("")}
-                          </span>
-                          <span className="soon mono">Photo soon</span>
-                        </>
+                        <span className="id-initials" aria-hidden>
+                          {initials(c.name)}
+                        </span>
                       )}
                     </div>
-                    <h3 className="h3">{c.name}</h3>
-                    <p className="role mono">
-                      {c.role} · {c.sticker}
-                    </p>
-                    <p>{c.bio}</p>
+                    <h3 className="id-name">{c.name}</h3>
+                    <p className="id-role">{c.role}</p>
+                    <p className="id-bio">{c.bio}</p>
+                    {!pics[c.id] && <p className="id-soon">Photo soon</p>}
                   </article>
                 </li>
               ))}
             </ul>
             {ADVISOR && (
-              <p className="mt-20 text-center" data-enter>
-                <span className="mono block">Directed by</span>
-                <span className="h2 block">{ADVISOR}</span>
+              <p className="advisor" data-enter>
+                Faculty advisor <b>{ADVISOR}</b>
               </p>
             )}
           </div>
         </section>
 
         {/* PARTNERS */}
-        <section className="section set set-700 torn" aria-labelledby="partners-h">
+        <section className="section section-top-0" aria-labelledby="partners-h">
           <div className="wrap">
-            <SceneHead id="partners-h" scene="07" roll="Friends" kicker="Hung on the line" title="Friends of the club." />
-            <div className="line" data-enter>
-              <svg className="rope" viewBox="0 0 1000 60" preserveAspectRatio="none" aria-hidden>
-                <path d="M0 8 Q500 64 1000 8" fill="none" stroke="#C89A5E" strokeWidth="5" strokeDasharray="16 5" />
-              </svg>
-              <ul className="pegs">
-                <li className="peg" style={css({ "--i": 0 })}>
-                  <span className="clothespin" aria-hidden />
-                  <div className="peg-card">{CLUB.school}</div>
-                </li>
-                <li className="peg" style={css({ "--i": 1 })}>
-                  <span className="clothespin" aria-hidden />
-                  {/* ponytail: drawn wordmark; drop the official file in /public and swap in an <Image> if they send one */}
-                  <div className="peg-card dark aic" role="img" aria-label="The AI Collective">
-                    <svg viewBox="0 0 40 40" aria-hidden>
-                      <path d="M31 9.5A15 15 0 1 0 31 30.5" />
-                      <path d="M26.5 15A8.5 8.5 0 1 0 26.5 25" />
-                    </svg>
-                    <span>
-                      The AI
-                      <br />
-                      Collective
-                    </span>
-                  </div>
-                </li>
-                {[2, 3].map((i) => (
-                  <li key={i} className="peg" style={css({ "--i": i })}>
-                    <span className="clothespin" aria-hidden />
-                    <a className="peg-card empty" href={`mailto:${CLUB.email}?subject=Partnering%20with%20EHIC`}>
-                      Your logo here →
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <Head id="partners-h" no="07" name="Friends" title="Friends of the club" />
+            <ul className="partners" data-enter>
+              <li className="partner">
+                <span className="partner-school">{CLUB.school}</span>
+              </li>
+              <li className="partner partner-dark" role="img" aria-label="The AI Collective">
+                {/* drawn wordmark; swap for their official file if they send one */}
+                <svg viewBox="0 0 40 40" aria-hidden>
+                  <path d="M31 9.5A15 15 0 1 0 31 30.5" />
+                  <path d="M26.5 15A8.5 8.5 0 1 0 26.5 25" />
+                </svg>
+                <span>
+                  The AI
+                  <br />
+                  Collective
+                </span>
+              </li>
+              <li>
+                <a className="partner partner-open" href={`mailto:${CLUB.email}?subject=Partnering%20with%20EHIC`}>
+                  Partner with EHIC
+                  <ArrowUpRight aria-hidden strokeWidth={1.5} />
+                </a>
+              </li>
+            </ul>
           </div>
         </section>
 
         {/* FAQ */}
-        <section id="faq" className="section desk torn" aria-labelledby="faq-h">
-          <div className="wrap">
-            <SceneHead id="faq-h" scene="08" roll="FAQ" kicker="Questions" title="Before you walk in." />
+        <section id="faq" className="section section-top-0" aria-labelledby="faq-h">
+          <div className="wrap faq-grid">
+            <Head
+              id="faq-h"
+              no="08"
+              name="FAQ"
+              title="Before you walk in"
+              lede={
+                <>
+                  Something else? Message{" "}
+                  <a href={CLUB.instagramUrl} target="_blank" rel="noopener noreferrer">
+                    {CLUB.instagram}
+                  </a>
+                </>
+              }
+            />
             <div className="faq" data-enter>
               {FAQS.map((f) => (
-                <details key={f.q}>
+                <details key={f.q} data-sfx="flip">
                   <summary>
                     {f.q}
-                    <i aria-hidden>+</i>
+                    <Plus aria-hidden strokeWidth={1.5} />
                   </summary>
-                  <div className="flap">
+                  <div className="faq-a">
                     <p>{f.a}</p>
                   </div>
                 </details>
@@ -453,35 +366,34 @@ export default function Home() {
           </div>
         </section>
 
-        {/* JOIN */}
-        <section id="join" className="section set torn" aria-labelledby="join-h">
+        {/* JOIN, back on the mat */}
+        <section id="join" className="section mat" aria-labelledby="join-h">
           <div className="wrap join-grid">
             <div>
-              <SceneHead
+              <Head
                 id="join-h"
-                scene="09"
-                roll="Join"
-                kicker="Casting call"
-                title="Get your crew badge."
-                lede={`No experience, no fee. Print a badge, finish the official form, then come by ${CLUB.meetingRoom}.`}
+                no="09"
+                name="Join"
+                title="Get your crew badge"
+                lede="No experience, no fee. Print a badge here, finish the official form, then come by G-225"
               />
-              <dl className="grid gap-5" data-enter>
+              <dl className="join-facts" data-enter style={css({ "--i": 3 })}>
                 <div>
-                  <dt className="mono" style={{ color: "var(--mint-200)" }}>When</dt>
-                  <dd className="h3">
+                  <dt>When</dt>
+                  <dd>
                     {CLUB.meetingDays}, {CLUB.meetingTime}
                   </dd>
                 </div>
                 <div>
-                  <dt className="mono" style={{ color: "var(--mint-200)" }}>Where</dt>
-                  <dd className="h3">
+                  <dt>Where</dt>
+                  <dd>
                     {CLUB.meetingRoom}, {CLUB.school}
                   </dd>
                 </div>
                 <div>
-                  <dt className="mono" style={{ color: "var(--mint-200)" }}>Say hi</dt>
-                  <dd className="h3">
-                    <a className="underline" href={CLUB.instagramUrl} target="_blank" rel="noopener noreferrer">
+                  <dt>Say hi</dt>
+                  <dd>
+                    <a href={CLUB.instagramUrl} target="_blank" rel="noopener noreferrer">
                       {CLUB.instagram}
                     </a>
                   </dd>
@@ -489,73 +401,12 @@ export default function Home() {
               </dl>
             </div>
             <div data-enter style={css({ "--i": 1 })}>
-              <BadgeForm />
+              <BadgePrinter />
             </div>
           </div>
         </section>
       </main>
-
-      {/* END CREDITS */}
-      <footer className="credits section">
-        <div className="wrap">
-          <p className="mono">End credits</p>
-          <div className="roll-window mt-8">
-            <div className="roll">
-              <dl>
-                <div>
-                  <dt className="mono">A production of</dt>
-                  <dd>{CLUB.name}</dd>
-                </div>
-                {CREW.map((c) => (
-                  <div key={c.id}>
-                    <dt className="mono">{c.role}</dt>
-                    <dd>{c.name}</dd>
-                  </div>
-                ))}
-                <div>
-                  <dt className="mono">Filmed on location</dt>
-                  <dd>
-                    {CLUB.meetingRoom}
-                    <small>
-                      {CLUB.school}, {CLUB.city}
-                    </small>
-                  </dd>
-                </div>
-                <div>
-                  <dt className="mono">Frame rate</dt>
-                  <dd>
-                    12 fps<small>On purpose.</small>
-                  </dd>
-                </div>
-                <div>
-                  <dt className="mono">Special thanks</dt>
-                  <dd>
-                    Every member who showed up<small>and the snack fund</small>
-                  </dd>
-                </div>
-              </dl>
-            </div>
-          </div>
-          <nav className="end-links" aria-label="Footer">
-            <a href={CLUB.instagramUrl} target="_blank" rel="noopener noreferrer">
-              Instagram
-            </a>
-            <a href={`mailto:${CLUB.email}`}>Email</a>
-            <a href={CLUB.github} target="_blank" rel="noopener noreferrer">
-              GitHub
-            </a>
-            <a href="/courses">Courses</a>
-            <a href="/games">Games</a>
-            <a href={CLUB.joinFormUrl} target="_blank" rel="noopener noreferrer">
-              Membership form
-            </a>
-          </nav>
-          <p className="mono mt-10 opacity-70">
-            © {new Date().getFullYear()} {CLUB.shortName} · {CLUB.school}
-          </p>
-        </div>
-      </footer>
-      <Director />
+      <Stage />
     </>
   );
 }

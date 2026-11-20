@@ -1,7 +1,7 @@
 "use client";
 // The opening shot. One drone move (film/film.mp4 from scripts/film.mjs, cut into public/intro by scripts/intro-frames.sh)
 // is scrubbed by scroll: the hero pins, the title sits over the aerial shot of campus, then the drone flies into G-225 and
-// lands on the TV, where the pitch arrives. The frame shown eases toward the scroll position, so scrolling back up plays it in reverse.
+// lands on the TV on the pegboard wall, where the pitch arrives. The frame shown eases toward the scroll position, so scrolling back up plays it in reverse.
 // Between the title and the landing, `beats` (one caption per shot) tell the story as the camera passes each scene.
 // No frames yet: the hero is just the title. Phones, short screens and reduced motion get the first frame as a still.
 import { useEffect, useRef, type ReactNode } from "react";
@@ -103,8 +103,11 @@ export default function HeroFilm({
       let raf = 0;
       const tick = () => {
         raf = 0;
-        const span = el.offsetHeight - innerHeight;
-        const target = clamp(-el.getBoundingClientRect().top / span);
+        // the film pins under the nav, so the move runs from when the hero reaches the nav until it lets go
+        const stick = el.firstElementChild as HTMLElement;
+        const top = parseFloat(getComputedStyle(stick).top) || 0;
+        const span = Math.max(1, el.offsetHeight - stick.offsetHeight);
+        const target = clamp((top - el.getBoundingClientRect().top) / span);
         cur += (target - cur) * 0.14;
         if (Math.abs(target - cur) < 0.0004) cur = target;
         const k = Math.round(ease(clamp(cur / MOVE)) * (frames - 1));
@@ -161,7 +164,7 @@ export default function HeroFilm({
     <section
       ref={root}
       id="top"
-      className="hero set"
+      className="hero"
       aria-labelledby="hero-h"
       style={{ "--film-h": `${Math.max(285, Math.round(100 + frames * 2.6))}svh` } as React.CSSProperties} // longer film, longer scroll
     >
