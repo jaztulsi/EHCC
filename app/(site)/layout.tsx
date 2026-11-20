@@ -12,14 +12,13 @@ const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", displ
 const FPS = 12;
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ehcc.vercel.app"),
+  metadataBase: new URL(CLUB.url),
   title: `${CLUB.shortName} · ${CLUB.name}`,
   description: CLUB.description,
   icons: { icon: "/logo-mark.png" },
   openGraph: {
     title: `${CLUB.shortName} · ${CLUB.tagline}`,
     description: CLUB.description,
-    images: ["/logo.png"],
     type: "website",
   },
 };

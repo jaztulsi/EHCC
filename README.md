@@ -13,7 +13,7 @@ npm run build    # production build, run this before deploying
 npm start        # serve the build
 ```
 
-Deploy with `vercel --prod`. The Vercel project is "ehcc" and the site is live at https://ehcc.vercel.app.
+Deploy with `vercel --prod`. The Vercel project is "ehcc-emerald" and the site is live at https://ehcc-emerald.vercel.app (set as `CLUB.url` in content/site.ts; link previews use app/opengraph-image.png).
 
 ## Routes
 

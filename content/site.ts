@@ -8,6 +8,7 @@ export const CLUB = {
   city: "Dublin, CA",
   tagline: "We build. We break. We ship.",
   founded: "2025",
+  url: "https://ehcc-emerald.vercel.app", // link previews, sitemap and robots build absolute URLs from this
   instagram: "@ehcc_26",
   instagramUrl: "https://www.instagram.com/ehcc_26/",
   email: "ehs.hackingcoding.club@gmail.com",

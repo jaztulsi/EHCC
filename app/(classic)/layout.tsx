@@ -10,7 +10,7 @@ import { CLUB } from "@/lib/data";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
 
-const siteUrl = "https://ehic.club";
+const siteUrl = CLUB.url;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

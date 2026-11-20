@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
+import { CLUB } from "@/content/site";
 
-const base = "https://ehcc.vercel.app";
+const base = CLUB.url;
 const routes = ["", "/courses", "/games"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
